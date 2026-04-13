@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakura Galery</title>
+    <link rel="icon" type="image/png" href="image/logo-sekolah/LOGO SAKURA.png">
+    <!-- Feather Icon -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- Font Awesome untuk ikon tambahan -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- css -->
+    <link rel="stylesheet" href="css/sakurastyle.css">
+</head>
+<body>
+    <!-- Nav Start -->
+    <nav class="navbar">
+        <a href="#" class="navbar-logo" onclick="showPage('home'); return false;">sakura<span1>galery</span1><span2>.web.id</span2></a>
+        
+        <div class="navbar-nav">
+            <a href="#" onclick="showPage('home'); return false;" class="nav-link active" data-page="home">Beranda</a>
+            <a href="#" onclick="showPage('album'); return false;" class="nav-link" data-page="album">Album</a>
+            <a href="#" onclick="showPage('kontak'); return false;" class="nav-link" data-page="kontak">Kontak</a>
+        </div>
+
+        <div class="navbar-extra">
+            <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+        </div>
+    </nav>
+    <!-- Nav End -->
+
+    <!-- PAGES CONTAINER -->
+    <div class="pages-container">
+        
+        <!-- HOME PAGE -->
+        <div id="page-home" class="page active">
+            <!-- Hero Section Start -->
+            <section class="hero" id="home">
+                <main class="content">
+                    <h1><span>GALERY</span> SMAN 1 CIKRANG UTARA</h1>
+                    <p>Welcome to the Digital Yearbook Website of SMAN 1 Cikarang Utara</p>
+                    <a href="#" onclick="showPage('album'); return false;" class="cta">Lihat Album</a>
+                </main>
+            </section>
+            <!-- Hero Section End -->
+        </div>
+
+        <!-- ALBUM PAGE - Gabungan Angkatan dan Ekstrakulikuler -->
+        <div id="page-album" class="page">
+            <section class="album-page">
+                <h2 class="page-title">Album Kenangan</h2>
+                <p class="page-subtitle">Pilih kategori album yang ingin Anda lihat</p>
+                
+                <!-- Tab Navigation untuk Album -->
+                <div class="album-tabs">
+                    <button class="tab-btn active" onclick="showAlbumTab('angkatan')">Angkatan</button>
+                    <button class="tab-btn" onclick="showAlbumTab('ekskul')">Ekstrakulikuler</button>
+                </div>
+                
+                <!-- Container Angkatan -->
+                <div id="album-angkatan" class="album-tab-content active">
+                    <div class="angkatan-grid" id="angkatan-grid">
+                        <!-- Angkatan akan diisi oleh JavaScript dari data.js -->
+                    </div>
+                </div>
+                
+                <!-- Container Ekstrakulikuler -->
+                <div id="album-ekskul" class="album-tab-content">
+                    <div class="ekskul-grid" id="ekskul-grid">
+                        <!-- Ekstrakulikuler akan diisi oleh JavaScript dari data.js -->
+                    </div>
+                </div>
+
+                <!-- Container untuk detail (angkatan atau ekskul) -->
+                <div id="album-detail" class="album-detail" style="display: none;">
+                    <!-- Konten akan diisi oleh JavaScript -->
+                </div>
+            </section>
+        </div>
+
+        <!-- KONTAK PAGE -->
+        <div id="page-kontak" class="page">
+            <section class="kontak-page">
+                <h2 class="page-title">Kontak & Media Sosial</h2>
+                
+                <div class="kontak-container">
+                    <!-- KOTAK 1: Kontak Sekolah & Media Sosial -->
+                    <div class="kontak-card main-card">
+                        <div class="card-header">
+                            <i data-feather="phone"></i>
+                            <h3>Kontak & Media Sosial Sekolah</h3>
+                        </div>
+                        
+                        <div class="kontak-content">
+                            <!-- Kontak Sekolah -->
+                            <div class="kontak-section">
+                                <h4>Hubungi Kami</h4>
+                                <div class="kontak-list">
+                                    <a href="tel:+6281234567890" class="kontak-item">
+                                        <span>(021) 1234-5678</span>
+                                    </a>
+                                    <a href="mailto:info@sman1cikarangutara.sch.id" class="kontak-item">
+                                        <span>info@sman1cikarangutara.sch.id</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Media Sosial Sekolah -->
+                            <div class="kontak-section">
+                                <h4>Media Sosial</h4>
+                                <div class="sosial-grid">
+                                    <a href="https://instagram.com/mee.zarr" class="sosial-item" target="_blank">
+                                        <span>@mee.zarr</span>
+                                    </a>
+                                    <a href="https://tiktok.com/@iki.sizarr" class="sosial-item" target="_blank">
+                                        <span>@iki.sizarr</span>
+                                    </a>
+                                    <a href="https://youtube.com/@zarr_senpai" class="sosial-item" target="_blank">
+                                        <span>zarr_senpai</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KOTAK 2: Pembuat Web (Developer) -->
+                    <div class="kontak-card developer-card">
+                        <div class="card-header">
+                            <i data-feather="code"></i>
+                            <h3>Pengembang Web</h3>
+                        </div>
+                        
+                        <div class="developer-info">
+                            <div class="developer-profile">
+                                <img src="https://res.cloudinary.com/duemncbn0/image/upload/v1775106911/IMG-20240929-WA0036_ohrnnr.jpg" alt="Developer" class="developer-photo">
+                                <h4>Meezarr</h4>
+                                <p class="developer-role">Full Stack Developer</p>
+                            </div>
+                            
+                            <div class="developer-contact">
+                                <div class="contact-item">
+                                    <span>developer@sakuragalery.id</span>
+                                </div>
+                                <div class="contact-item">
+                                    <span>+62 882-9503-9238</span>
+                                </div>
+                            </div>
+                            
+                            <div class="developer-sosial">
+                                <h4>Kontak Developer</h4>
+                                <div class="sosial-text">
+                                    <a href="https://t.me/zarrstoreid" target="_blank">Telegram: @zarrstoreid</a>
+                                    <a href="https://wa.me/6288295039238" target="_blank">WhatsApp: 088295039238</a>
+                                    <a href="https://instagram.com/mee.zarr" target="_blank">Instagram: @mee.zarr</a>
+                                    <a href="https://github.com/meezarr715-ux" target="_blank">GitHub: meezarr715-ux</a>
+                                    <a href="https://tiktok.com/@iki.sizarr" target="_blank">TikTok: @iki.sizarr</a>
+                                    <a href="https://youtube.com/@zarr_senpai" target="_blank">YouTube: @zarr_senpai</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-logo">sakura<span1>galery</span1><span2>.web.id</span2></h3>
+                <p class="footer-desc">Digital Yearbook Platform SMAN 1 Cikarang Utara</p>
+                <p class="footer-address">
+                    Jl. Ki Hajar Dewantara No.23, Karangasih, Cikarang Utara, Bekasi
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Tautan Cepat</h4>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="showPage('home'); return false;">Beranda</a></li>
+                    <li><a href="#" onclick="showPage('album'); return false;">Album</a></li>
+                    <li><a href="#" onclick="showPage('kontak'); return false;">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2024 SMAN 1 Cikarang Utara. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal untuk tampilan gambar besar -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="modalCaption" class="modal-caption"></div>
+        <a class="prev" onclick="changeModalImage(-1)">&#10094;</a>
+        <a class="next" onclick="changeModalImage(1)">&#10095;</a>
+    </div>
+
+    <!-- Data.js untuk menyimpan data gambar -->
+    <script src="js/sakuradata.js"></script>
+    <!-- Feather Icons JS -->
+    <script>
+        feather.replace();
+    </script>
+    <script src="js/sakura.js"></script>
+</body>
+</html>

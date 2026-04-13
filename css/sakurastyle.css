@@ -1,0 +1,1180 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --primary: #355872;
+    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --color1: #4CC9FE;
+    --color2: #A1E3F9;
+    --color3: #0F67B1;
+    --color4: #00A9FF;
+    --color5: #F4D160;
+    --color6: #2C3E50;
+    --color7: #FFFFFF;
+    --footer-bg: #1a1f2e;
+    --footer-text: #e0e0e0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    background: linear-gradient(145deg, #3b3f5c 0%, #2a2f45 100%);
+    min-height: 100vh;
+    color: var(--color6);
+    line-height: 1.6;
+}
+
+/* Background pattern untuk semua halaman kecuali home */
+.page:not(#page-home) {
+    position: relative;
+    background: linear-gradient(145deg, #3b3f5c 0%, #2a2f45 100%);
+}
+
+.page:not(#page-home)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="1"/><circle cx="50" cy="50" r="20" fill="none" stroke="white" stroke-width="1"/><path d="M50 10 L50 90 M10 50 L90 50" stroke="white" stroke-width="1"/></svg>') repeat;
+    pointer-events: none;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 7%;
+    background: rgba(26, 31, 46, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(244, 209, 96, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.navbar .navbar-logo {
+    font-size: 1.8rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.navbar .navbar-logo:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 15px var(--color5);
+}
+
+.navbar .navbar-logo span1 {
+    color: var(--color1);
+}
+
+.navbar .navbar-logo span2 {
+    color: var(--color5);
+}
+
+.navbar .navbar-nav {
+    display: flex;
+}
+
+.navbar .navbar-nav a {
+    color: white;
+    display: inline-block;
+    font-size: 1.2rem;
+    margin: 0 1.5rem;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: 0.3s;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.navbar .navbar-nav a:hover {
+    color: var(--color5);
+    transform: translateY(-2px);
+}
+
+.navbar .navbar-nav a.active {
+    color: var(--color5);
+    font-weight: 600;
+}
+
+.navbar .navbar-nav a::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color5);
+    transform: scaleX(0);
+    transition: 0.3s ease;
+}
+
+.navbar .navbar-nav a:hover::after,
+.navbar .navbar-nav a.active::after {
+    transform: scaleX(1);
+}
+
+.navbar .navbar-extra a {
+    color: white;
+    margin: 0 0.5rem;
+    transition: 0.3s;
+}
+
+.navbar .navbar-extra a:hover {
+    color: var(--color2);
+    transform: scale(1.1);
+}
+
+#hamburger-menu {
+    display: none;
+    cursor: pointer;
+}
+
+/* Pages Container */
+.pages-container {
+    margin-top: 5rem;
+    min-height: calc(100vh - 5rem);
+    padding-bottom: 0;
+}
+
+.page {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hero section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../image/image-file/sekolah.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    margin-bottom: 0;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+}
+
+.hero .content {
+    padding: 1.4rem 7%;
+    max-width: 60rem;
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
+.hero .content h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero .content h1 span {
+    color: var(--color5);
+}
+
+.hero .content p {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.cta {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: var(--color5);
+    color: var(--color6);
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: 0.3s;
+    border: 2px solid transparent;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.cta:hover {
+    background: transparent;
+    border-color: var(--color5);
+    color: var(--color5);
+    transform: translateY(-3px);
+}
+
+/* Page Titles */
+.page-title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: white;
+    padding-top: 2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 1;
+}
+
+.page-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Album Tabs */
+.album-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+}
+
+.tab-btn {
+    padding: 0.8rem 2rem;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid var(--color5);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tab-btn:hover {
+    background: var(--color5);
+    color: var(--color6);
+    transform: translateY(-3px);
+}
+
+.tab-btn.active {
+    background: var(--color5);
+    color: var(--color6);
+}
+
+.album-tab-content {
+    display: none;
+}
+
+.album-tab-content.active {
+    display: block;
+}
+
+/* Angkatan Grid */
+.angkatan-grid,
+.ekskul-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.angkatan-card,
+.ekskul-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    cursor: pointer;
+    animation: slideUp 0.5s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.angkatan-card:hover,
+.ekskul-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.angkatan-thumbnail,
+.ekskul-thumbnail {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.angkatan-thumbnail img,
+.ekskul-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.angkatan-card:hover .angkatan-thumbnail img,
+.ekskul-card:hover .ekskul-thumbnail img {
+    transform: scale(1.1);
+}
+
+.thumbnail-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.angkatan-card:hover .thumbnail-overlay,
+.ekskul-card:hover .thumbnail-overlay {
+    opacity: 1;
+}
+
+.thumbnail-overlay span {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.8rem 1.5rem;
+    background: var(--color5);
+    border-radius: 25px;
+    transform: translateY(20px);
+    transition: 0.3s;
+    color: var(--color6);
+}
+
+.angkatan-card:hover .thumbnail-overlay span,
+.ekskul-card:hover .thumbnail-overlay span {
+    transform: translateY(0);
+}
+
+.angkatan-info,
+.ekskul-info {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.angkatan-number,
+.ekskul-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+}
+
+.angkatan-year,
+.ekskul-category {
+    font-size: 1.1rem;
+    color: var(--color3);
+    margin-bottom: 0.5rem;
+}
+
+.angkatan-info p,
+.ekskul-info p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.album-detail {
+    margin-top: 3rem;
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: 0.3s;
+}
+
+.back-button:hover {
+    color: var(--color5);
+    transform: translateX(-5px);
+}
+
+/* Search Bar */
+.search-container {
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+#search-kelas,
+#search-ekskul {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border: 2px solid var(--color5);
+    border-radius: 50px;
+    font-size: 1rem;
+    font-family: "Poppins", sans-serif;
+    background: rgba(255,255,255,0.95);
+    transition: 0.3s;
+}
+
+#search-kelas:focus,
+#search-ekskul:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(244, 209, 96, 0.3);
+    transform: scale(1.02);
+}
+
+/* Kelas Grid */
+.kelas-container,
+.ekskul-items-container {
+    margin-top: 2rem;
+}
+
+.kelas-header,
+.ekskul-items-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.kelas-header h3,
+.ekskul-items-header h3 {
+    font-size: 1.8rem;
+    color: var(--primary);
+}
+
+.kelas-count,
+.items-count {
+    background: var(--color5);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    color: var(--color6);
+}
+
+.kelas-grid,
+.ekskul-items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.kelas-card,
+.ekskul-item-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.kelas-card:hover,
+.ekskul-item-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color5);
+    box-shadow: 0 5px 20px rgba(244, 209, 96, 0.3);
+}
+
+.kelas-card h4,
+.ekskul-item-card h4 {
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+}
+
+.kelas-card p,
+.ekskul-item-card p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Detail Foto Kelas/Ekskul */
+.kelas-detail,
+.ekskul-detail {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.kelas-detail-header,
+.ekskul-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.kelas-detail-header h3,
+.ekskul-detail-header h3 {
+    font-size: 1.8rem;
+    color: var(--primary);
+}
+
+.foto-kelas-grid,
+.foto-ekskul-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.foto-kelas-item,
+.foto-ekskul-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #f5f5f5;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.foto-kelas-item:hover,
+.foto-ekskul-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(244, 209, 96, 0.4);
+}
+
+.foto-kelas-item img,
+.foto-ekskul-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: 0.5s;
+    object-fit: contain;
+    max-height: 300px;
+}
+
+.foto-kelas-item:hover img,
+.foto-ekskul-item:hover img {
+    transform: scale(1.05);
+}
+
+.foto-kelas-caption,
+.foto-ekskul-caption {
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-weight: 500;
+    margin-top: -3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.foto-kelas-item:hover .foto-kelas-caption,
+.foto-ekskul-item:hover .foto-ekskul-caption {
+    background: linear-gradient(to top, rgba(244, 209, 96, 0.9), rgba(244, 209, 96, 0.5));
+    color: var(--color6);
+}
+
+/* Kontak Page */
+.kontak-page {
+    padding: 2rem 7%;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+}
+
+.kontak-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.kontak-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.kontak-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--color5);
+    padding-bottom: 1rem;
+}
+
+.card-header i {
+    width: 30px;
+    height: 30px;
+    color: var(--primary);
+}
+
+.card-header h3 {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+/* Main Card (Kontak & Media Sosial) */
+.main-card .kontak-content {
+    display: grid;
+    gap: 2rem;
+}
+
+.kontak-section h4 {
+    font-size: 1.2rem;
+    color: var(--color3);
+    margin-bottom: 1rem;
+}
+
+.kontak-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.kontak-item {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    background: rgba(244, 209, 96, 0.1);
+    border-radius: 10px;
+    color: var(--color6);
+    transition: 0.3s;
+}
+
+.kontak-item:hover {
+    background: var(--color5);
+    transform: translateX(5px);
+}
+
+.sosial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+}
+
+.sosial-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem;
+    background: rgba(244, 209, 96, 0.1);
+    border-radius: 10px;
+    color: var(--color6);
+    transition: 0.3s;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.sosial-item:hover {
+    background: var(--color5);
+    transform: scale(1.05);
+}
+
+/* Developer Card */
+.developer-card .developer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.developer-profile {
+    text-align: center;
+}
+
+.developer-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    object-fit: cover;
+    border: 4px solid var(--color5);
+}
+
+.developer-profile h4 {
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+}
+
+.developer-role {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.developer-contact {
+    background: rgba(244, 209, 96, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    color: var(--color6);
+}
+
+.developer-sosial h4 {
+    color: var(--color3);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.sosial-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sosial-text a {
+    color: var(--color6);
+    text-decoration: none;
+    padding: 0.5rem;
+    background: rgba(244, 209, 96, 0.1);
+    border-radius: 5px;
+    transition: 0.3s;
+    display: block;
+}
+
+.sosial-text a:hover {
+    background: var(--color5);
+    transform: translateX(5px);
+}
+
+/* Modal untuk tampilan gambar besar */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    overflow: auto;
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+    animation: zoom 0.3s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes zoom {
+    from {transform: translate(-50%, -50%) scale(0.1); opacity: 0;}
+    to {transform: translate(-50%, -50%) scale(1); opacity: 1;}
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 10001;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: var(--color5);
+    transform: scale(1.1);
+}
+
+.modal-caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    border-radius: 30px;
+    font-size: 1.1rem;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    transition: 0.3s;
+    user-select: none;
+    background: rgba(0,0,0,0.3);
+    border-radius: 0 3px 3px 0;
+    z-index: 10001;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: var(--color5);
+    color: black;
+}
+
+/* Footer */
+.footer {
+    background: #0b0e14;
+    color: #fff;
+    padding: 4rem 7% 2rem;
+    margin-top: 0;
+    position: relative;
+    border-top: 3px solid var(--color5);
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color5), transparent);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    text-align: left;
+}
+
+.footer-section {
+    animation: slideUp 0.5s ease;
+}
+
+.footer-logo {
+    font-size: 2rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.footer-logo span1 {
+    color: var(--color1);
+}
+
+.footer-logo span2 {
+    color: var(--color5);
+}
+
+.footer-desc {
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.footer-address {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.95rem;
+}
+
+.footer-section h4 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.footer-section h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background: var(--color5);
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+    color: rgba(255,255,255,0.7);
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: var(--color5);
+    transform: translateX(5px);
+}
+
+.footer-bottom {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-bottom-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.95rem;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    html {
+        font-size: 62.5%;
+    }
+
+    #hamburger-menu {
+        display: inline-block;
+    }
+
+    .navbar .navbar-nav {
+        position: absolute;
+        top: 100%;
+        right: -100%;
+        background: #0b0e14;
+        width: 80%;
+        max-width: 30rem;
+        height: 100vh;
+        flex-direction: column;
+        transition: 0.3s;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+        padding-top: 2rem;
+    }
+
+    .navbar .navbar-nav.active {
+        right: 0;
+    }
+
+    .navbar .navbar-nav a {
+        color: white;
+        display: block;
+        margin: 1rem 2rem;
+        padding: 0.5rem;
+        font-size: 1.6rem;
+    }
+
+    .kontak-container {
+        grid-template-columns: 1fr;
+    }
+
+    .hero .content h1 {
+        font-size: 3rem;
+    }
+
+    .angkatan-grid,
+    .ekskul-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    
+    .sosial-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .footer-section h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .footer-content {
+        text-align: center;
+    }
+    
+    .footer-section h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .footer-links a {
+        display: inline-block;
+    }
+    
+    .kelas-grid,
+    .ekskul-items-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+    
+    .kelas-header,
+    .ekskul-items-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .foto-kelas-grid,
+    .foto-ekskul-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .modal-content {
+        max-width: 95%;
+        max-height: 70vh;
+    }
+    
+    .prev, .next {
+        font-size: 20px;
+        padding: 10px;
+    }
+    
+    .close-modal {
+        top: 10px;
+        right: 20px;
+        font-size: 30px;
+    }
+    
+    .album-tabs {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .tab-btn {
+        width: 80%;
+    }
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 55%;
+    }
+    
+    .page-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero .content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .foto-kelas-grid,
+    .foto-ekskul-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .foto-kelas-item img,
+    .foto-ekskul-item img {
+        max-height: 250px;
+    }
+    
+    .sosial-grid {
+        grid-template-columns: 1fr;
+    }
+}
