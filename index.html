@@ -3,23 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sakura Gallery</title>
+    <title>SMAN 1 Cikarang Utara - Official Website</title>
     <link rel="icon" type="image/png" href="image/logo-sekolah/LOGO SAKURA.png">
     <!-- Feather Icon -->
     <script src="https://unpkg.com/feather-icons"></script>
-    <!-- Font Awesome untuk ikon tambahan -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- css -->
+    <!-- CSS -->
     <link rel="stylesheet" href="css/sakurastyle.css">
 </head>
 <body>
+    <!-- INTRO LOGO SECTION -->
+    <div id="introScreen" class="intro-screen">
+        <div class="intro-logo-container">
+            <img src="image/logo-sekolah/LOGO SAKURA.png" alt="Logo Sekolah" class="intro-logo" id="introLogo" onerror="this.src='https://via.placeholder.com/150?text=Logo'">
+            <div class="intro-text">
+                <h2>SMAN 1 CIKARANG UTARA</h2>
+                <p>Sekolah Unggul Berprestasi</p>
+            </div>
+        </div>
+        <div class="intro-progress">
+            <div class="intro-progress-bar"></div>
+        </div>
+    </div>
+
     <!-- Nav Start -->
-    <nav class="navbar">
-        <a href="#" class="navbar-logo" onclick="showPage('home'); return false;">sakura<span1>gallery</span1><span2>.web.id</span2></a>
+    <nav class="navbar" id="mainNavbar">
+        <a href="#" class="navbar-logo" onclick="showPage('home'); return false;"><span class="logo-icon"><img src="image/logo-sekolah/LOGO SAKURA.png" alt="logo" style="width: 35px; height: 35px; object-fit: contain; margin-right: 8px;" onerror="this.style.display='none'"></span>SMAN 1 <span1>CIKARANG UTARA</span1><span2>.sch.id</span2></a>
         
         <div class="navbar-nav">
             <a href="#" onclick="showPage('home'); return false;" class="nav-link active" data-page="home">Beranda</a>
+            <a href="#" onclick="showPage('profil'); return false;" class="nav-link" data-page="profil">Profil Sekolah</a>
             <a href="#" onclick="showPage('album'); return false;" class="nav-link" data-page="album">Album</a>
+            <a href="#" onclick="showPage('spmb'); return false;" class="nav-link" data-page="spmb">SPMB</a>
             <a href="#" onclick="showPage('kontak'); return false;" class="nav-link" data-page="kontak">Kontak</a>
         </div>
 
@@ -30,50 +46,127 @@
     <!-- Nav End -->
 
     <!-- PAGES CONTAINER -->
-    <div class="pages-container">
+    <div class="pages-container" id="pagesContainer">
         
         <!-- HOME PAGE -->
         <div id="page-home" class="page active">
-            <!-- Hero Section Start -->
             <section class="hero" id="home">
                 <main class="content">
-                    <h1><span>GALERY</span> SMAN 1 CIKRANG UTARA</h1>
-                    <p>Selamat Datang di Website Album Kenangan SMAN 1 CIKARANG UTARA</p>
-                    <a href="#" onclick="showPage('album'); return false;" class="cta">Lihat Album</a>
+                    <h1><span>SELAMAT DATANG</span> DI SMAN 1 CIKARANG UTARA</h1>
+                    <p>Sekolah Unggul Berprestasi, Berkarakter, dan Berwawasan Lingkungan</p>
+                    <a href="#" onclick="showPage('profil'); return false;" class="cta">Profil Sekolah</a>
                 </main>
             </section>
-            <!-- Hero Section End -->
         </div>
 
-        <!-- ALBUM PAGE - Gabungan Angkatan dan Ekstrakulikuler -->
+        <!-- PROFIL SEKOLAH PAGE -->
+        <div id="page-profil" class="page">
+            <section class="profil-page">
+                <h2 class="page-title">Profil Sekolah</h2>
+                <p class="page-subtitle">Mengenal lebih dekat SMAN 1 Cikarang Utara</p>
+                
+                <div class="visi-misi-container">
+                    <div class="visi-card">
+                        <div class="card-icon"><i data-feather="eye"></i></div>
+                        <h3>Visi</h3>
+                        <p>"Terwujudnya peserta didik yang beriman, bertakwa, berilmu, terampil, berakhlak mulia, dan berwawasan lingkungan"</p>
+                    </div>
+                    <div class="misi-card">
+                        <div class="card-icon"><i data-feather="target"></i></div>
+                        <h3>Misi</h3>
+                        <ul>
+                            <li>Meningkatkan mutu pendidikan berbasis IMTAQ dan IPTEK</li>
+                            <li>Mengembangkan potensi peserta didik secara optimal</li>
+                            <li>Menciptakan lingkungan sekolah yang bersih, hijau, dan nyaman</li>
+                            <li>Membangun kerjasama dengan orang tua dan masyarakat</li>
+                            <li>Meningkatkan profesionalisme tenaga pendidik dan kependidikan</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="kepala-sekolah-section">
+                    <h3 class="section-title">Kepala Sekolah</h3>
+                    <div class="kepala-sekolah-card" id="kepala-sekolah-card"></div>
+                </div>
+
+                <div class="guru-section">
+                    <h3 class="section-title">Dewan Guru & Staff</h3>
+                    <div class="guru-grid" id="guru-grid"></div>
+                </div>
+
+                <div class="admin-actions" id="admin-actions" style="display: none;">
+                    <button class="btn-add" onclick="openAddGuruModal()">
+                        <i data-feather="plus"></i> Tambah Guru
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- ALBUM PAGE -->
         <div id="page-album" class="page">
             <section class="album-page">
                 <h2 class="page-title">Album Kenangan</h2>
                 <p class="page-subtitle">Pilih kategori album yang ingin Anda lihat</p>
                 
-                <!-- Tab Navigation untuk Album -->
                 <div class="album-tabs">
-                    <button class="tab-btn active" onclick="showAlbumTab('angkatan')">Angkatan</button>
-                    <button class="tab-btn" onclick="showAlbumTab('ekskul')">Ekstrakulikuler</button>
+                    <button class="tab-btn active" onclick="showAlbumTab('angkatan', event)">Angkatan</button>
+                    <button class="tab-btn" onclick="showAlbumTab('ekskul', event)">Ekstrakulikuler</button>
                 </div>
                 
-                <!-- Container Angkatan -->
                 <div id="album-angkatan" class="album-tab-content active">
-                    <div class="angkatan-grid" id="angkatan-grid">
-                        <!-- Angkatan akan diisi oleh JavaScript dari data.js -->
-                    </div>
+                    <div class="angkatan-grid" id="angkatan-grid"></div>
                 </div>
                 
-                <!-- Container Ekstrakulikuler -->
                 <div id="album-ekskul" class="album-tab-content">
-                    <div class="ekskul-grid" id="ekskul-grid">
-                        <!-- Ekstrakulikuler akan diisi oleh JavaScript dari data.js -->
+                    <div class="ekskul-grid" id="ekskul-grid"></div>
+                </div>
+
+                <div id="album-detail" class="album-detail" style="display: none;"></div>
+            </section>
+        </div>
+
+        <!-- SPMB PAGE -->
+        <div id="page-spmb" class="page">
+            <section class="spmb-page">
+                <h2 class="page-title">SPMB</h2>
+                <p class="page-subtitle">Sistem Penerimaan Murid Baru SMAN 1 Cikarang Utara</p>
+                
+                <div class="spmb-container">
+                    <div class="spmb-info-card">
+                        <div class="spmb-icon"><i data-feather="calendar"></i></div>
+                        <h3>Pendaftaran Gelombang 1</h3>
+                        <p>Januari - Maret 2026</p>
+                    </div>
+                    <div class="spmb-info-card">
+                        <div class="spmb-icon"><i data-feather="calendar"></i></div>
+                        <h3>Pendaftaran Gelombang 2</h3>
+                        <p>April - Juni 2026</p>
+                    </div>
+                    <div class="spmb-info-card">
+                        <div class="spmb-icon"><i data-feather="users"></i></div>
+                        <h3>Kuota</h3>
+                        <p>360 Siswa (10 Rombel)</p>
+                    </div>
+                    <div class="spmb-info-card">
+                        <div class="spmb-icon"><i data-feather="clipboard"></i></div>
+                        <h3>Jalur Pendaftaran</h3>
+                        <p>Zonasi • Prestasi • Afirmasi</p>
                     </div>
                 </div>
 
-                <!-- Container untuk detail (angkatan atau ekskul) -->
-                <div id="album-detail" class="album-detail" style="display: none;">
-                    <!-- Konten akan diisi oleh JavaScript -->
+                <div class="spmb-persyaratan">
+                    <h3><i data-feather="file-text"></i> Persyaratan Umum</h3>
+                    <ul>
+                        <li>Ijazah/SKL SMP/MTS atau sederajat</li>
+                        <li>Nilai rata-rata rapor minimal 75</li>
+                        <li>Pas foto terbaru 3x4 (4 lembar)</li>
+                        <li>Kartu Keluarga dan Akta Kelahiran</li>
+                        <li>Surat Keterangan Sehat dari dokter</li>
+                    </ul>
+                </div>
+
+                <div class="spmb-button">
+                    <a href="#" class="cta" onclick="alert('Pendaftaran akan dibuka Januari 2026')">Daftar Sekarang</a>
                 </div>
             </section>
         </div>
@@ -84,7 +177,6 @@
                 <h2 class="page-title">Kontak & Media Sosial</h2>
                 
                 <div class="kontak-container">
-                    <!-- KOTAK 1: Kontak Sekolah & Media Sosial -->
                     <div class="kontak-card main-card">
                         <div class="card-header">
                             <i data-feather="phone"></i>
@@ -92,7 +184,6 @@
                         </div>
                         
                         <div class="kontak-content">
-                            <!-- Kontak Sekolah -->
                             <div class="kontak-section">
                                 <h4>Hubungi Kami</h4>
                                 <div class="kontak-list">
@@ -105,12 +196,11 @@
                                 </div>
                             </div>
 
-                            <!-- Media Sosial Sekolah -->
                             <div class="kontak-section">
                                 <h4>Media Sosial</h4>
                                 <div class="sosial-grid">
-                                    <a href="https://instagram.com/mee.zarr" class="sosial-item" target="_blank">
-                                        <span>@mee.zarr</span>
+                                    <a href="https://instagram.com/smansacikut" class="sosial-item" target="_blank">
+                                        <span>ig = smansacikut</span>
                                     </a>
                                     <a href="https://tiktok.com/@iki.sizarr" class="sosial-item" target="_blank">
                                         <span>@iki.sizarr</span>
@@ -123,7 +213,6 @@
                         </div>
                     </div>
 
-                    <!-- KOTAK 2: Pembuat Web (Developer) -->
                     <div class="kontak-card developer-card">
                         <div class="card-header">
                             <i data-feather="code"></i>
@@ -132,14 +221,14 @@
                         
                         <div class="developer-info">
                             <div class="developer-profile">
-                                <img src="https://res.cloudinary.com/duemncbn0/image/upload/v1775106911/IMG-20240929-WA0036_ohrnnr.jpg" alt="Developer" class="developer-photo">
+                                <img src="image/developer/foto-developer.jpg" alt="Developer" class="developer-photo" onerror="this.src='https://via.placeholder.com/120?text=Developer'">
                                 <h4>Iki Si Zarr</h4>
                                 <p class="developer-role">Developer Sakura</p>
                             </div>
                             
                             <div class="developer-contact">
                                 <div class="contact-item">
-                                    <span>Hai, Perkenalkan nama saya Zaenul Enka Azwar atau yang biasa di panggil Zarr atau Azwar, saya dari kelas X.D (10.D). Saya memulai project ini pada pertengahan bulan maret tahun 2026 </span>
+                                    <span>Hai, Perkenalkan nama saya Zaenul Enka Azwar atau yang biasa di panggil Zarr atau Azwar, saya dari kelas X.D (10.D). Saya memulai project ini pada pertengahan bulan maret tahun 2026</span>
                                 </div>
                             </div>
                             
@@ -165,8 +254,8 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3 class="footer-logo">sakura<span1>gallery</span1><span2>.web.id</span2></h3>
-                <p class="footer-desc">Digital Yearbook Platform SMAN 1 Cikarang Utara</p>
+                <h3 class="footer-logo">SMAN 1 <span1>CIKARANG UTARA</span1><span2>.sch.id</span2></h3>
+                <p class="footer-desc">Sekolah Unggul Berprestasi, Berkarakter, dan Berwawasan Lingkungan</p>
                 <p class="footer-address">
                     Jl. Ki Hajar Dewantara No.23, Karangasih, Cikarang Utara, Bekasi
                 </p>
@@ -176,7 +265,9 @@
                 <h4>Tautan Cepat</h4>
                 <ul class="footer-links">
                     <li><a href="#" onclick="showPage('home'); return false;">Beranda</a></li>
+                    <li><a href="#" onclick="showPage('profil'); return false;">Profil Sekolah</a></li>
                     <li><a href="#" onclick="showPage('album'); return false;">Album</a></li>
+                    <li><a href="#" onclick="showPage('spmb'); return false;">SPMB</a></li>
                     <li><a href="#" onclick="showPage('kontak'); return false;">Kontak</a></li>
                 </ul>
             </div>
@@ -189,7 +280,7 @@
         </div>
     </footer>
 
-    <!-- Modal untuk tampilan gambar besar -->
+    <!-- Modal Gambar Besar -->
     <div id="imageModal" class="modal">
         <span class="close-modal">&times;</span>
         <img class="modal-content" id="modalImage">
@@ -198,12 +289,22 @@
         <a class="next" onclick="changeModalImage(1)">&#10095;</a>
     </div>
 
-    <!-- Data.js untuk menyimpan data gambar -->
-    <script src="js/sakuradata.js"></script>
-    <!-- Feather Icons JS -->
-    <script>
-        feather.replace();
-    </script>
-    <script src="js/sakura.js"></script>
+    <!-- Modal Tambah Guru -->
+    <div id="addGuruModal" class="modal-guru">
+        <div class="modal-guru-content">
+            <span class="close-guru-modal">&times;</span>
+            <h3>Tambah Guru / Staff</h3>
+            <form id="addGuruForm">
+                <input type="text" id="guruNama" placeholder="Nama Lengkap" required>
+                <input type="text" id="guruMapel" placeholder="Mata Pelajaran / Jabatan" required>
+                <input type="text" id="guruFoto" placeholder="URL Foto Guru" required>
+                <button type="submit">Tambah Guru</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="sakuradata.js"></script>
+    <script src="sakura.js"></script>
 </body>
 </html>
