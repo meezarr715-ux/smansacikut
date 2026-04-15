@@ -1,82 +1,96 @@
-// ========== Toggle Navbar Mobile ==========
+// Toggle class active untuk hamburger menu
 const navbarNav = document.querySelector('.navbar-nav');
-const hamburgerBtn = document.querySelector('#hamburger-menu');
 
-if (hamburgerBtn) {
-    hamburgerBtn.onclick = function(e) {
-        e.preventDefault();
-        navbarNav.classList.toggle('active');
-    };
-}
+document.querySelector('#hamburger-menu').onclick = () => {
+    navbarNav.classList.toggle('active');
+};
+
+// Klik di luar sidebar untuk menghilangkan nav
+const hamburger = document.querySelector('#hamburger-menu');
 
 document.addEventListener('click', function(e) {
-    if (hamburgerBtn && navbarNav) {
-        if (!hamburgerBtn.contains(e.target) && !navbarNav.contains(e.target)) {
-            navbarNav.classList.remove('active');
-        }
+    if(!hamburger.contains(e.target) && !navbarNav.contains(e.target)) {
+        navbarNav.classList.remove('active');
     }
 });
 
 // ========== INTRO SCREEN ==========
-function hideIntroAndShowWebsite() {
+window.addEventListener('load', function() {
     const introScreen = document.getElementById('introScreen');
-    const navbar = document.getElementById('mainNavbar');
-    const pagesContainer = document.getElementById('pagesContainer');
     
-    if (introScreen) {
-        introScreen.classList.add('hide');
-    }
-    
-    if (navbar) {
-        navbar.classList.add('show');
-    }
-    
-    if (pagesContainer) {
-        pagesContainer.classList.add('show');
-    }
-    
-    // Hapus intro dari DOM setelah animasi selesai
+    // Intro akan hilang setelah 2.5 detik (bisa diatur)
     setTimeout(function() {
-        if (introScreen) {
+        introScreen.classList.add('hide');
+        
+        setTimeout(function() {
             introScreen.style.display = 'none';
+        }, 800);
+    }, 2500); // Ganti angka ini untuk mengatur durasi intro (dalam milidetik)
+    // Contoh: 3000 = 3 detik, 2000 = 2 detik
+});
+
+// ========== COUNTDOWN TIMER SPMB ==========
+// Atur tanggal target di sini (YYYY, MM-1, DD, HH, MM, SS)
+// Contoh: targetDate.setFullYear(2026, 0, 15, 0, 0, 0); // 15 Januari 2026
+function startCountdown() {
+    const targetDate = new Date();
+    targetDate.setFullYear(2026, 7, 15, 0, 0, 0); // Ubah sesuai keinginan Anda
+    
+    function updateCountdown() {
+        const now = new Date();
+        const diff = targetDate - now;
+        
+        if (diff <= 0) {
+            document.getElementById('days').innerHTML = '00';
+            document.getElementById('hours').innerHTML = '00';
+            document.getElementById('minutes').innerHTML = '00';
+            document.getElementById('seconds').innerHTML = '00';
+            return;
         }
-    }, 600);
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
+        document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+    }
+    
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 }
 
-// Jalankan intro dengan timeout
-setTimeout(function() {
-    hideIntroAndShowWebsite();
-}, 2500);
+// ========== FAQ ACCORDION ==========
+function initFaq() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            item.classList.toggle('active');
+        });
+    });
+}
 
 // ========== FUNGSI UNTUK MENGGANTI HALAMAN ==========
 function showPage(pageId) {
-    // Sembunyikan semua halaman
-    const pages = document.querySelectorAll('.page');
-    pages.forEach(page => {
+    document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
     });
     
-    // Tampilkan halaman yang dipilih
-    const activePage = document.getElementById(`page-${pageId}`);
-    if (activePage) {
-        activePage.classList.add('active');
-    }
+    document.getElementById(`page-${pageId}`).classList.add('active');
     
-    // Update active class di navbar
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
+    document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('data-page') === pageId) {
+        if(link.dataset.page === pageId) {
             link.classList.add('active');
         }
     });
     
-    // Tutup menu mobile
-    if (navbarNav) {
-        navbarNav.classList.remove('active');
-    }
+    navbarNav.classList.remove('active');
     
-    // Load data spesifik per halaman
     if (pageId === 'album') {
         loadAngkatan();
         loadEkskul();
@@ -86,13 +100,11 @@ function showPage(pageId) {
         loadGuruData();
     }
     
-    // Refresh feather icons
-    if (typeof feather !== 'undefined') {
-        feather.replace();
+    if (pageId === 'spmb') {
+        initFaq();
     }
     
-    // Scroll ke atas
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    feather.replace();
 }
 
 // ========== FUNGSI UNTUK GURU ==========
@@ -116,9 +128,9 @@ function loadGuruData() {
     }
     
     let guruHtml = '';
-    guruLain.forEach(guru => {
+    guruLain.forEach((guru, index) => {
         guruHtml += `
-            <div class="guru-card">
+            <div class="guru-card" style="animation-delay: ${0.05 * (index + 1)}s">
                 <img src="${guru.foto}" alt="${guru.nama}" class="guru-foto" onerror="this.src='https://via.placeholder.com/150?text=Guru'">
                 <h4>${guru.nama}</h4>
                 <p>${guru.mapel}</p>
@@ -127,73 +139,24 @@ function loadGuruData() {
     });
     
     guruGrid.innerHTML = guruHtml;
-    
-    if (typeof feather !== 'undefined') {
-        feather.replace();
-    }
-}
-
-// ========== FUNGSI UNTUK TAMBAH GURU ==========
-function openAddGuruModal() {
-    const modal = document.getElementById('addGuruModal');
-    if (modal) modal.style.display = 'block';
-}
-
-function closeAddGuruModal() {
-    const modal = document.getElementById('addGuruModal');
-    if (modal) modal.style.display = 'none';
-}
-
-function addGuru(event) {
-    event.preventDefault();
-    
-    const nama = document.getElementById('guruNama').value;
-    const mapel = document.getElementById('guruMapel').value;
-    const foto = document.getElementById('guruFoto').value;
-    
-    if (nama && mapel && foto) {
-        dataGuru.push({
-            nama: nama,
-            mapel: mapel,
-            foto: foto,
-            isKepala: false
-        });
-        
-        loadGuruData();
-        closeAddGuruModal();
-        document.getElementById('addGuruForm').reset();
-        alert('Guru berhasil ditambahkan!');
-    } else {
-        alert('Mohon isi semua data!');
-    }
+    feather.replace();
 }
 
 // ========== FUNGSI UNTUK TAB ALBUM ==========
-function showAlbumTab(tabName, event) {
-    // Update tab buttons
+function showAlbumTab(tabName) {
     const buttons = document.querySelectorAll('.tab-btn');
     buttons.forEach(btn => {
         btn.classList.remove('active');
     });
-    if (event && event.target) {
-        event.target.classList.add('active');
-    }
+    event.target.classList.add('active');
     
-    // Show selected tab content
-    const albumAngkatan = document.getElementById('album-angkatan');
-    const albumEkskul = document.getElementById('album-ekskul');
+    document.querySelectorAll('.album-tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    document.getElementById(`album-${tabName}`).classList.add('active');
     
-    if (tabName === 'angkatan') {
-        if (albumAngkatan) albumAngkatan.classList.add('active');
-        if (albumEkskul) albumEkskul.classList.remove('active');
-    } else {
-        if (albumAngkatan) albumAngkatan.classList.remove('active');
-        if (albumEkskul) albumEkskul.classList.add('active');
-    }
-    
-    // Hide detail
     const detailDiv = document.getElementById('album-detail');
-    if (detailDiv) detailDiv.style.display = 'none';
+    detailDiv.style.display = 'none';
     
     if (tabName === 'angkatan') {
         const angkatanGrid = document.querySelector('.angkatan-grid');
@@ -213,9 +176,9 @@ function loadAngkatan() {
     if (!grid) return;
     
     let html = '';
-    dataAngkatan.forEach(angkatan => {
+    dataAngkatan.forEach((angkatan, index) => {
         html += `
-            <div class="angkatan-card" onclick="showAngkatan('${angkatan.id}')">
+            <div class="angkatan-card" style="animation-delay: ${0.05 * index}s" onclick="showAngkatan('${angkatan.id}')">
                 <div class="angkatan-thumbnail">
                     <img src="${angkatan.thumbnail}" alt="${angkatan.number}" onerror="this.src='https://via.placeholder.com/300?text=Thumbnail'">
                     <div class="thumbnail-overlay">
@@ -240,7 +203,6 @@ function showAngkatan(angkatanId) {
     if (!angkatan) return;
     
     const detailDiv = document.getElementById('album-detail');
-    if (!detailDiv) return;
     
     let kelasHtml = '';
     angkatan.kelas.forEach(kelas => {
@@ -275,21 +237,16 @@ function showAngkatan(angkatanId) {
     if (angkatanGrid) angkatanGrid.style.display = 'none';
     
     detailDiv.scrollIntoView({ behavior: 'smooth' });
-    
-    if (typeof feather !== 'undefined') {
-        feather.replace();
-    }
+    feather.replace();
 }
 
 function searchKelas() {
     const input = document.getElementById('search-kelas');
-    if (!input) return;
-    
     const filter = input.value.toUpperCase();
     const kelasCards = document.querySelectorAll('.kelas-card');
     
     kelasCards.forEach(card => {
-        const kelasName = card.querySelector('h4')?.textContent || '';
+        const kelasName = card.querySelector('h4').textContent;
         if (kelasName.toUpperCase().indexOf(filter) > -1) {
             card.style.display = '';
         } else {
@@ -304,7 +261,6 @@ function showKelas(angkatanId, kelas) {
     const fotoList = getFotoKelas(angkatanId, kelas);
     
     const detailDiv = document.getElementById('album-detail');
-    if (!detailDiv) return;
     
     let fotoHtml = '';
     if (fotoList.length > 0) {
@@ -342,14 +298,12 @@ function showKelas(angkatanId, kelas) {
         </div>
     `;
     
-    if (typeof feather !== 'undefined') {
-        feather.replace();
-    }
+    feather.replace();
 }
 
 function backToAngkatan() {
     const detailDiv = document.getElementById('album-detail');
-    if (detailDiv) detailDiv.style.display = 'none';
+    detailDiv.style.display = 'none';
     
     const angkatanGrid = document.querySelector('.angkatan-grid');
     if (angkatanGrid) angkatanGrid.style.display = 'grid';
@@ -367,9 +321,9 @@ function loadEkskul() {
     if (!grid) return;
     
     let html = '';
-    dataEkskul.forEach(ekskul => {
+    dataEkskul.forEach((ekskul, index) => {
         html += `
-            <div class="ekskul-card" onclick="showEkskul('${ekskul.id}')">
+            <div class="ekskul-card" style="animation-delay: ${0.05 * index}s" onclick="showEkskul('${ekskul.id}')">
                 <div class="ekskul-thumbnail">
                     <img src="${ekskul.thumbnail}" alt="${ekskul.name}" onerror="this.src='https://via.placeholder.com/300?text=Thumbnail'">
                     <div class="thumbnail-overlay">
@@ -394,7 +348,6 @@ function showEkskul(ekskulId) {
     if (!ekskul) return;
     
     const detailDiv = document.getElementById('album-detail');
-    if (!detailDiv) return;
     
     let anggotaHtml = '';
     ekskul.anggota.forEach(anggota => {
@@ -431,21 +384,16 @@ function showEkskul(ekskulId) {
     if (ekskulGrid) ekskulGrid.style.display = 'none';
     
     detailDiv.scrollIntoView({ behavior: 'smooth' });
-    
-    if (typeof feather !== 'undefined') {
-        feather.replace();
-    }
+    feather.replace();
 }
 
 function searchEkskulItems() {
     const input = document.getElementById('search-ekskul');
-    if (!input) return;
-    
     const filter = input.value.toUpperCase();
     const itemCards = document.querySelectorAll('.ekskul-item-card');
     
     itemCards.forEach(card => {
-        const itemName = card.querySelector('h4')?.textContent || '';
+        const itemName = card.querySelector('h4').textContent;
         if (itemName.toUpperCase().indexOf(filter) > -1) {
             card.style.display = '';
         } else {
@@ -461,7 +409,6 @@ function showEkskulItem(ekskulId, itemName) {
     const fotoList = semuaFoto.filter(f => f.nama.includes(itemName));
     
     const detailDiv = document.getElementById('album-detail');
-    if (!detailDiv) return;
     
     let fotoHtml = '';
     if (fotoList.length > 0) {
@@ -499,14 +446,12 @@ function showEkskulItem(ekskulId, itemName) {
         </div>
     `;
     
-    if (typeof feather !== 'undefined') {
-        feather.replace();
-    }
+    feather.replace();
 }
 
 function backToEkskul() {
     const detailDiv = document.getElementById('album-detail');
-    if (detailDiv) detailDiv.style.display = 'none';
+    detailDiv.style.display = 'none';
     
     const ekskulGrid = document.querySelector('.ekskul-grid');
     if (ekskulGrid) ekskulGrid.style.display = 'grid';
@@ -527,12 +472,11 @@ function openModalKelas(angkatanId, kelas, index) {
     const modalImg = document.getElementById('modalImage');
     const modalCaption = document.getElementById('modalCaption');
     
-    if (modal && modalImg && modalCaption) {
-        modal.style.display = 'block';
-        modalImg.src = currentFotoList[index].src;
-        modalCaption.innerHTML = `${currentFotoList[index].nama} - Kelas ${kelas} (${index + 1}/${currentFotoList.length})`;
-        document.body.style.overflow = 'hidden';
-    }
+    modal.style.display = 'block';
+    modalImg.src = currentFotoList[index].src;
+    modalCaption.innerHTML = `${currentFotoList[index].nama} - Kelas ${kelas} (${index + 1}/${currentFotoList.length})`;
+    
+    document.body.style.overflow = 'hidden';
 }
 
 function openModalEkskul(ekskulId, itemName, index) {
@@ -544,20 +488,17 @@ function openModalEkskul(ekskulId, itemName, index) {
     const modalImg = document.getElementById('modalImage');
     const modalCaption = document.getElementById('modalCaption');
     
-    if (modal && modalImg && modalCaption) {
-        modal.style.display = 'block';
-        modalImg.src = currentFotoList[index].src;
-        modalCaption.innerHTML = `${currentFotoList[index].nama} (${index + 1}/${currentFotoList.length})`;
-        document.body.style.overflow = 'hidden';
-    }
+    modal.style.display = 'block';
+    modalImg.src = currentFotoList[index].src;
+    modalCaption.innerHTML = `${currentFotoList[index].nama} (${index + 1}/${currentFotoList.length})`;
+    
+    document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
     const modal = document.getElementById('imageModal');
-    if (modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
 }
 
 function changeModalImage(direction) {
@@ -572,21 +513,17 @@ function changeModalImage(direction) {
     const modalImg = document.getElementById('modalImage');
     const modalCaption = document.getElementById('modalCaption');
     
-    if (modalImg && modalCaption && currentFotoList[currentFotoIndex]) {
-        modalImg.src = currentFotoList[currentFotoIndex].src;
-        modalCaption.innerHTML = `${currentFotoList[currentFotoIndex].nama} (${currentFotoIndex + 1}/${currentFotoList.length})`;
-    }
+    modalImg.src = currentFotoList[currentFotoIndex].src;
+    modalCaption.innerHTML = `${currentFotoList[currentFotoIndex].nama} (${currentFotoIndex + 1}/${currentFotoList.length})`;
 }
 
-// ========== EVENT LISTENER ==========
+// Event listener untuk modal
 document.addEventListener('DOMContentLoaded', function() {
-    // Modal close button
     const closeBtn = document.querySelector('.close-modal');
     if (closeBtn) {
         closeBtn.addEventListener('click', closeModal);
     }
     
-    // Click outside modal
     window.addEventListener('click', function(event) {
         const modal = document.getElementById('imageModal');
         if (event.target === modal) {
@@ -594,10 +531,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Keyboard navigation
     document.addEventListener('keydown', function(e) {
         const modal = document.getElementById('imageModal');
-        if (modal && modal.style.display === 'block') {
+        if (modal.style.display === 'block') {
             if (e.key === 'Escape') {
                 closeModal();
             } else if (e.key === 'ArrowLeft') {
@@ -608,27 +544,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Modal guru
-    const addGuruModal = document.getElementById('addGuruModal');
-    const closeGuruBtn = document.querySelector('.close-guru-modal');
-    const guruForm = document.getElementById('addGuruForm');
-    
-    if (closeGuruBtn) {
-        closeGuruBtn.addEventListener('click', closeAddGuruModal);
-    }
-    
-    if (guruForm) {
-        guruForm.addEventListener('submit', addGuru);
-    }
-    
-    window.addEventListener('click', function(event) {
-        if (event.target === addGuruModal) {
-            closeAddGuruModal();
-        }
-    });
-    
-    // Load initial data
-    loadGuruData();
     loadAngkatan();
     loadEkskul();
+    startCountdown();
+    initFaq();
+    loadGuruData();
+    
+    showPage('home');
 });

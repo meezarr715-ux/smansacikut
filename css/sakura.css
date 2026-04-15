@@ -31,11 +31,55 @@ html {
 body {
     font-family: "Poppins", sans-serif;
     font-weight: 400;
-    background: linear-gradient(145deg, #3b3f5c 0%, #2a2f45 100%);
+    background: linear-gradient(145deg, #1a1f2e 0%, #2a2f45 100%);
     min-height: 100vh;
     color: var(--color6);
     line-height: 1.6;
     overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Animation */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(76, 201, 254, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(244, 209, 96, 0.08) 0%, transparent 50%),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 8px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Floating Orbs */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 10% 30%, rgba(76, 201, 254, 0.05) 0%, transparent 30%),
+        radial-gradient(circle at 90% 70%, rgba(244, 209, 96, 0.05) 0%, transparent 30%);
+    pointer-events: none;
+    z-index: 0;
+    animation: floatOrbs 20s ease-in-out infinite;
+}
+
+@keyframes floatOrbs {
+    0%, 100% {
+        opacity: 0.5;
+        transform: translate(0, 0);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(2%, 2%);
+    }
 }
 
 /* ========== INTRO SCREEN ========== */
@@ -45,13 +89,13 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #1a1f2e 0%, #2a2f45 100%);
+    background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
     z-index: 20000;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
     opacity: 1;
     visibility: visible;
 }
@@ -59,12 +103,11 @@ body {
 .intro-screen.hide {
     opacity: 0;
     visibility: hidden;
-    pointer-events: none;
 }
 
 .intro-logo-container {
     text-align: center;
-    animation: introZoom 0.8s ease-out;
+    animation: introZoom 1s ease-out;
 }
 
 @keyframes introZoom {
@@ -87,6 +130,16 @@ body {
     object-fit: contain;
     margin-bottom: 20px;
     filter: drop-shadow(0 0 20px rgba(244, 209, 96, 0.5));
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 20px rgba(244, 209, 96, 0.5));
+    }
+    50% {
+        filter: drop-shadow(0 0 40px rgba(244, 209, 96, 0.8));
+    }
 }
 
 .intro-text h2 {
@@ -114,9 +167,9 @@ body {
 .intro-progress-bar {
     width: 0%;
     height: 100%;
-    background: var(--color5);
+    background: linear-gradient(90deg, var(--color5), var(--color1));
     border-radius: 3px;
-    animation: progressBar 2s linear forwards;
+    animation: progressBar 2.5s ease-out forwards;
 }
 
 @keyframes progressBar {
@@ -139,18 +192,22 @@ body {
     right: 0;
     z-index: 9999;
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    transform: translateY(-100%);
+    animation: slideDownNav 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 2.8s;
 }
 
-.navbar.show {
-    opacity: 1;
-    visibility: visible;
+@keyframes slideDownNav {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .navbar .navbar-logo {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-family: "Poppins", sans-serif;
     font-weight: 700;
     font-style: italic;
@@ -245,27 +302,26 @@ body {
     margin-top: 5rem;
     min-height: calc(100vh - 5rem);
     padding-bottom: 0;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.pages-container.show {
-    opacity: 1;
+    position: relative;
+    z-index: 1;
 }
 
 .page {
     display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .page.active {
     display: block;
-    animation: pageFadeIn 0.5s ease forwards;
+    animation: pageFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes pageFadeIn {
     0% {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
     100% {
         opacity: 1;
@@ -278,7 +334,7 @@ body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('image/hero/sekolah.jpg');
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -302,6 +358,18 @@ body {
     color: white;
     position: relative;
     z-index: 1;
+    animation: heroContentFade 0.8s ease-out 3s both;
+}
+
+@keyframes heroContentFade {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .hero .content h1 {
@@ -324,17 +392,24 @@ body {
 }
 
 .cta {
-    display: inline-block;
-    padding: 1rem 3rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
     background: var(--color5);
     color: var(--color6);
     border-radius: 50px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
     transition: all 0.3s ease;
     border: 2px solid transparent;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.cta i {
+    width: 20px;
+    height: 20px;
 }
 
 .cta:hover {
@@ -382,7 +457,8 @@ body {
     transform: translateX(-50%);
     width: 80px;
     height: 3px;
-    background: var(--color5);
+    background: linear-gradient(90deg, var(--color5), var(--color1));
+    border-radius: 3px;
 }
 
 /* Profil Page */
@@ -406,22 +482,42 @@ body {
     padding: 2rem;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cardFadeUp 0.6s ease forwards;
+    backdrop-filter: blur(5px);
+}
+
+.visi-card { animation-delay: 0.1s; }
+.misi-card { animation-delay: 0.2s; }
+
+@keyframes cardFadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .visi-card:hover, .misi-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
 }
 
 .card-icon {
     width: 70px;
     height: 70px;
-    background: var(--color5);
+    background: linear-gradient(135deg, var(--color5), var(--color1));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 1rem;
+    box-shadow: 0 5px 15px rgba(244, 209, 96, 0.3);
 }
 
 .card-icon i {
@@ -464,9 +560,25 @@ body {
     border-radius: 20px;
     padding: 2rem;
     text-align: center;
-    width: 300px;
+    width: 320px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: scale(0.9);
+    animation: scaleFadeIn 0.5s ease forwards;
+    animation-delay: 0.3s;
+    backdrop-filter: blur(5px);
+}
+
+@keyframes scaleFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .kepala-card:hover {
@@ -480,6 +592,7 @@ body {
     object-fit: cover;
     margin-bottom: 1rem;
     border: 4px solid var(--color5);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
 
 .kepala-card h4 {
@@ -507,7 +620,11 @@ body {
     padding: 1.5rem;
     text-align: center;
     box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cardFadeUp 0.5s ease forwards;
+    backdrop-filter: blur(5px);
 }
 
 .guru-card:hover {
@@ -535,95 +652,286 @@ body {
     font-size: 0.9rem;
 }
 
-/* Admin Actions */
-.admin-actions {
-    text-align: center;
-    margin-top: 2rem;
-}
-
-.btn-add {
-    background: var(--color5);
-    color: var(--color6);
-    border: none;
-    padding: 0.8rem 2rem;
-    border-radius: 50px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: 0.3s;
-}
-
-.btn-add:hover {
-    transform: scale(1.05);
-    background: #e6c145;
-}
-
-/* Modal Guru */
-.modal-guru {
-    display: none;
-    position: fixed;
-    z-index: 10001;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.7);
-}
-
-.modal-guru-content {
-    background-color: white;
-    margin: 10% auto;
-    padding: 2rem;
-    width: 90%;
-    max-width: 500px;
-    border-radius: 20px;
+/* ========== SPMB PAGE ========== */
+.spmb-page {
+    padding: 2rem 7%;
     position: relative;
+    z-index: 1;
 }
 
-.close-guru-modal {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #666;
+/* Countdown Timer */
+.countdown-container {
+    background: linear-gradient(135deg, rgba(244, 209, 96, 0.15), rgba(76, 201, 254, 0.15));
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(244, 209, 96, 0.3);
+    animation: cardFadeUp 0.6s ease forwards;
 }
 
-.close-guru-modal:hover {
+.countdown-container h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: white;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.countdown-container h3 i {
+    width: 30px;
+    height: 30px;
     color: var(--color5);
 }
 
-.modal-guru-content h3 {
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    text-align: center;
+    background: rgba(0,0,0,0.5);
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    min-width: 100px;
+}
+
+.countdown-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color5);
+    display: block;
+    font-family: monospace;
+}
+
+.countdown-label {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+}
+
+.countdown-note {
+    margin-top: 1rem;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+}
+
+/* SPMB Info Cards */
+.spmb-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+}
+
+.spmb-info-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cardFadeUp 0.5s ease forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.spmb-info-card:nth-child(1) { animation-delay: 0.1s; }
+.spmb-info-card:nth-child(2) { animation-delay: 0.2s; }
+.spmb-info-card:nth-child(3) { animation-delay: 0.3s; }
+.spmb-info-card:nth-child(4) { animation-delay: 0.4s; }
+
+.spmb-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.spmb-icon i {
+    width: 50px;
+    height: 50px;
+    color: var(--color5);
+    margin-bottom: 1rem;
+}
+
+.spmb-info-card h3 {
+    font-size: 1.3rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.spmb-info-card p {
+    color: #666;
+    margin-bottom: 0.8rem;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    background: linear-gradient(135deg, var(--color5), var(--color1));
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color6);
+}
+
+/* Informasi Lengkap Section */
+.spmb-info-lengkap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+}
+
+.spmb-persyaratan, .spmb-alur {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cardFadeUp 0.5s ease forwards;
+}
+
+.spmb-persyaratan { animation-delay: 0.5s; }
+.spmb-alur { animation-delay: 0.6s; }
+
+.spmb-persyaratan h3, .spmb-alur h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
     margin-bottom: 1.5rem;
     color: var(--primary);
 }
 
-.modal-guru-content input {
-    width: 100%;
-    padding: 0.8rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    font-family: "Poppins", sans-serif;
+.spmb-persyaratan h3 i, .spmb-alur h3 i {
+    width: 25px;
+    height: 25px;
 }
 
-.modal-guru-content button {
-    width: 100%;
-    padding: 0.8rem;
-    background: var(--color5);
-    border: none;
-    border-radius: 10px;
+.spmb-persyaratan ul li {
+    margin-bottom: 0.8rem;
+    color: #555;
+    list-style-position: inside;
+}
+
+.alur-steps {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.alur-step {
+    text-align: center;
+    flex: 1;
+    min-width: 70px;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--color5), var(--color1));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.5rem;
+    font-weight: 700;
+    color: var(--color6);
+}
+
+.alur-step p {
+    font-size: 0.8rem;
+    color: #555;
+}
+
+.alur-arrow {
+    font-size: 1.5rem;
+    color: var(--color5);
+}
+
+/* SPMB Button */
+.spmb-button {
+    text-align: center;
+    margin: 2rem 0;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cardFadeUp 0.5s ease forwards;
+    animation-delay: 0.7s;
+}
+
+/* FAQ Section */
+.spmb-faq {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cardFadeUp 0.5s ease forwards;
+    animation-delay: 0.8s;
+}
+
+.spmb-faq h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.faq-item {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 1rem;
+}
+
+.faq-question {
     font-weight: 600;
+    color: var(--primary);
     cursor: pointer;
-    transition: 0.3s;
+    padding: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.modal-guru-content button:hover {
-    background: #e6c145;
+.faq-question::after {
+    content: '+';
+    font-size: 1.2rem;
+    color: var(--color5);
+}
+
+.faq-item.active .faq-question::after {
+    content: '-';
+}
+
+.faq-answer {
+    color: #666;
+    font-size: 0.9rem;
+    padding-top: 0.5rem;
+    display: none;
+}
+
+.faq-item.active .faq-answer {
+    display: block;
 }
 
 /* Album Tabs */
@@ -681,8 +989,11 @@ body {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     cursor: pointer;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cardFadeUp 0.5s ease forwards;
 }
 
 .angkatan-card:hover, .ekskul-card:hover {
@@ -761,6 +1072,18 @@ body {
     border-radius: 20px;
     padding: 2rem;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    animation: detailFadeIn 0.5s ease;
+}
+
+@keyframes detailFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .back-button {
@@ -794,6 +1117,12 @@ body {
     font-size: 1rem;
     font-family: "Poppins", sans-serif;
     background: rgba(255,255,255,0.95);
+    transition: all 0.3s ease;
+}
+
+#search-kelas:focus, #search-ekskul:focus {
+    transform: scale(1.02);
+    box-shadow: 0 0 10px rgba(244, 209, 96, 0.5);
 }
 
 .kelas-grid, .ekskul-items-grid {
@@ -858,82 +1187,6 @@ body {
     z-index: 2;
 }
 
-/* SPMB Page */
-.spmb-page {
-    padding: 2rem 7%;
-    position: relative;
-    z-index: 1;
-}
-
-.spmb-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto 3rem;
-}
-
-.spmb-info-card {
-    background: var(--card-bg);
-    border-radius: 20px;
-    padding: 2rem;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.spmb-info-card:hover {
-    transform: translateY(-5px);
-}
-
-.spmb-icon i {
-    width: 50px;
-    height: 50px;
-    color: var(--color5);
-    margin-bottom: 1rem;
-}
-
-.spmb-info-card h3 {
-    font-size: 1.3rem;
-    color: var(--primary);
-    margin-bottom: 0.5rem;
-}
-
-.spmb-info-card p {
-    color: #666;
-}
-
-.spmb-persyaratan {
-    background: var(--card-bg);
-    border-radius: 20px;
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto 2rem;
-}
-
-.spmb-persyaratan h3 {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    color: var(--primary);
-}
-
-.spmb-persyaratan h3 i {
-    width: 30px;
-    height: 30px;
-}
-
-.spmb-persyaratan ul li {
-    margin-bottom: 0.8rem;
-    color: #555;
-    list-style-position: inside;
-}
-
-.spmb-button {
-    text-align: center;
-}
-
 /* Kontak Page */
 .kontak-page {
     padding: 2rem 7%;
@@ -955,8 +1208,14 @@ body {
     border-radius: 20px;
     padding: 2rem;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cardFadeUp 0.5s ease forwards;
 }
+
+.kontak-card:first-child { animation-delay: 0.1s; }
+.kontak-card:last-child { animation-delay: 0.2s; }
 
 .kontak-card:hover {
     transform: translateY(-5px);
@@ -1112,6 +1371,18 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    animation: modalZoom 0.3s ease;
+}
+
+@keyframes modalZoom {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
 }
 
 .close-modal {
@@ -1196,7 +1467,7 @@ body {
 }
 
 .footer-logo {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-style: italic;
     margin-bottom: 1rem;
 }
@@ -1233,7 +1504,7 @@ body {
     bottom: 0;
     width: 50px;
     height: 2px;
-    background: var(--color5);
+    background: linear-gradient(90deg, var(--color5), var(--color1));
 }
 
 .footer-links {
@@ -1300,7 +1571,8 @@ body {
     }
 
     .visi-misi-container,
-    .kontak-container {
+    .kontak-container,
+    .spmb-info-lengkap {
         grid-template-columns: 1fr;
     }
 
@@ -1350,6 +1622,27 @@ body {
 
     .intro-text h2 {
         font-size: 1.5rem;
+    }
+
+    .countdown-timer {
+        gap: 1rem;
+    }
+
+    .countdown-item {
+        min-width: 70px;
+        padding: 0.8rem;
+    }
+
+    .countdown-number {
+        font-size: 1.8rem;
+    }
+
+    .alur-steps {
+        flex-direction: column;
+    }
+
+    .alur-arrow {
+        transform: rotate(90deg);
     }
 }
 

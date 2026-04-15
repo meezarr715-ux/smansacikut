@@ -10,13 +10,13 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="css/sakurastyle.css">
+    <link rel="stylesheet" href="css/sakura.css">
 </head>
 <body>
     <!-- INTRO LOGO SECTION -->
     <div id="introScreen" class="intro-screen">
         <div class="intro-logo-container">
-            <img src="image/logo-sekolah/LOGO SAKURA.png" alt="Logo Sekolah" class="intro-logo" id="introLogo" onerror="this.src='https://via.placeholder.com/150?text=Logo'">
+            <img src="image/logo-sekolah/LOGO SAKURA.png" alt="Logo Sekolah" class="intro-logo" id="introLogo">
             <div class="intro-text">
                 <h2>SMAN 1 CIKARANG UTARA</h2>
                 <p>Sekolah Unggul Berprestasi</p>
@@ -28,14 +28,14 @@
     </div>
 
     <!-- Nav Start -->
-    <nav class="navbar" id="mainNavbar">
-        <a href="#" class="navbar-logo" onclick="showPage('home'); return false;"><span class="logo-icon"><img src="image/logo-sekolah/LOGO SAKURA.png" alt="logo" style="width: 35px; height: 35px; object-fit: contain; margin-right: 8px;" onerror="this.style.display='none'"></span>SMAN 1 <span1>CIKARANG UTARA</span1><span2>.sch.id</span2></a>
+    <nav class="navbar">
+        <a href="#" class="navbar-logo" onclick="showPage('home'); return false;"><span class="logo-icon"><img src="image/logo-sekolah/LOGO SAKURA.png" alt="logo" style="width: 35px; height: 35px; object-fit: contain; margin-right: 8px;"></span>SMAN 1 <span1>CIKARANG UTARA</span1><span2>.sch.id</span2></a>
         
         <div class="navbar-nav">
             <a href="#" onclick="showPage('home'); return false;" class="nav-link active" data-page="home">Beranda</a>
             <a href="#" onclick="showPage('profil'); return false;" class="nav-link" data-page="profil">Profil Sekolah</a>
-            <a href="#" onclick="showPage('album'); return false;" class="nav-link" data-page="album">Album</a>
             <a href="#" onclick="showPage('spmb'); return false;" class="nav-link" data-page="spmb">SPMB</a>
+            <a href="#" onclick="showPage('album'); return false;" class="nav-link" data-page="album">Album</a>
             <a href="#" onclick="showPage('kontak'); return false;" class="nav-link" data-page="kontak">Kontak</a>
         </div>
 
@@ -46,7 +46,7 @@
     <!-- Nav End -->
 
     <!-- PAGES CONTAINER -->
-    <div class="pages-container" id="pagesContainer">
+    <div class="pages-container">
         
         <!-- HOME PAGE -->
         <div id="page-home" class="page active">
@@ -93,11 +93,131 @@
                     <h3 class="section-title">Dewan Guru & Staff</h3>
                     <div class="guru-grid" id="guru-grid"></div>
                 </div>
+            </section>
+        </div>
 
-                <div class="admin-actions" id="admin-actions" style="display: none;">
-                    <button class="btn-add" onclick="openAddGuruModal()">
-                        <i data-feather="plus"></i> Tambah Guru
-                    </button>
+        <!-- SPMB PAGE -->
+        <div id="page-spmb" class="page">
+            <section class="spmb-page">
+                <h2 class="page-title">SPMB</h2>
+                <p class="page-subtitle">Sistem Penerimaan Murid Baru SMAN 1 Cikarang Utara</p>
+                
+                <!-- Countdown Timer -->
+                <div class="countdown-container">
+                    <h3><i data-feather="clock"></i> Pendaftaran Dibuka Dalam</h3>
+                    <div class="countdown-timer" id="countdownTimer">
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="days">00</span>
+                            <span class="countdown-label">Hari</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="hours">00</span>
+                            <span class="countdown-label">Jam</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="minutes">00</span>
+                            <span class="countdown-label">Menit</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="seconds">00</span>
+                            <span class="countdown-label">Detik</span>
+                        </div>
+                    </div>
+                    <p class="countdown-note">*Gelombang 1: Januari - Maret 2026</p>
+                </div>
+
+                <div class="spmb-container">
+                    <div class="spmb-info-card">
+                        <div class="spmb-icon"><i data-feather="calendar"></i></div>
+                        <h3>Pendaftaran Gelombang 1</h3>
+                        <p>Januari - Maret 2026</p>
+                        <span class="badge">Segera Dibuka</span>
+                    </div>
+                    <div class="spmb-info-card">
+                        <div class="spmb-icon"><i data-feather="calendar"></i></div>
+                        <h3>Pendaftaran Gelombang 2</h3>
+                        <p>April - Juni 2026</p>
+                        <span class="badge">Akan Datang</span>
+                    </div>
+                    <div class="spmb-info-card">
+                        <div class="spmb-icon"><i data-feather="users"></i></div>
+                        <h3>Kuota</h3>
+                        <p>360 Siswa</p>
+                        <span class="badge">10 Rombel</span>
+                    </div>
+                    <div class="spmb-info-card">
+                        <div class="spmb-icon"><i data-feather="clipboard"></i></div>
+                        <h3>Jalur Pendaftaran</h3>
+                        <p>Zonasi • Prestasi • Afirmasi</p>
+                        <span class="badge">3 Jalur</span>
+                    </div>
+                </div>
+
+                <div class="spmb-info-lengkap">
+                    <div class="spmb-persyaratan">
+                        <h3><i data-feather="file-text"></i> Persyaratan Umum</h3>
+                        <ul>
+                            <li>Ijazah/SKL SMP/MTS atau sederajat</li>
+                            <li>Nilai rata-rata rapor minimal 75</li>
+                            <li>Pas foto terbaru 3x4 (4 lembar)</li>
+                            <li>Kartu Keluarga dan Akta Kelahiran</li>
+                            <li>Surat Keterangan Sehat dari dokter</li>
+                        </ul>
+                    </div>
+
+                    <div class="spmb-alur">
+                        <h3><i data-feather="git-branch"></i> Alur Pendaftaran</h3>
+                        <div class="alur-steps">
+                            <div class="alur-step">
+                                <div class="step-number">1</div>
+                                <p>Registrasi Online</p>
+                            </div>
+                            <div class="alur-arrow">→</div>
+                            <div class="alur-step">
+                                <div class="step-number">2</div>
+                                <p>Verifikasi Berkas</p>
+                            </div>
+                            <div class="alur-arrow">→</div>
+                            <div class="alur-step">
+                                <div class="step-number">3</div>
+                                <p>Seleksi</p>
+                            </div>
+                            <div class="alur-arrow">→</div>
+                            <div class="alur-step">
+                                <div class="step-number">4</div>
+                                <p>Pengumuman</p>
+                            </div>
+                            <div class="alur-arrow">→</div>
+                            <div class="alur-step">
+                                <div class="step-number">5</div>
+                                <p>Daftar Ulang</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spmb-button">
+                    <a href="https://instagram.com/smansacikut" class="cta" target="_blank">
+                        <i data-feather="instagram"></i> Informasi Lengkap
+                    </a>
+                </div>
+
+                <div class="spmb-faq">
+                    <h3><i data-feather="help-circle"></i> FAQ - Pertanyaan Umum</h3>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <div class="faq-question">Apakah ada biaya pendaftaran?</div>
+                            <div class="faq-answer">Pendaftaran SPMB SMAN 1 Cikarang Utara GRATIS (tidak dipungut biaya apapun).</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">Kapan jadwal tes seleksi?</div>
+                            <div class="faq-answer">Jadwal tes akan diinformasikan setelah pendaftaran ditutup melalui website dan Instagram resmi sekolah.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">Apakah menerima siswa dari luar zona?</div>
+                            <div class="faq-answer">Tersedia jalur prestasi dan afirmasi untuk siswa dari luar zona.</div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -109,8 +229,8 @@
                 <p class="page-subtitle">Pilih kategori album yang ingin Anda lihat</p>
                 
                 <div class="album-tabs">
-                    <button class="tab-btn active" onclick="showAlbumTab('angkatan', event)">Angkatan</button>
-                    <button class="tab-btn" onclick="showAlbumTab('ekskul', event)">Ekstrakulikuler</button>
+                    <button class="tab-btn active" onclick="showAlbumTab('angkatan')">Angkatan</button>
+                    <button class="tab-btn" onclick="showAlbumTab('ekskul')">Ekstrakulikuler</button>
                 </div>
                 
                 <div id="album-angkatan" class="album-tab-content active">
@@ -122,52 +242,6 @@
                 </div>
 
                 <div id="album-detail" class="album-detail" style="display: none;"></div>
-            </section>
-        </div>
-
-        <!-- SPMB PAGE -->
-        <div id="page-spmb" class="page">
-            <section class="spmb-page">
-                <h2 class="page-title">SPMB</h2>
-                <p class="page-subtitle">Sistem Penerimaan Murid Baru SMAN 1 Cikarang Utara</p>
-                
-                <div class="spmb-container">
-                    <div class="spmb-info-card">
-                        <div class="spmb-icon"><i data-feather="calendar"></i></div>
-                        <h3>Pendaftaran Gelombang 1</h3>
-                        <p>Januari - Maret 2026</p>
-                    </div>
-                    <div class="spmb-info-card">
-                        <div class="spmb-icon"><i data-feather="calendar"></i></div>
-                        <h3>Pendaftaran Gelombang 2</h3>
-                        <p>April - Juni 2026</p>
-                    </div>
-                    <div class="spmb-info-card">
-                        <div class="spmb-icon"><i data-feather="users"></i></div>
-                        <h3>Kuota</h3>
-                        <p>360 Siswa (10 Rombel)</p>
-                    </div>
-                    <div class="spmb-info-card">
-                        <div class="spmb-icon"><i data-feather="clipboard"></i></div>
-                        <h3>Jalur Pendaftaran</h3>
-                        <p>Zonasi • Prestasi • Afirmasi</p>
-                    </div>
-                </div>
-
-                <div class="spmb-persyaratan">
-                    <h3><i data-feather="file-text"></i> Persyaratan Umum</h3>
-                    <ul>
-                        <li>Ijazah/SKL SMP/MTS atau sederajat</li>
-                        <li>Nilai rata-rata rapor minimal 75</li>
-                        <li>Pas foto terbaru 3x4 (4 lembar)</li>
-                        <li>Kartu Keluarga dan Akta Kelahiran</li>
-                        <li>Surat Keterangan Sehat dari dokter</li>
-                    </ul>
-                </div>
-
-                <div class="spmb-button">
-                    <a href="#" class="cta" onclick="alert('Pendaftaran akan dibuka Januari 2026')">Daftar Sekarang</a>
-                </div>
             </section>
         </div>
 
@@ -221,7 +295,7 @@
                         
                         <div class="developer-info">
                             <div class="developer-profile">
-                                <img src="image/developer/foto-developer.jpg" alt="Developer" class="developer-photo" onerror="this.src='https://via.placeholder.com/120?text=Developer'">
+                                <img src="https://res.cloudinary.com/duemncbn0/image/upload/v1775106911/IMG-20240929-WA0036_ohrnnr.jpg" alt="Developer" class="developer-photo">
                                 <h4>Iki Si Zarr</h4>
                                 <p class="developer-role">Developer Sakura</p>
                             </div>
@@ -266,8 +340,8 @@
                 <ul class="footer-links">
                     <li><a href="#" onclick="showPage('home'); return false;">Beranda</a></li>
                     <li><a href="#" onclick="showPage('profil'); return false;">Profil Sekolah</a></li>
-                    <li><a href="#" onclick="showPage('album'); return false;">Album</a></li>
                     <li><a href="#" onclick="showPage('spmb'); return false;">SPMB</a></li>
+                    <li><a href="#" onclick="showPage('album'); return false;">Album</a></li>
                     <li><a href="#" onclick="showPage('kontak'); return false;">Kontak</a></li>
                 </ul>
             </div>
@@ -289,22 +363,11 @@
         <a class="next" onclick="changeModalImage(1)">&#10095;</a>
     </div>
 
-    <!-- Modal Tambah Guru -->
-    <div id="addGuruModal" class="modal-guru">
-        <div class="modal-guru-content">
-            <span class="close-guru-modal">&times;</span>
-            <h3>Tambah Guru / Staff</h3>
-            <form id="addGuruForm">
-                <input type="text" id="guruNama" placeholder="Nama Lengkap" required>
-                <input type="text" id="guruMapel" placeholder="Mata Pelajaran / Jabatan" required>
-                <input type="text" id="guruFoto" placeholder="URL Foto Guru" required>
-                <button type="submit">Tambah Guru</button>
-            </form>
-        </div>
-    </div>
-
     <!-- Scripts -->
-    <script src="sakuradata.js"></script>
-    <script src="sakura.js"></script>
+    <script src="js/sakuradata.js"></script>
+    <script>
+        feather.replace();
+    </script>
+    <script src="js/sakura.js"></script>
 </body>
 </html>
