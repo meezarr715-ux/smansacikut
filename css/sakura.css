@@ -68,7 +68,7 @@ body::before {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
     opacity: 1;
     visibility: visible;
 }
@@ -80,16 +80,13 @@ body::before {
 
 .intro-logo-container {
     text-align: center;
-    animation: introZoom 1s ease-out;
+    animation: introZoom 0.8s ease-out;
 }
 
 @keyframes introZoom {
     0% {
         transform: scale(0.3);
         opacity: 0;
-    }
-    60% {
-        transform: scale(1.1);
     }
     100% {
         transform: scale(1);
@@ -103,16 +100,6 @@ body::before {
     object-fit: contain;
     margin-bottom: 20px;
     filter: drop-shadow(0 0 20px rgba(244, 209, 96, 0.5));
-    animation: pulseGlow 2s ease-in-out infinite;
-}
-
-@keyframes pulseGlow {
-    0%, 100% {
-        filter: drop-shadow(0 0 20px rgba(244, 209, 96, 0.5));
-    }
-    50% {
-        filter: drop-shadow(0 0 40px rgba(244, 209, 96, 0.8));
-    }
 }
 
 .intro-text h2 {
@@ -153,65 +140,71 @@ body::before {
 /* ========== WELCOME POPUP ========== */
 .welcome-popup {
     position: fixed;
-    top: -150px;
+    top: -100px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 19999;
-    transition: top 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(135deg, var(--color5), var(--color1));
+    border-radius: 50px;
+    padding: 12px 24px;
+    z-index: 15000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .welcome-popup.show {
-    top: 80px;
+    top: 20px;
+    opacity: 1;
 }
 
 .welcome-popup-content {
-    background: linear-gradient(135deg, var(--color5), var(--color1));
-    padding: 15px 30px;
-    border-radius: 50px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     display: flex;
     align-items: center;
-    gap: 15px;
-    animation: welcomePulse 0.5s ease;
-}
-
-@keyframes welcomePulse {
-    0% {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+    gap: 12px;
+    color: var(--color6);
 }
 
 .welcome-icon i {
-    width: 30px;
-    height: 30px;
-    color: var(--color6);
+    width: 24px;
+    height: 24px;
 }
 
 .welcome-popup-content h3 {
-    font-size: 1.2rem;
-    color: var(--color6);
+    font-size: 1rem;
     margin: 0;
 }
 
 .welcome-popup-content p {
-    font-size: 1rem;
-    color: var(--color6);
+    font-size: 0.85rem;
     margin: 0;
-    font-weight: 500;
+    opacity: 0.8;
 }
 
-.welcome-decoration {
-    width: 3px;
-    height: 30px;
+.welcome-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 0 0 50px 50px;
+    overflow: hidden;
+}
+
+.welcome-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
     background: var(--color6);
-    border-radius: 3px;
-    opacity: 0.3;
+    animation: welcomeProgress 5s linear forwards;
+}
+
+@keyframes welcomeProgress {
+    0% { width: 0%; }
+    100% { width: 100%; }
 }
 
 /* ========== NAVBAR ========== */
@@ -235,12 +228,8 @@ body::before {
 }
 
 @keyframes slideDownNav {
-    0% {
-        transform: translateY(-100%);
-    }
-    100% {
-        transform: translateY(0);
-    }
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(0); }
 }
 
 .navbar .navbar-logo {
@@ -276,15 +265,13 @@ body::before {
 
 .navbar .navbar-nav {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
 }
 
 .navbar .navbar-nav a {
     color: white;
     display: inline-block;
     font-size: 0.85rem;
-    margin: 0 0.8rem;
+    margin: 0 0.7rem;
     padding: 0.5rem 0;
     position: relative;
     transition: 0.3s;
@@ -349,12 +336,12 @@ body::before {
     display: none;
     opacity: 0;
     transform: translateY(15px);
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .page.active {
     display: block;
-    animation: pageFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: pageFadeIn 0.35s ease forwards;
 }
 
 @keyframes pageFadeIn {
@@ -368,7 +355,7 @@ body::before {
     }
 }
 
-/* Hero section - PERBAIKAN: animasi lebih cepat dan konsisten */
+/* Hero section */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -391,21 +378,13 @@ body::before {
     background: rgba(0,0,0,0.3);
 }
 
-/* Konten Hero - animasi selalu aktif saat halaman aktif */
 .hero .content {
     padding: 1.4rem 7%;
     max-width: 60rem;
     color: white;
     position: relative;
     z-index: 1;
-    opacity: 0;
-    transform: translateX(-20px);
-    animation: heroContentFade 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-/* Saat page-home aktif, hero content akan selalu animasi */
-#page-home.active .hero .content {
-    animation: heroContentFade 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: heroContentFade 0.5s ease-out 3s both;
 }
 
 @keyframes heroContentFade {
@@ -420,7 +399,7 @@ body::before {
 }
 
 .hero .content h1 {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1.2;
@@ -432,7 +411,7 @@ body::before {
 }
 
 .hero .content p {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     margin-bottom: 2rem;
     opacity: 0.95;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
@@ -442,11 +421,11 @@ body::before {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 1rem 2rem;
+    padding: 0.8rem 2rem;
     background: var(--color5);
     color: var(--color6);
     border-radius: 50px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     transition: all 0.3s ease;
     border: 2px solid transparent;
@@ -455,24 +434,24 @@ body::before {
 }
 
 .cta i {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
 }
 
 .cta:hover {
     background: transparent;
     border-color: var(--color5);
     color: var(--color5);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 }
 
 /* Page Titles */
 .page-title {
     text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     color: white;
-    padding-top: 2rem;
+    padding-top: 1.5rem;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     position: relative;
     z-index: 1;
@@ -491,9 +470,9 @@ body::before {
     text-align: center;
     font-size: 1.8rem;
     color: white;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     position: relative;
-    padding-bottom: 1rem;
+    padding-bottom: 0.8rem;
 }
 
 .section-title::after {
@@ -508,9 +487,16 @@ body::before {
     border-radius: 3px;
 }
 
+.sub-section-title {
+    text-align: center;
+    font-size: 1.4rem;
+    color: white;
+    margin: 1.5rem 0 1rem;
+}
+
 /* Profil Page */
 .profil-page {
-    padding: 2rem 7%;
+    padding: 1.5rem 7%;
     position: relative;
     z-index: 1;
 }
@@ -518,21 +504,21 @@ body::before {
 .visi-misi-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto 3rem;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto 2rem;
 }
 
 .visi-card, .misi-card {
     background: var(--card-bg);
-    border-radius: 20px;
-    padding: 2rem;
+    border-radius: 15px;
+    padding: 1.5rem;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
     opacity: 0;
     transform: translateY(15px);
-    animation: cardFadeUp 0.4s ease forwards;
+    animation: cardFadeUp 0.35s ease forwards;
 }
 
 .visi-card { animation-delay: 0.05s; }
@@ -551,6 +537,7 @@ body::before {
 
 .visi-card:hover, .misi-card:hover {
     transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
 }
 
 .card-icon {
@@ -561,8 +548,7 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1rem;
-    box-shadow: 0 5px 15px rgba(244, 209, 96, 0.3);
+    margin: 0 auto 0.8rem;
 }
 
 .card-icon i {
@@ -574,7 +560,7 @@ body::before {
 .visi-card h3, .misi-card h3 {
     font-size: 1.5rem;
     color: var(--primary);
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
 }
 
 .visi-card p {
@@ -585,29 +571,33 @@ body::before {
 
 .misi-card ul {
     text-align: left;
-    padding-left: 1.5rem;
+    padding-left: 1.2rem;
 }
 
 .misi-card ul li {
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.5rem;
     color: #555;
     font-size: 0.9rem;
 }
 
 /* Sambutan Kepala Sekolah */
 .sambutan-section {
-    max-width: 900px;
-    margin: 0 auto 3rem;
+    margin: 2rem 0;
 }
 
 .sambutan-card {
     background: var(--card-bg);
-    border-radius: 20px;
-    padding: 2rem;
+    border-radius: 15px;
+    padding: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     opacity: 0;
     transform: translateY(15px);
-    animation: cardFadeUp 0.4s ease forwards;
+    animation: cardFadeUp 0.35s ease forwards;
     animation-delay: 0.15s;
 }
 
@@ -616,61 +606,56 @@ body::before {
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    margin: 0 auto 1rem;
-    border: 4px solid var(--color5);
-    display: block;
+    border: 3px solid var(--color5);
 }
 
-.sambutan-card h4 {
-    text-align: center;
-    font-size: 1.3rem;
+.sambutan-text {
+    flex: 1;
+}
+
+.sambutan-text h4 {
+    font-size: 1.2rem;
     color: var(--primary);
     margin-bottom: 0.3rem;
 }
 
-.sambutan-jabatan {
-    text-align: center;
-    color: var(--color3);
-    margin-bottom: 1.5rem;
+.sambutan-text p {
+    color: #666;
     font-size: 0.9rem;
-}
-
-.sambutan-teks {
-    font-style: italic;
-    line-height: 1.8;
-    color: #555;
-    text-align: center;
+    line-height: 1.6;
 }
 
 /* Struktur Organisasi */
 .struktur-section {
-    max-width: 1200px;
-    margin: 0 auto;
+    margin: 2rem 0;
 }
 
 .struktur-level {
     display: flex;
     justify-content: center;
     gap: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     flex-wrap: wrap;
 }
 
-.level-1 {
-    margin-bottom: 1.5rem;
+.level-1 .struktur-card {
+    min-width: 250px;
 }
 
-.level-2 {
-    margin-bottom: 2rem;
+.level-2 .struktur-card {
+    min-width: 200px;
+}
+
+.level-3 .struktur-card {
+    min-width: 250px;
 }
 
 .struktur-card {
     background: var(--card-bg);
-    border-radius: 15px;
-    padding: 1.5rem;
+    border-radius: 12px;
+    padding: 1rem;
     text-align: center;
-    min-width: 200px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     opacity: 0;
     transform: translateY(15px);
@@ -686,14 +671,14 @@ body::before {
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 1rem;
-    border: 3px solid var(--color5);
+    margin-bottom: 0.8rem;
+    border: 2px solid var(--color5);
 }
 
 .struktur-card h4 {
     font-size: 1rem;
     color: var(--primary);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.2rem;
 }
 
 .struktur-card p {
@@ -701,35 +686,111 @@ body::before {
     font-size: 0.8rem;
 }
 
-/* Guru by Mapel */
-.guru-by-mapel {
-    margin-top: 2rem;
+/* Guru Mapel Grid */
+.guru-mapel-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
 }
 
 .mapel-group {
-    margin-bottom: 2rem;
-    background: rgba(255,255,255,0.05);
-    border-radius: 15px;
-    padding: 1.5rem;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 1rem;
     backdrop-filter: blur(5px);
 }
 
 .mapel-title {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color: var(--color5);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--color5);
-    display: inline-block;
+    border-bottom: 1px solid rgba(244, 209, 96, 0.3);
 }
 
-.mapel-grid {
+.mapel-guru-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
-/* COMING SOON PAGE */
+.guru-item {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 0.8rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.guru-item:hover {
+    transform: translateY(-2px);
+}
+
+.guru-item-foto {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+    border: 2px solid var(--color5);
+}
+
+.guru-item h5 {
+    font-size: 0.9rem;
+    color: var(--primary);
+    margin-bottom: 0.2rem;
+}
+
+.guru-item p {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+/* Staff Grid */
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.staff-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: cardFadeUp 0.35s ease forwards;
+}
+
+.staff-card:hover {
+    transform: translateY(-2px);
+}
+
+.staff-foto {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+    border: 2px solid var(--color5);
+}
+
+.staff-card h4 {
+    font-size: 0.9rem;
+    color: var(--primary);
+    margin-bottom: 0.2rem;
+}
+
+.staff-card p {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+/* Coming Soon Page */
 .coming-soon-page {
     min-height: 70vh;
     display: flex;
@@ -741,13 +802,14 @@ body::before {
 .coming-soon-content {
     text-align: center;
     background: var(--card-bg);
-    border-radius: 30px;
+    border-radius: 20px;
     padding: 3rem;
     max-width: 500px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     opacity: 0;
     transform: translateY(15px);
-    animation: cardFadeUp 0.4s ease forwards;
+    animation: cardFadeUp 0.35s ease forwards;
 }
 
 .coming-soon-icon i {
@@ -761,7 +823,6 @@ body::before {
     font-size: 2rem;
     color: var(--primary);
     margin-bottom: 0.5rem;
-    letter-spacing: 3px;
 }
 
 .coming-soon-content p {
@@ -769,17 +830,30 @@ body::before {
     margin-bottom: 1.5rem;
 }
 
-.coming-soon-decoration {
-    width: 50px;
-    height: 3px;
+.coming-soon-progress {
+    width: 100%;
+    height: 4px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.coming-soon-progress .progress-bar {
+    width: 30%;
+    height: 100%;
     background: linear-gradient(90deg, var(--color5), var(--color1));
-    margin: 0 auto;
-    border-radius: 3px;
+    border-radius: 4px;
+    animation: progressPulse 2s ease-in-out infinite;
+}
+
+@keyframes progressPulse {
+    0%, 100% { width: 30%; }
+    50% { width: 70%; }
 }
 
 /* SPMB Page */
 .spmb-page {
-    padding: 2rem 7%;
+    padding: 1.5rem 7%;
     position: relative;
     z-index: 1;
 }
@@ -787,15 +861,10 @@ body::before {
 .countdown-container {
     background: linear-gradient(135deg, rgba(244, 209, 96, 0.15), rgba(76, 201, 254, 0.15));
     backdrop-filter: blur(10px);
-    border-radius: 30px;
-    padding: 2rem;
+    border-radius: 20px;
+    padding: 1.5rem;
     text-align: center;
-    margin-bottom: 3rem;
-    border: 1px solid rgba(244, 209, 96, 0.3);
-    opacity: 0;
-    transform: translateY(15px);
-    animation: cardFadeUp 0.4s ease forwards;
-    animation-delay: 0.05s;
+    margin-bottom: 2rem;
 }
 
 .countdown-container h3 {
@@ -804,14 +873,14 @@ body::before {
     justify-content: center;
     gap: 0.5rem;
     color: white;
-    margin-bottom: 1.5rem;
-    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
 }
 
 .countdown-timer {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 1rem;
     flex-wrap: wrap;
 }
 
@@ -819,30 +888,27 @@ body::before {
     text-align: center;
     background: rgba(0,0,0,0.5);
     padding: 0.8rem 1.2rem;
-    border-radius: 15px;
-    min-width: 80px;
+    border-radius: 12px;
+    min-width: 70px;
 }
 
 .countdown-number {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: var(--color5);
     display: block;
-    font-family: monospace;
 }
 
 .countdown-label {
     font-size: 0.7rem;
     color: rgba(255,255,255,0.7);
-    text-transform: uppercase;
 }
 
 .spmb-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
-    max-width: 1000px;
-    margin: 0 auto 2rem;
+    margin-bottom: 2rem;
 }
 
 .spmb-info-card {
@@ -855,11 +921,6 @@ body::before {
     transform: translateY(15px);
     animation: cardFadeUp 0.35s ease forwards;
 }
-
-.spmb-info-card:nth-child(1) { animation-delay: 0.1s; }
-.spmb-info-card:nth-child(2) { animation-delay: 0.15s; }
-.spmb-info-card:nth-child(3) { animation-delay: 0.2s; }
-.spmb-info-card:nth-child(4) { animation-delay: 0.25s; }
 
 .spmb-info-card:hover {
     transform: translateY(-3px);
@@ -881,7 +942,6 @@ body::before {
 .spmb-info-card p {
     color: #666;
     font-size: 0.85rem;
-    margin-bottom: 0.5rem;
 }
 
 .badge {
@@ -892,29 +952,22 @@ body::before {
     font-size: 0.7rem;
     font-weight: 600;
     color: var(--color6);
+    margin-top: 0.5rem;
 }
 
-.spmb-info-lengkap {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    max-width: 1000px;
-    margin: 0 auto 2rem;
-}
-
-.spmb-persyaratan, .spmb-alur {
+.spmb-persyaratan {
     background: var(--card-bg);
     border-radius: 15px;
     padding: 1.5rem;
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
     opacity: 0;
     transform: translateY(15px);
     animation: cardFadeUp 0.35s ease forwards;
+    animation-delay: 0.1s;
 }
 
-.spmb-persyaratan { animation-delay: 0.3s; }
-.spmb-alur { animation-delay: 0.35s; }
-
-.spmb-persyaratan h3, .spmb-alur h3 {
+.spmb-persyaratan h3 {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -931,56 +984,18 @@ body::before {
     list-style-position: inside;
 }
 
-.alur-steps {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.3rem;
-}
-
-.alur-step {
-    text-align: center;
-    flex: 1;
-    min-width: 60px;
-}
-
-.step-number {
-    width: 30px;
-    height: 30px;
-    background: linear-gradient(135deg, var(--color5), var(--color1));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 0.3rem;
-    font-weight: 700;
-    font-size: 0.8rem;
-    color: var(--color6);
-}
-
-.alur-step p {
-    font-size: 0.7rem;
-    color: #555;
-}
-
-.alur-arrow {
-    font-size: 1rem;
-    color: var(--color5);
-}
-
 .spmb-button {
     text-align: center;
     margin: 1.5rem 0;
     opacity: 0;
     transform: translateY(15px);
     animation: cardFadeUp 0.35s ease forwards;
-    animation-delay: 0.4s;
+    animation-delay: 0.15s;
 }
 
 /* Kontak Page */
 .kontak-page {
-    padding: 2rem 7%;
+    padding: 1.5rem 7%;
     min-height: 100vh;
     position: relative;
     z-index: 1;
@@ -989,14 +1004,14 @@ body::before {
 .kontak-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 1.5rem;
     max-width: 1000px;
     margin: 0 auto;
 }
 
 .kontak-card {
     background: var(--card-bg);
-    border-radius: 20px;
+    border-radius: 15px;
     padding: 1.5rem;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
@@ -1094,28 +1109,36 @@ body::before {
     transform: scale(1.02);
 }
 
-.developer-photo {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 0.8rem;
-    object-fit: cover;
-    border: 3px solid var(--color5);
+/* Developers Grid */
+.developers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .developer-profile {
     text-align: center;
 }
 
+.developer-photo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+    border: 3px solid var(--color5);
+}
+
 .developer-profile h4 {
+    font-size: 0.9rem;
     color: var(--primary);
-    font-size: 1.1rem;
     margin-bottom: 0.2rem;
 }
 
 .developer-role {
     color: #666;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
 }
 
 .developer-contact {
@@ -1123,19 +1146,18 @@ body::before {
     padding: 0.8rem;
     border-radius: 10px;
     margin: 0.8rem 0;
-    font-size: 0.85rem;
 }
 
 .developer-sosial h4 {
     color: var(--color3);
-    margin-bottom: 0.8rem;
-    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
 }
 
 .sosial-text {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.3rem;
 }
 
 .sosial-text a {
@@ -1145,12 +1167,12 @@ body::before {
     border-radius: 5px;
     transition: 0.3s;
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
 }
 
 .sosial-text a:hover {
     background: var(--color5);
-    transform: translateX(5px);
+    transform: translateX(3px);
 }
 
 /* Modal Gambar */
@@ -1163,7 +1185,6 @@ body::before {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.95);
-    overflow: auto;
 }
 
 .modal-content {
@@ -1176,12 +1197,12 @@ body::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: modalZoom 0.25s ease;
+    animation: modalZoom 0.2s ease;
 }
 
 @keyframes modalZoom {
     0% {
-        transform: translate(-50%, -50%) scale(0.8);
+        transform: translate(-50%, -50%) scale(0.9);
         opacity: 0;
     }
     100% {
@@ -1195,7 +1216,7 @@ body::before {
     top: 20px;
     right: 35px;
     color: #f1f1f1;
-    font-size: 35px;
+    font-size: 40px;
     font-weight: bold;
     cursor: pointer;
     z-index: 10001;
@@ -1204,6 +1225,7 @@ body::before {
 
 .close-modal:hover {
     color: var(--color5);
+    transform: scale(1.1);
 }
 
 .modal-caption {
@@ -1213,14 +1235,14 @@ body::before {
     max-width: 700px;
     text-align: center;
     color: #ccc;
-    padding: 8px 0;
+    padding: 10px 0;
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     background: rgba(0,0,0,0.7);
     border-radius: 30px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .prev, .next {
@@ -1232,7 +1254,7 @@ body::before {
     padding: 12px;
     color: white;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 24px;
     transition: 0.3s;
     background: rgba(0,0,0,0.3);
     z-index: 10001;
@@ -1256,8 +1278,8 @@ body::before {
 .footer {
     background: #0b0e14;
     color: #fff;
-    padding: 3rem 7% 1.5rem;
-    margin-top: 0;
+    padding: 2rem 7% 1.5rem;
+    margin-top: 2rem;
     position: relative;
     border-top: 3px solid var(--color5);
 }
@@ -1266,13 +1288,13 @@ body::before {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     text-align: left;
 }
 
 .footer-logo {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-style: italic;
     margin-bottom: 0.8rem;
 }
@@ -1288,7 +1310,7 @@ body::before {
 .footer-desc {
     color: rgba(255,255,255,0.7);
     margin-bottom: 0.8rem;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
 }
 
 .footer-address {
@@ -1297,7 +1319,7 @@ body::before {
 }
 
 .footer-section h4 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: 1rem;
     position: relative;
     padding-bottom: 0.4rem;
@@ -1327,7 +1349,7 @@ body::before {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
 }
 
 .footer-links a i {
@@ -1341,25 +1363,18 @@ body::before {
 }
 
 .footer-bottom {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
     border-top: 1px solid rgba(255,255,255,0.1);
     text-align: center;
-    color: rgba(255,255,255,0.6);
-    font-size: 0.75rem;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.7rem;
 }
 
 /* Media Queries */
-@media (max-width: 992px) {
-    .navbar .navbar-nav a {
-        font-size: 0.75rem;
-        margin: 0 0.5rem;
-    }
-}
-
 @media (max-width: 768px) {
     html {
-        font-size: 62.5%;
+        font-size: 14px;
     }
 
     #hamburger-menu {
@@ -1372,12 +1387,13 @@ body::before {
         right: -100%;
         background: #0b0e14;
         width: 70%;
-        max-width: 25rem;
+        max-width: 280px;
         height: 100vh;
         flex-direction: column;
-        transition: 0.3s;
+        transition: 0.3s ease;
         box-shadow: -5px 0 20px rgba(0,0,0,0.3);
-        padding-top: 1rem;
+        padding: 1rem 0;
+        border-radius: 0 0 0 20px;
     }
 
     .navbar .navbar-nav.active {
@@ -1387,114 +1403,124 @@ body::before {
     .navbar .navbar-nav a {
         color: white;
         display: block;
-        margin: 0.8rem 1.5rem;
+        margin: 0.5rem 1.5rem;
         padding: 0.5rem;
-        font-size: 1.4rem;
+        font-size: 1rem;
+        text-align: left;
+    }
+
+    .navbar .navbar-nav a::after {
+        display: none;
+    }
+
+    .navbar .navbar-nav a:hover,
+    .navbar .navbar-nav a.active {
+        background: rgba(244, 209, 96, 0.2);
+        border-radius: 10px;
+        padding-left: 1rem;
     }
 
     .visi-misi-container,
-    .kontak-container,
-    .spmb-info-lengkap {
+    .kontak-container {
         grid-template-columns: 1fr;
     }
 
     .hero .content h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
-    .spmb-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .modal-content {
-        max-width: 95%;
-        max-height: 70vh;
+    .hero .content p {
+        font-size: 1rem;
     }
 
-    .intro-logo {
-        width: 100px;
-        height: 100px;
+    .sambutan-card {
+        flex-direction: column;
+        text-align: center;
     }
 
-    .intro-text h2 {
+    .struktur-level {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .level-2 {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .mapel-guru-list {
+        grid-template-columns: 1fr;
+    }
+
+    .coming-soon-content {
+        padding: 2rem;
+    }
+
+    .coming-soon-icon i {
+        width: 60px;
+        height: 60px;
+    }
+
+    .coming-soon-content h2 {
         font-size: 1.5rem;
     }
 
-    .countdown-timer {
-        gap: 1rem;
-    }
-
     .countdown-item {
-        min-width: 65px;
+        min-width: 60px;
         padding: 0.5rem 0.8rem;
     }
 
     .countdown-number {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
-    .alur-steps {
-        flex-direction: column;
-    }
-
-    .alur-arrow {
-        transform: rotate(90deg);
-    }
-    
-    .welcome-popup-content {
-        padding: 10px 20px;
-    }
-    
-    .welcome-popup-content h3 {
-        font-size: 1rem;
-    }
-    
-    .welcome-popup-content p {
-        font-size: 0.85rem;
+    .developers-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 }
 
 @media (max-width: 480px) {
-    html {
-        font-size: 55%;
-    }
-    
     .page-title {
-        font-size: 2rem;
-    }
-    
-    .hero .content h1 {
         font-size: 1.8rem;
     }
-    
-    .spmb-container {
-        grid-template-columns: 1fr;
+
+    .section-title {
+        font-size: 1.3rem;
     }
 
-    .sosial-grid {
-        grid-template-columns: 1fr;
+    .hero .content h1 {
+        font-size: 1.6rem;
     }
 
-    .prev, .next {
-        padding: 8px;
-        font-size: 18px;
+    .countdown-timer {
+        gap: 0.5rem;
     }
-    
-    .struktur-level {
-        gap: 1rem;
+
+    .countdown-item {
+        min-width: 50px;
     }
-    
-    .struktur-card {
-        min-width: 150px;
-        padding: 1rem;
+
+    .countdown-number {
+        font-size: 1.1rem;
     }
-    
-    .struktur-foto {
-        width: 70px;
-        height: 70px;
+
+    .welcome-popup-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+        padding: 8px 16px;
     }
-    
-    .mapel-grid {
-        grid-template-columns: 1fr;
+
+    .welcome-popup.show {
+        top: 70px;
+    }
+
+    .welcome-popup-content h3 {
+        font-size: 0.9rem;
+    }
+
+    .welcome-popup-content p {
+        font-size: 0.7rem;
     }
 }

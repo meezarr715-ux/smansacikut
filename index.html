@@ -19,7 +19,7 @@
             <img src="image/logo-sekolah/LOGO SAKURA.png" alt="Logo Sekolah" class="intro-logo" id="introLogo">
             <div class="intro-text">
                 <h2>SMAN 1 CIKARANG UTARA</h2>
-                <p>Sakura Hebat, Cerdas, Kreatif</p>
+                <p>Sekolah Unggul Berprestasi</p>
             </div>
         </div>
         <div class="intro-progress">
@@ -27,25 +27,26 @@
         </div>
     </div>
 
-    <!-- Popup Selamat Datang -->
+    <!-- WELCOME POPUP NOTIFICATION -->
     <div id="welcomePopup" class="welcome-popup">
         <div class="welcome-popup-content">
             <div class="welcome-icon">
-                <i data-feather="award"></i>
+                <i data-feather="smile"></i>
             </div>
-            <h3>Selamat Datang!</h3>
-            <div class="welcome-decoration"></div>
+            <h3>Halo Sobat Sakura!</h3>
+            <p>Selamat datang di website resmi SMAN 1 Cikarang Utara</p>
+            <div class="welcome-progress"></div>
         </div>
     </div>
 
     <!-- Nav Start -->
     <nav class="navbar">
-        <a href="#" class="navbar-logo" onclick="showPage('home'); return false;"><span class="logo-icon"><img src="image/logo-sekolah/LOGO SAKURA.png" alt="logo" style="width: 35px; height: 35px; object-fit: contain; margin-right: 8px;"></span>SMAN 1 <span1>CIKARANG</span1><span2>UTARA</span2></a>
+        <a href="#" class="navbar-logo" onclick="showPage('home'); return false;"><span class="logo-icon"><img src="image/logo-sekolah/LOGO SAKURA.png" alt="logo" style="width: 35px; height: 35px; object-fit: contain; margin-right: 8px;"></span>SMAN 1 <span1>CIKARANG UTARA</span1><span2>.sch.id</span2></a>
         
         <div class="navbar-nav">
             <a href="#" onclick="showPage('home'); return false;" class="nav-link active" data-page="home">Beranda</a>
             <a href="#" onclick="showPage('profil'); return false;" class="nav-link" data-page="profil">Profil Sekolah</a>
-            <a href="#" onclick="openKaryaSakura(); return false;" class="nav-link" data-page="karya">Karya Sakura</a>
+            <a href="#" onclick="window.open('https://sites.google.com/guru.sma.belajar.id/karyasakura', '_blank'); return false;" class="nav-link">Karya Sakura</a>
             <a href="#" onclick="showPage('spmb'); return false;" class="nav-link" data-page="spmb">Informasi SPMB</a>
             <a href="#" onclick="showPage('album'); return false;" class="nav-link" data-page="album">Album</a>
             <a href="#" onclick="showPage('ekskul'); return false;" class="nav-link" data-page="ekskul">Ekstrakulikuler</a>
@@ -79,7 +80,6 @@
                 <h2 class="page-title">Profil Sekolah</h2>
                 <p class="page-subtitle">Mengenal lebih dekat SMAN 1 Cikarang Utara</p>
                 
-                <!-- Visi Misi -->
                 <div class="visi-misi-container">
                     <div class="visi-card">
                         <div class="card-icon"><i data-feather="eye"></i></div>
@@ -102,7 +102,9 @@
                 <!-- Sambutan Kepala Sekolah -->
                 <div class="sambutan-section">
                     <h3 class="section-title">Sambutan Kepala Sekolah</h3>
-                    <div class="sambutan-card" id="sambutan-card"></div>
+                    <div class="sambutan-card" id="sambutan-card">
+                        <!-- Data dari JavaScript -->
+                    </div>
                 </div>
 
                 <!-- Struktur Organisasi -->
@@ -111,27 +113,39 @@
                     
                     <!-- Kepala Sekolah -->
                     <div class="struktur-level level-1">
-                        <div class="struktur-card" id="kepala-sekolah-card"></div>
+                        <div class="struktur-card kepala-card" id="kepala-card"></div>
                     </div>
-                    
-                    <!-- Wakil / Koordinator (Kurikulum, Kesiswaan, dll) -->
-                    <div class="struktur-level level-2" id="koordinator-container"></div>
-                    
-                    <!-- Guru Berdasarkan Mapel -->
-                    <div class="guru-by-mapel" id="guru-by-mapel"></div>
+
+                    <!-- Kurikulum & Kesiswaan (Level 2) -->
+                    <div class="struktur-level level-2">
+                        <div class="struktur-card" id="kurikulum-card"></div>
+                        <div class="struktur-card" id="kesiswaan-card"></div>
+                    </div>
+
+                    <!-- BK (Level 3) -->
+                    <div class="struktur-level level-3">
+                        <div class="struktur-card" id="bk-card"></div>
+                    </div>
+
+                    <!-- Guru Berdasarkan Mapel (Level 4) -->
+                    <div class="guru-section">
+                        <h4 class="sub-section-title">Dewan Guru</h4>
+                        <div class="guru-mapel-grid" id="guru-mapel-grid"></div>
+                    </div>
+
+                    <!-- Staff (Level 5) -->
+                    <div class="staff-section">
+                        <h4 class="sub-section-title">Staff Tata Usaha</h4>
+                        <div class="staff-grid" id="staff-grid"></div>
+                    </div>
                 </div>
             </section>
         </div>
 
-        <!-- KARYA SAKURA PAGE (Redirect) -->
-        <div id="page-karya" class="page">
-            <!-- Halaman ini akan redirect ke Google Sites -->
-        </div>
-
-        <!-- SPMB PAGE -->
+        <!-- INFORMASI SPMB PAGE -->
         <div id="page-spmb" class="page">
             <section class="spmb-page">
-                <h2 class="page-title">SPMB</h2>
+                <h2 class="page-title">Informasi SPMB</h2>
                 <p class="page-subtitle">Sistem Penerimaan Murid Baru SMAN 1 Cikarang Utara</p>
                 
                 <div class="countdown-container">
@@ -184,47 +198,15 @@
                     </div>
                 </div>
 
-                <div class="spmb-info-lengkap">
-                    <div class="spmb-persyaratan">
-                        <h3><i data-feather="file-text"></i> Persyaratan Umum</h3>
-                        <ul>
-                            <li>Ijazah/SKL SMP/MTS atau sederajat</li>
-                            <li>Nilai rata-rata rapor minimal 75</li>
-                            <li>Pas foto terbaru 3x4 (4 lembar)</li>
-                            <li>Kartu Keluarga dan Akta Kelahiran</li>
-                            <li>Surat Keterangan Sehat dari dokter</li>
-                        </ul>
-                    </div>
-
-                    <div class="spmb-alur">
-                        <h3><i data-feather="git-branch"></i> Alur Pendaftaran</h3>
-                        <div class="alur-steps">
-                            <div class="alur-step">
-                                <div class="step-number">1</div>
-                                <p>Registrasi Online</p>
-                            </div>
-                            <div class="alur-arrow">→</div>
-                            <div class="alur-step">
-                                <div class="step-number">2</div>
-                                <p>Verifikasi Berkas</p>
-                            </div>
-                            <div class="alur-arrow">→</div>
-                            <div class="alur-step">
-                                <div class="step-number">3</div>
-                                <p>Seleksi</p>
-                            </div>
-                            <div class="alur-arrow">→</div>
-                            <div class="alur-step">
-                                <div class="step-number">4</div>
-                                <p>Pengumuman</p>
-                            </div>
-                            <div class="alur-arrow">→</div>
-                            <div class="alur-step">
-                                <div class="step-number">5</div>
-                                <p>Daftar Ulang</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="spmb-persyaratan">
+                    <h3><i data-feather="file-text"></i> Persyaratan Umum</h3>
+                    <ul>
+                        <li>Ijazah/SKL SMP/MTS atau sederajat</li>
+                        <li>Nilai rata-rata rapor minimal 75</li>
+                        <li>Pas foto terbaru 3x4 (4 lembar)</li>
+                        <li>Kartu Keluarga dan Akta Kelahiran</li>
+                        <li>Surat Keterangan Sehat dari dokter</li>
+                    </ul>
                 </div>
 
                 <div class="spmb-button">
@@ -243,8 +225,10 @@
                         <i data-feather="image"></i>
                     </div>
                     <h2>COMING SOON</h2>
-                    <p>Album kenangan sedang dalam persiapan</p>
-                    <div class="coming-soon-decoration"></div>
+                    <p>Album kenangan sedang dalam pengembangan</p>
+                    <div class="coming-soon-progress">
+                        <div class="progress-bar"></div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -254,11 +238,13 @@
             <section class="coming-soon-page">
                 <div class="coming-soon-content">
                     <div class="coming-soon-icon">
-                        <i data-feather="activity"></i>
+                        <i data-feather="award"></i>
                     </div>
                     <h2>COMING SOON</h2>
-                    <p>Galeri ekstrakulikuler sedang dalam persiapan</p>
-                    <div class="coming-soon-decoration"></div>
+                    <p>Galeri ekstrakulikuler sedang dalam pengembangan</p>
+                    <div class="coming-soon-progress">
+                        <div class="progress-bar"></div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -272,7 +258,9 @@
                     </div>
                     <h2>COMING SOON</h2>
                     <p>Portal alumni sedang dalam pengembangan</p>
-                    <div class="coming-soon-decoration"></div>
+                    <div class="coming-soon-progress">
+                        <div class="progress-bar"></div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -319,7 +307,7 @@
                                         <i data-feather="music"></i>
                                         <span>TikTok</span>
                                     </a>
-                                    <a href="https://wa.me/6288295039238" class="sosial-item" target="_blank">
+                                    <a href="https://wa.me/6281234567890" class="sosial-item" target="_blank">
                                         <i data-feather="message-circle"></i>
                                         <span>WhatsApp</span>
                                     </a>
@@ -335,27 +323,32 @@
                         </div>
                         
                         <div class="developer-info">
-                            <div class="developer-profile">
-                                <img src="https://res.cloudinary.com/duemncbn0/image/upload/v1775106911/IMG-20240929-WA0036_ohrnnr.jpg" alt="Developer" class="developer-photo">
-                                <h4>Iki Si Zarr</h4>
-                                <p class="developer-role">Developer Sakura</p>
+                            <div class="developers-grid">
+                                <div class="developer-profile">
+                                    <img src="image/developer/foto-developer1.jpg" alt="Developer 1" class="developer-photo" onerror="this.src='https://via.placeholder.com/120'">
+                                    <h4>Zaenul Enka Azwar</h4>
+                                    <p class="developer-role">Zarr - Fullstack Developer</p>
+                                </div>
+                                <div class="developer-profile">
+                                    <img src="image/developer/foto-developer2.jpg" alt="Developer 2" class="developer-photo" onerror="this.src='https://via.placeholder.com/120'">
+                                    <h4>Rizki Ramadhan</h4>
+                                    <p class="developer-role">Rizki - UI/UX Designer</p>
+                                </div>
                             </div>
                             
                             <div class="developer-contact">
                                 <div class="contact-item">
-                                    <span>Hai, Perkenalkan nama saya Zaenul Enka Azwar atau yang biasa di panggil Zarr atau Azwar, saya dari kelas X.D (10.D). Saya memulai project ini pada pertengahan bulan maret tahun 2026</span>
+                                    <span>Website ini dikembangkan oleh tim kreatif Sakura Studio. Kami berkomitmen menghadirkan platform digital terbaik untuk SMAN 1 Cikarang Utara.</span>
                                 </div>
                             </div>
                             
                             <div class="developer-sosial">
-                                <h4>Kontak Developer</h4>
+                                <h4>Hubungi Developer</h4>
                                 <div class="sosial-text">
                                     <a href="https://t.me/zarrstoreid" target="_blank">Telegram: @zarrstoreid</a>
                                     <a href="https://wa.me/6288295039238" target="_blank">WhatsApp: Zarr</a>
                                     <a href="https://instagram.com/si.zarr2" target="_blank">Instagram: @si.zarr2</a>
                                     <a href="https://github.com/meezarr715-ux" target="_blank">GitHub: meezarr715-ux</a>
-                                    <a href="https://tiktok.com/@iki.sizarr" target="_blank">TikTok: @iki.sizarr</a>
-                                    <a href="https://youtube.com/@zarr_senpai" target="_blank">YouTube: @zarr_senpai</a>
                                 </div>
                             </div>
                         </div>
@@ -369,7 +362,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3 class="footer-logo">SMAN 1 <span1>CIKARANG</span1><span2>UTARA</span2></h3>
+                <h3 class="footer-logo">SMAN 1 <span1>CIKARANG UTARA</span1><span2>.sch.id</span2></h3>
                 <p class="footer-desc">Sekolah Unggul Berprestasi, Berkarakter, dan Berwawasan Lingkungan</p>
                 <p class="footer-address">
                     Jl. Ki Hajar Dewantara No.23, Karangasih, Cikarang Utara, Bekasi
@@ -379,11 +372,11 @@
             <div class="footer-section">
                 <h4>Kontak Sekolah</h4>
                 <ul class="footer-links">
-                    <li><a href="https://wa.me/6281234567890" target="_blank"><i data-feather="phone"></i> +62 812-3456-7890</a></li>
-                    <li><a href="https://instagram.com/smansacikut" target="_blank"><i data-feather="instagram"></i> @smansacikut</a></li>
+                    <li><a href="https://wa.me/6281234567890" target="_blank"><i data-feather="phone"></i> WhatsApp</a></li>
+                    <li><a href="https://instagram.com/smansacikut" target="_blank"><i data-feather="instagram"></i> Instagram</a></li>
                     <li><a href="https://youtube.com/@zarr_senpai" target="_blank"><i data-feather="youtube"></i> YouTube</a></li>
                     <li><a href="https://tiktok.com/@iki.sizarr" target="_blank"><i data-feather="music"></i> TikTok</a></li>
-                    <li><a href="mailto:info@sman1cikarangutara.sch.id"><i data-feather="mail"></i> Email Sekolah</a></li>
+                    <li><a href="mailto:info@sman1cikarangutara.sch.id"><i data-feather="mail"></i> Email</a></li>
                 </ul>
             </div>
         </div>

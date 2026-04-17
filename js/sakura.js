@@ -18,42 +18,28 @@ document.addEventListener('click', function(e) {
 window.addEventListener('load', function() {
     const introScreen = document.getElementById('introScreen');
     
-    // Intro hilang setelah 2.5 detik (bisa diatur)
     setTimeout(function() {
         introScreen.classList.add('hide');
         
         setTimeout(function() {
             introScreen.style.display = 'none';
-        }, 800);
+        }, 600);
     }, 2500);
     
-    // Welcome Popup - muncul setelah intro selesai
+    // Welcome Popup
     setTimeout(function() {
         const welcomePopup = document.getElementById('welcomePopup');
         welcomePopup.classList.add('show');
         
-        // Popup hilang setelah 5 detik
         setTimeout(function() {
             welcomePopup.classList.remove('show');
         }, 5000);
-    }, 3300);
+    }, 3000);
 });
-
-// ========== FUNGSI UNTUK KARYA SAKURA (Redirect) ==========
-function openKaryaSakura() {
-    window.open('https://sites.google.com/guru.sma.belajar.id/karyasakura', '_blank');
-    // Tetap aktifkan nav yang diklik
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-    });
-    event.target.classList.add('active');
-}
 
 // ========== COUNTDOWN TIMER SPMB ==========
 function startCountdown() {
     const targetDate = new Date();
-    // ATUR TANGGAL TARGET DISINI - format: tahun, bulan-1, tanggal, jam, menit, detik
-    // Contoh: 15 Januari 2026 jam 00:00:00
     targetDate.setFullYear(2026, 0, 15, 0, 0, 0);
     
     function updateCountdown() {
@@ -85,18 +71,15 @@ function startCountdown() {
 
 // ========== FUNGSI UNTUK MENGGANTI HALAMAN ==========
 function showPage(pageId) {
-    // Sembunyikan semua halaman
     document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
     });
     
-    // Tampilkan halaman yang dipilih
-    const targetPage = document.getElementById(`page-${pageId}`);
-    if (targetPage) {
-        targetPage.classList.add('active');
+    const activePage = document.getElementById(`page-${pageId}`);
+    if (activePage) {
+        activePage.classList.add('active');
     }
     
-    // Update active class di navbar
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
         if(link.dataset.page === pageId) {
@@ -104,24 +87,10 @@ function showPage(pageId) {
         }
     });
     
-    // Tutup menu mobile
     navbarNav.classList.remove('active');
     
-    // Load data spesifik per halaman
     if (pageId === 'profil') {
         loadProfilData();
-    }
-    
-    // PERBAIKAN: Untuk halaman home, pastikan animasi hero content berjalan
-    // dengan mereset dan memicu ulang animasi
-    if (pageId === 'home') {
-        const heroContent = document.querySelector('#page-home .hero .content');
-        if (heroContent) {
-            // Reset animasi dengan menghapus dan menambahkan kembali class
-            heroContent.style.animation = 'none';
-            heroContent.offsetHeight; // Trigger reflow
-            heroContent.style.animation = 'heroContentFade 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards';
-        }
     }
     
     feather.replace();
@@ -134,69 +103,97 @@ function loadProfilData() {
     if (sambutanCard) {
         sambutanCard.innerHTML = `
             <img src="${sambutanKepsek.foto}" alt="${sambutanKepsek.nama}" class="sambutan-foto" onerror="this.src='https://via.placeholder.com/120'">
-            <h4>${sambutanKepsek.nama}</h4>
-            <p class="sambutan-jabatan">${sambutanKepsek.jabatan}</p>
-            <p class="sambutan-teks">"${sambutanKepsek.teks}"</p>
-        `;
-    }
-    
-    // Load Kepala Sekolah (Struktur Level 1)
-    const kepalaCard = document.getElementById('kepala-sekolah-card');
-    if (kepalaCard) {
-        kepalaCard.innerHTML = `
-            <div class="struktur-card" style="animation-delay: 0.05s">
-                <img src="${kepalaSekolah.foto}" alt="${kepalaSekolah.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/100'">
-                <h4>${kepalaSekolah.nama}</h4>
-                <p>${kepalaSekolah.jabatan}</p>
+            <div class="sambutan-text">
+                <h4>${sambutanKepsek.nama}</h4>
+                <p>${sambutanKepsek.sambutan}</p>
             </div>
         `;
     }
     
-    // Load Koordinator (Struktur Level 2)
-    const koordinatorContainer = document.getElementById('koordinator-container');
-    if (koordinatorContainer) {
-        let koordinatorHtml = '';
-        koordinator.forEach((item, index) => {
-            koordinatorHtml += `
-                <div class="struktur-card" style="animation-delay: ${0.1 + (index * 0.05)}s">
-                    <img src="${item.foto}" alt="${item.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/100'">
-                    <h4>${item.nama}</h4>
-                    <p>${item.jabatan}</p>
-                </div>
-            `;
-        });
-        koordinatorContainer.innerHTML = koordinatorHtml;
+    // Load Kepala Sekolah
+    const kepalaCard = document.getElementById('kepala-card');
+    if (kepalaCard && strukturData.kepalaSekolah) {
+        kepalaCard.innerHTML = `
+            <img src="${strukturData.kepalaSekolah.foto}" alt="${strukturData.kepalaSekolah.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/100'">
+            <h4>${strukturData.kepalaSekolah.nama}</h4>
+            <p>${strukturData.kepalaSekolah.jabatan}</p>
+        `;
+    }
+    
+    // Load Kurikulum
+    const kurikulumCard = document.getElementById('kurikulum-card');
+    if (kurikulumCard && strukturData.kurikulum) {
+        kurikulumCard.innerHTML = `
+            <img src="${strukturData.kurikulum.foto}" alt="${strukturData.kurikulum.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/100'">
+            <h4>${strukturData.kurikulum.nama}</h4>
+            <p>${strukturData.kurikulum.jabatan}</p>
+        `;
+    }
+    
+    // Load Kesiswaan
+    const kesiswaanCard = document.getElementById('kesiswaan-card');
+    if (kesiswaanCard && strukturData.kesiswaan) {
+        kesiswaanCard.innerHTML = `
+            <img src="${strukturData.kesiswaan.foto}" alt="${strukturData.kesiswaan.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/100'">
+            <h4>${strukturData.kesiswaan.nama}</h4>
+            <p>${strukturData.kesiswaan.jabatan}</p>
+        `;
+    }
+    
+    // Load BK
+    const bkCard = document.getElementById('bk-card');
+    if (bkCard && strukturData.bk) {
+        bkCard.innerHTML = `
+            <img src="${strukturData.bk.foto}" alt="${strukturData.bk.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/100'">
+            <h4>${strukturData.bk.nama}</h4>
+            <p>${strukturData.bk.jabatan}</p>
+        `;
     }
     
     // Load Guru Berdasarkan Mapel
-    const guruContainer = document.getElementById('guru-by-mapel');
-    if (guruContainer) {
-        let guruHtml = '';
-        
-        for (const [mapel, guruList] of Object.entries(guruByMapel)) {
-            let guruItems = '';
+    const guruMapelGrid = document.getElementById('guru-mapel-grid');
+    if (guruMapelGrid) {
+        let html = '';
+        for (const [mapel, guruList] of Object.entries(dataGuruByMapel)) {
+            let guruHtml = '';
             guruList.forEach(guru => {
-                guruItems += `
-                    <div class="struktur-card">
-                        <img src="${guru.foto}" alt="${guru.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/100'">
-                        <h4>${guru.nama}</h4>
+                guruHtml += `
+                    <div class="guru-item">
+                        <img src="${guru.foto}" alt="${guru.nama}" class="guru-item-foto" onerror="this.src='https://via.placeholder.com/70'">
+                        <h5>${guru.nama}</h5>
                         <p>${mapel}</p>
                     </div>
                 `;
             });
-            
-            guruHtml += `
+            html += `
                 <div class="mapel-group">
-                    <h4 class="mapel-title">${mapel}</h4>
-                    <div class="mapel-grid">
-                        ${guruItems}
+                    <div class="mapel-title">${mapel}</div>
+                    <div class="mapel-guru-list">
+                        ${guruHtml}
                     </div>
                 </div>
             `;
         }
-        
-        guruContainer.innerHTML = guruHtml;
+        guruMapelGrid.innerHTML = html;
     }
+    
+    // Load Staff
+    const staffGrid = document.getElementById('staff-grid');
+    if (staffGrid) {
+        let html = '';
+        dataStaff.forEach((staff, index) => {
+            html += `
+                <div class="staff-card" style="animation-delay: ${0.03 * index}s">
+                    <img src="${staff.foto}" alt="${staff.nama}" class="staff-foto" onerror="this.src='https://via.placeholder.com/80'">
+                    <h4>${staff.nama}</h4>
+                    <p>${staff.jabatan}</p>
+                </div>
+            `;
+        });
+        staffGrid.innerHTML = html;
+    }
+    
+    feather.replace();
 }
 
 // ========== FUNGSI UNTUK MODAL GAMBAR ==========
@@ -204,34 +201,11 @@ let currentFotoList = [];
 let currentFotoIndex = 0;
 
 function openModalKelas(angkatanId, kelas, index) {
-    currentFotoList = getFotoKelas(angkatanId, kelas);
-    currentFotoIndex = index;
-    
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    const modalCaption = document.getElementById('modalCaption');
-    
-    modal.style.display = 'block';
-    modalImg.src = currentFotoList[index].src;
-    modalCaption.innerHTML = `${currentFotoList[index].nama} - Kelas ${kelas} (${index + 1}/${currentFotoList.length})`;
-    
-    document.body.style.overflow = 'hidden';
+    // Coming Soon
 }
 
 function openModalEkskul(ekskulId, itemName, index) {
-    const semuaFoto = getFotoEkskul(ekskulId);
-    currentFotoList = semuaFoto.filter(f => f.nama.includes(itemName));
-    currentFotoIndex = index;
-    
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    const modalCaption = document.getElementById('modalCaption');
-    
-    modal.style.display = 'block';
-    modalImg.src = currentFotoList[index].src;
-    modalCaption.innerHTML = `${currentFotoList[index].nama} (${index + 1}/${currentFotoList.length})`;
-    
-    document.body.style.overflow = 'hidden';
+    // Coming Soon
 }
 
 function closeModal() {
@@ -241,19 +215,7 @@ function closeModal() {
 }
 
 function changeModalImage(direction) {
-    currentFotoIndex += direction;
-    
-    if (currentFotoIndex < 0) {
-        currentFotoIndex = currentFotoList.length - 1;
-    } else if (currentFotoIndex >= currentFotoList.length) {
-        currentFotoIndex = 0;
-    }
-    
-    const modalImg = document.getElementById('modalImage');
-    const modalCaption = document.getElementById('modalCaption');
-    
-    modalImg.src = currentFotoList[currentFotoIndex].src;
-    modalCaption.innerHTML = `${currentFotoList[currentFotoIndex].nama} (${currentFotoIndex + 1}/${currentFotoList.length})`;
+    // Coming Soon
 }
 
 // Event listener untuk modal
@@ -270,23 +232,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    document.addEventListener('keydown', function(e) {
-        const modal = document.getElementById('imageModal');
-        if (modal.style.display === 'block') {
-            if (e.key === 'Escape') {
-                closeModal();
-            } else if (e.key === 'ArrowLeft') {
-                changeModalImage(-1);
-            } else if (e.key === 'ArrowRight') {
-                changeModalImage(1);
-            }
-        }
-    });
-    
-    // Load data awal
-    loadProfilData();
     startCountdown();
+    loadProfilData();
     
-    // Set active page default
     showPage('home');
 });
