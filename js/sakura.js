@@ -18,23 +18,43 @@ document.addEventListener('click', function(e) {
 window.addEventListener('load', function() {
     const introScreen = document.getElementById('introScreen');
     
-    // Intro akan hilang setelah 2.5 detik (bisa diatur)
+    // Intro hilang setelah 2.5 detik (bisa diatur)
     setTimeout(function() {
         introScreen.classList.add('hide');
         
         setTimeout(function() {
             introScreen.style.display = 'none';
         }, 800);
-    }, 2500); // Ganti angka ini untuk mengatur durasi intro (dalam milidetik)
-    // Contoh: 3000 = 3 detik, 2000 = 2 detik
+    }, 2500);
+    
+    // Welcome Popup - muncul setelah intro selesai
+    setTimeout(function() {
+        const welcomePopup = document.getElementById('welcomePopup');
+        welcomePopup.classList.add('show');
+        
+        // Popup hilang setelah 5 detik
+        setTimeout(function() {
+            welcomePopup.classList.remove('show');
+        }, 5000);
+    }, 3300);
 });
 
+// ========== FUNGSI UNTUK KARYA SAKURA (Redirect) ==========
+function openKaryaSakura() {
+    window.open('https://sites.google.com/guru.sma.belajar.id/karyasakura', '_blank');
+    // Tetap aktifkan nav yang diklik
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+    event.target.classList.add('active');
+}
+
 // ========== COUNTDOWN TIMER SPMB ==========
-// Atur tanggal target di sini (YYYY, MM-1, DD, HH, MM, SS)
-// Contoh: targetDate.setFullYear(2026, 0, 15, 0, 0, 0); // 15 Januari 2026
 function startCountdown() {
     const targetDate = new Date();
-    targetDate.setFullYear(2026, 7, 15, 0, 0, 0); // Ubah sesuai keinginan Anda
+    // ATUR TANGGAL TARGET DISINI - format: tahun, bulan-1, tanggal, jam, menit, detik
+    // Contoh: 15 Januari 2026 jam 00:00:00
+    targetDate.setFullYear(2026, 0, 15, 0, 0, 0);
     
     function updateCountdown() {
         const now = new Date();
@@ -63,25 +83,20 @@ function startCountdown() {
     setInterval(updateCountdown, 1000);
 }
 
-// ========== FAQ ACCORDION ==========
-function initFaq() {
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        question.addEventListener('click', () => {
-            item.classList.toggle('active');
-        });
-    });
-}
-
 // ========== FUNGSI UNTUK MENGGANTI HALAMAN ==========
 function showPage(pageId) {
+    // Sembunyikan semua halaman
     document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
     });
     
-    document.getElementById(`page-${pageId}`).classList.add('active');
+    // Tampilkan halaman yang dipilih
+    const targetPage = document.getElementById(`page-${pageId}`);
+    if (targetPage) {
+        targetPage.classList.add('active');
+    }
     
+    // Update active class di navbar
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
         if(link.dataset.page === pageId) {
@@ -89,375 +104,99 @@ function showPage(pageId) {
         }
     });
     
+    // Tutup menu mobile
     navbarNav.classList.remove('active');
     
-    if (pageId === 'album') {
-        loadAngkatan();
-        loadEkskul();
-    }
-    
+    // Load data spesifik per halaman
     if (pageId === 'profil') {
-        loadGuruData();
+        loadProfilData();
     }
     
-    if (pageId === 'spmb') {
-        initFaq();
+    // PERBAIKAN: Untuk halaman home, pastikan animasi hero content berjalan
+    // dengan mereset dan memicu ulang animasi
+    if (pageId === 'home') {
+        const heroContent = document.querySelector('#page-home .hero .content');
+        if (heroContent) {
+            // Reset animasi dengan menghapus dan menambahkan kembali class
+            heroContent.style.animation = 'none';
+            heroContent.offsetHeight; // Trigger reflow
+            heroContent.style.animation = 'heroContentFade 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+        }
     }
     
     feather.replace();
 }
 
-// ========== FUNGSI UNTUK GURU ==========
-function loadGuruData() {
+// ========== LOAD PROFIL DATA ==========
+function loadProfilData() {
+    // Load Sambutan Kepsek
+    const sambutanCard = document.getElementById('sambutan-card');
+    if (sambutanCard) {
+        sambutanCard.innerHTML = `
+            <img src="${sambutanKepsek.foto}" alt="${sambutanKepsek.nama}" class="sambutan-foto" onerror="this.src='https://via.placeholder.com/120'">
+            <h4>${sambutanKepsek.nama}</h4>
+            <p class="sambutan-jabatan">${sambutanKepsek.jabatan}</p>
+            <p class="sambutan-teks">"${sambutanKepsek.teks}"</p>
+        `;
+    }
+    
+    // Load Kepala Sekolah (Struktur Level 1)
     const kepalaCard = document.getElementById('kepala-sekolah-card');
-    const guruGrid = document.getElementById('guru-grid');
-    
-    if (!kepalaCard || !guruGrid) return;
-    
-    const kepala = dataGuru.find(g => g.isKepala === true);
-    const guruLain = dataGuru.filter(g => g.isKepala !== true);
-    
-    if (kepala) {
+    if (kepalaCard) {
         kepalaCard.innerHTML = `
-            <div class="kepala-card">
-                <img src="${kepala.foto}" alt="${kepala.nama}" class="kepala-foto" onerror="this.src='https://via.placeholder.com/180?text=Kepala+Sekolah'">
-                <h4>${kepala.nama}</h4>
-                <p>${kepala.mapel}</p>
+            <div class="struktur-card" style="animation-delay: 0.05s">
+                <img src="${kepalaSekolah.foto}" alt="${kepalaSekolah.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/100'">
+                <h4>${kepalaSekolah.nama}</h4>
+                <p>${kepalaSekolah.jabatan}</p>
             </div>
         `;
     }
     
-    let guruHtml = '';
-    guruLain.forEach((guru, index) => {
-        guruHtml += `
-            <div class="guru-card" style="animation-delay: ${0.05 * (index + 1)}s">
-                <img src="${guru.foto}" alt="${guru.nama}" class="guru-foto" onerror="this.src='https://via.placeholder.com/150?text=Guru'">
-                <h4>${guru.nama}</h4>
-                <p>${guru.mapel}</p>
-            </div>
-        `;
-    });
-    
-    guruGrid.innerHTML = guruHtml;
-    feather.replace();
-}
-
-// ========== FUNGSI UNTUK TAB ALBUM ==========
-function showAlbumTab(tabName) {
-    const buttons = document.querySelectorAll('.tab-btn');
-    buttons.forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
-    
-    document.querySelectorAll('.album-tab-content').forEach(content => {
-        content.classList.remove('active');
-    });
-    document.getElementById(`album-${tabName}`).classList.add('active');
-    
-    const detailDiv = document.getElementById('album-detail');
-    detailDiv.style.display = 'none';
-    
-    if (tabName === 'angkatan') {
-        const angkatanGrid = document.querySelector('.angkatan-grid');
-        if (angkatanGrid) angkatanGrid.style.display = 'grid';
-    } else {
-        const ekskulGrid = document.querySelector('.ekskul-grid');
-        if (ekskulGrid) ekskulGrid.style.display = 'grid';
-    }
-}
-
-// ========== FUNGSI UNTUK ANGKATAN ==========
-let currentAngkatan = null;
-let currentKelas = null;
-
-function loadAngkatan() {
-    const grid = document.getElementById('angkatan-grid');
-    if (!grid) return;
-    
-    let html = '';
-    dataAngkatan.forEach((angkatan, index) => {
-        html += `
-            <div class="angkatan-card" style="animation-delay: ${0.05 * index}s" onclick="showAngkatan('${angkatan.id}')">
-                <div class="angkatan-thumbnail">
-                    <img src="${angkatan.thumbnail}" alt="${angkatan.number}" onerror="this.src='https://via.placeholder.com/300?text=Thumbnail'">
-                    <div class="thumbnail-overlay">
-                        <span>Lihat Album</span>
-                    </div>
-                </div>
-                <div class="angkatan-info">
-                    <div class="angkatan-number">${angkatan.number}</div>
-                    <div class="angkatan-year">${angkatan.year}</div>
-                    <p>${angkatan.fotoCount} Foto • ${angkatan.kelas.length} Kelas</p>
-                </div>
-            </div>
-        `;
-    });
-    
-    grid.innerHTML = html;
-}
-
-function showAngkatan(angkatanId) {
-    currentAngkatan = angkatanId;
-    const angkatan = dataAngkatan.find(a => a.id === angkatanId);
-    if (!angkatan) return;
-    
-    const detailDiv = document.getElementById('album-detail');
-    
-    let kelasHtml = '';
-    angkatan.kelas.forEach(kelas => {
-        const fotoCount = getFotoKelas(angkatanId, kelas).length;
-        kelasHtml += `
-            <div class="kelas-card" onclick="showKelas('${angkatanId}', '${kelas}')">
-                <h4>Kelas ${kelas}</h4>
-                <p>${fotoCount} Foto</p>
-            </div>
-        `;
-    });
-    
-    detailDiv.innerHTML = `
-        <div class="kelas-container">
-            <div class="kelas-header">
-                <h3>${angkatan.number} - Daftar Kelas</h3>
-                <button class="back-button" onclick="backToAngkatan()">
-                    <i data-feather="arrow-left"></i> Kembali
-                </button>
-            </div>
-            <div class="search-container">
-                <input type="text" id="search-kelas" placeholder="Cari kelas... (contoh: 10 A)" onkeyup="searchKelas()">
-            </div>
-            <div class="kelas-grid" id="kelas-grid">
-                ${kelasHtml}
-            </div>
-        </div>
-    `;
-    
-    detailDiv.style.display = 'block';
-    const angkatanGrid = document.querySelector('.angkatan-grid');
-    if (angkatanGrid) angkatanGrid.style.display = 'none';
-    
-    detailDiv.scrollIntoView({ behavior: 'smooth' });
-    feather.replace();
-}
-
-function searchKelas() {
-    const input = document.getElementById('search-kelas');
-    const filter = input.value.toUpperCase();
-    const kelasCards = document.querySelectorAll('.kelas-card');
-    
-    kelasCards.forEach(card => {
-        const kelasName = card.querySelector('h4').textContent;
-        if (kelasName.toUpperCase().indexOf(filter) > -1) {
-            card.style.display = '';
-        } else {
-            card.style.display = 'none';
-        }
-    });
-}
-
-function showKelas(angkatanId, kelas) {
-    currentKelas = kelas;
-    const angkatan = dataAngkatan.find(a => a.id === angkatanId);
-    const fotoList = getFotoKelas(angkatanId, kelas);
-    
-    const detailDiv = document.getElementById('album-detail');
-    
-    let fotoHtml = '';
-    if (fotoList.length > 0) {
-        fotoList.forEach((foto, index) => {
-            fotoHtml += `
-                <div class="foto-kelas-item" onclick="openModalKelas('${angkatanId}', '${kelas}', ${index})">
-                    <img src="${foto.src}" alt="${foto.nama}" onerror="this.src='https://via.placeholder.com/300?text=Foto+Tidak+Tersedia'">
-                    <div class="foto-kelas-caption">
-                        <p>${foto.nama}</p>
-                    </div>
+    // Load Koordinator (Struktur Level 2)
+    const koordinatorContainer = document.getElementById('koordinator-container');
+    if (koordinatorContainer) {
+        let koordinatorHtml = '';
+        koordinator.forEach((item, index) => {
+            koordinatorHtml += `
+                <div class="struktur-card" style="animation-delay: ${0.1 + (index * 0.05)}s">
+                    <img src="${item.foto}" alt="${item.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/100'">
+                    <h4>${item.nama}</h4>
+                    <p>${item.jabatan}</p>
                 </div>
             `;
         });
-    } else {
-        fotoHtml = '<p style="grid-column: 1/-1; text-align: center; padding: 2rem;">Belum ada foto untuk kelas ini</p>';
+        koordinatorContainer.innerHTML = koordinatorHtml;
     }
     
-    detailDiv.innerHTML = `
-        <div class="kelas-detail">
-            <div class="kelas-detail-header">
-                <div>
-                    <h3>${angkatan.number} - Kelas ${kelas}</h3>
-                    <p>${fotoList.length} foto tersedia</p>
-                </div>
-                <div>
-                    <button class="back-button" onclick="showAngkatan('${angkatanId}')">
-                        <i data-feather="arrow-left"></i> Kembali ke Kelas
-                    </button>
-                </div>
-            </div>
-            
-            <div class="foto-kelas-grid">
-                ${fotoHtml}
-            </div>
-        </div>
-    `;
-    
-    feather.replace();
-}
-
-function backToAngkatan() {
-    const detailDiv = document.getElementById('album-detail');
-    detailDiv.style.display = 'none';
-    
-    const angkatanGrid = document.querySelector('.angkatan-grid');
-    if (angkatanGrid) angkatanGrid.style.display = 'grid';
-    
-    currentAngkatan = null;
-    currentKelas = null;
-}
-
-// ========== FUNGSI UNTUK EKSTRAKULIKULER ==========
-let currentEkskul = null;
-let currentEkskulItem = null;
-
-function loadEkskul() {
-    const grid = document.getElementById('ekskul-grid');
-    if (!grid) return;
-    
-    let html = '';
-    dataEkskul.forEach((ekskul, index) => {
-        html += `
-            <div class="ekskul-card" style="animation-delay: ${0.05 * index}s" onclick="showEkskul('${ekskul.id}')">
-                <div class="ekskul-thumbnail">
-                    <img src="${ekskul.thumbnail}" alt="${ekskul.name}" onerror="this.src='https://via.placeholder.com/300?text=Thumbnail'">
-                    <div class="thumbnail-overlay">
-                        <span>Lihat Album</span>
+    // Load Guru Berdasarkan Mapel
+    const guruContainer = document.getElementById('guru-by-mapel');
+    if (guruContainer) {
+        let guruHtml = '';
+        
+        for (const [mapel, guruList] of Object.entries(guruByMapel)) {
+            let guruItems = '';
+            guruList.forEach(guru => {
+                guruItems += `
+                    <div class="struktur-card">
+                        <img src="${guru.foto}" alt="${guru.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/100'">
+                        <h4>${guru.nama}</h4>
+                        <p>${mapel}</p>
                     </div>
-                </div>
-                <div class="ekskul-info">
-                    <div class="ekskul-name">${ekskul.name}</div>
-                    <div class="ekskul-category">${ekskul.category}</div>
-                    <p>${ekskul.fotoCount} Foto • ${ekskul.anggota.length} Kegiatan</p>
-                </div>
-            </div>
-        `;
-    });
-    
-    grid.innerHTML = html;
-}
-
-function showEkskul(ekskulId) {
-    currentEkskul = ekskulId;
-    const ekskul = dataEkskul.find(e => e.id === ekskulId);
-    if (!ekskul) return;
-    
-    const detailDiv = document.getElementById('album-detail');
-    
-    let anggotaHtml = '';
-    ekskul.anggota.forEach(anggota => {
-        const fotoCount = getFotoEkskul(ekskulId).filter(f => f.nama.includes(anggota)).length;
-        anggotaHtml += `
-            <div class="ekskul-item-card" onclick="showEkskulItem('${ekskulId}', '${anggota}')">
-                <h4>${anggota}</h4>
-                <p>${fotoCount} Foto</p>
-            </div>
-        `;
-    });
-    
-    detailDiv.innerHTML = `
-        <div class="ekskul-items-container">
-            <div class="ekskul-items-header">
-                <h3>${ekskul.name} - Kegiatan</h3>
-                <button class="back-button" onclick="backToEkskul()">
-                    <i data-feather="arrow-left"></i> Kembali
-                </button>
-            </div>
+                `;
+            });
             
-            <div class="search-container">
-                <input type="text" id="search-ekskul" placeholder="Cari kegiatan..." onkeyup="searchEkskulItems()">
-            </div>
-            
-            <div class="ekskul-items-grid" id="ekskul-items-grid">
-                ${anggotaHtml}
-            </div>
-        </div>
-    `;
-    
-    detailDiv.style.display = 'block';
-    const ekskulGrid = document.querySelector('.ekskul-grid');
-    if (ekskulGrid) ekskulGrid.style.display = 'none';
-    
-    detailDiv.scrollIntoView({ behavior: 'smooth' });
-    feather.replace();
-}
-
-function searchEkskulItems() {
-    const input = document.getElementById('search-ekskul');
-    const filter = input.value.toUpperCase();
-    const itemCards = document.querySelectorAll('.ekskul-item-card');
-    
-    itemCards.forEach(card => {
-        const itemName = card.querySelector('h4').textContent;
-        if (itemName.toUpperCase().indexOf(filter) > -1) {
-            card.style.display = '';
-        } else {
-            card.style.display = 'none';
-        }
-    });
-}
-
-function showEkskulItem(ekskulId, itemName) {
-    currentEkskulItem = itemName;
-    const ekskul = dataEkskul.find(e => e.id === ekskulId);
-    const semuaFoto = getFotoEkskul(ekskulId);
-    const fotoList = semuaFoto.filter(f => f.nama.includes(itemName));
-    
-    const detailDiv = document.getElementById('album-detail');
-    
-    let fotoHtml = '';
-    if (fotoList.length > 0) {
-        fotoList.forEach((foto, index) => {
-            fotoHtml += `
-                <div class="foto-ekskul-item" onclick="openModalEkskul('${ekskulId}', '${itemName}', ${index})">
-                    <img src="${foto.src}" alt="${foto.nama}" onerror="this.src='https://via.placeholder.com/300?text=Foto+Tidak+Tersedia'">
-                    <div class="foto-ekskul-caption">
-                        <p>${foto.nama}</p>
+            guruHtml += `
+                <div class="mapel-group">
+                    <h4 class="mapel-title">${mapel}</h4>
+                    <div class="mapel-grid">
+                        ${guruItems}
                     </div>
                 </div>
             `;
-        });
-    } else {
-        fotoHtml = '<p style="grid-column: 1/-1; text-align: center; padding: 2rem;">Belum ada foto untuk kegiatan ini</p>';
+        }
+        
+        guruContainer.innerHTML = guruHtml;
     }
-    
-    detailDiv.innerHTML = `
-        <div class="ekskul-detail">
-            <div class="ekskul-detail-header">
-                <div>
-                    <h3>${ekskul.name} - ${itemName}</h3>
-                    <p>${fotoList.length} foto tersedia</p>
-                </div>
-                <div>
-                    <button class="back-button" onclick="showEkskul('${ekskulId}')">
-                        <i data-feather="arrow-left"></i> Kembali ke Kegiatan
-                    </button>
-                </div>
-            </div>
-            
-            <div class="foto-ekskul-grid">
-                ${fotoHtml}
-            </div>
-        </div>
-    `;
-    
-    feather.replace();
-}
-
-function backToEkskul() {
-    const detailDiv = document.getElementById('album-detail');
-    detailDiv.style.display = 'none';
-    
-    const ekskulGrid = document.querySelector('.ekskul-grid');
-    if (ekskulGrid) ekskulGrid.style.display = 'grid';
-    
-    currentEkskul = null;
-    currentEkskulItem = null;
 }
 
 // ========== FUNGSI UNTUK MODAL GAMBAR ==========
@@ -544,11 +283,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    loadAngkatan();
-    loadEkskul();
+    // Load data awal
+    loadProfilData();
     startCountdown();
-    initFaq();
-    loadGuruData();
     
+    // Set active page default
     showPage('home');
 });
