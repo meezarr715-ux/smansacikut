@@ -1,113 +1,91 @@
-// ===== SAMBUTAN KEPALA SEKOLAH (Bisa diubah) =====
-const sambutanKepsek = {
-    nama: "Dra. Hj. Siti Rohmah, M.Pd",
-    foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg",
-    sambutan: "Assalamualaikum Warahmatullahi Wabarakatuh. Puji syukur kehadirat Allah SWT atas segala rahmat dan karunia-Nya sehingga website resmi SMAN 1 Cikarang Utara dapat hadir sebagai media informasi dan komunikasi bagi seluruh civitas akademika. Kami berkomitmen untuk terus meningkatkan kualitas pendidikan dan pelayanan kepada masyarakat. Selamat bergabung dan semoga bermanfaat."
+// ========== SAMBUTAN KEPALA SEKOLAH ==========
+const sambutanKepalaSekolah = {
+    nama: "Bp. Didi Rosidi S.Pd",
+    foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776490934/IMG-20220714-WA0011-768x1024_pycgku.jpg",
+    sambutan: "Assalamu'alaikum Warahmatullahi Wabarakatuh. Puji syukur kita panjatkan ke hadirat Allah SWT atas segala nikmat dan karunia-Nya. Selamat datang di website resmi SMAN 1 Cikarang Utara. Kami berkomitmen untuk memberikan pendidikan terbaik bagi generasi penerus bangsa. Semoga website ini bermanfaat sebagai sarana informasi dan komunikasi antara sekolah dengan orang tua, alumni, dan masyarakat."
 };
 
-// ===== DATA STRUKTUR ORGANISASI =====
-// Format folder: image/struktur/{jabatan}/{nama-file.jpg}
-
-const strukturData = {
-    kepalaSekolah: {
-        nama: "Dra. Hj. Siti Rohmah, M.Pd",
-        jabatan: "Kepala Sekolah",
-        foto: "image/struktur/kepala-sekolah/foto.jpg"
+// ========== DATA STRUKTUR ORGANISASI ==========
+const dataStrukturOrganisasi = {
+    kepala: [
+        { nama: "Bp. Didi Rosidi S.Pd", jabatan: "Kepala Sekolah", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776490934/IMG-20220714-WA0011-768x1024_pycgku.jpg" }
+    ],
+    
+    wakil: [
+        { nama: "Drs. Ahmad Fauzi, M.Pd", jabatan: "Wakil Kepala Sekolah Bidang Kurikulum", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
+        { nama: "Dra. Siti Aminah, M.Pd", jabatan: "Wakil Kepala Sekolah Bidang Kesiswaan", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
+        { nama: "Drs. Budi Santoso", jabatan: "Wakil Kepala Sekolah Bidang Sarpras", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
+        { nama: "Hj. Lilis Suryani, S.Pd", jabatan: "Wakil Kepala Sekolah Bidang Humas", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+    ],
+    
+    guru: {
+        "Matematika": [
+            { nama: "Sri Mulyani, S.Pd", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
+            { nama: "Drs. Rahmat Hidayat", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "Informatika": [
+            { nama: "Eka Pratiwi, S.Kom", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
+            { nama: "Reynaldi Saputra, S.Kom", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "Bahasa Indonesia": [
+            { nama: "Drs. Budi Santoso", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "Bahasa Inggris": [
+            { nama: "Hj. Lilis Suryani, S.Pd", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "Bahasa Sunda": [
+            { nama: "Drs. Ujang Kosasih", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "Bahasa Jepang": [
+            { nama: "Rina Febrianti, S.Pd", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "PPKn": [
+            { nama: "Drs. Mulyadi, M.Si", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "Sejarah": [
+            { nama: "Nurhasanah, S.Pd", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "Sosiologi": [
+            { nama: "Dra. Yuniarti", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "Ekonomi": [
+            { nama: "Yuniarti, S.Pd", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "Geografi": [
+            { nama: "Drs. Agus Supriyadi", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "Biologi": [
+            { nama: "Drs. Agus Supriyadi, M.Si", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "Fisika": [
+            { nama: "Drs. Rahmat Hidayat, M.Si", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "Kimia": [
+            { nama: "Eka Pratiwi, S.Pd", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "Astronomi": [
+            { nama: "Dr. Rudi Hermawan, M.Si", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "PJOK": [
+            { nama: "Rudi Hartono, S.Pd", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "SBdP": [
+            { nama: "Dian Puspita, S.Sn", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "Agama Islam": [
+            { nama: "Drs. Ahmad Zaeni, M.Ag", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ],
+        "BK": [
+            { nama: "Dra. Siti Rohmah", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
+            { nama: "Drs. Hermawan", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+        ]
     },
-    kurikulum: {
-        nama: "Drs. Ahmad Fauzi, M.Pd",
-        jabatan: "Wakil Kepala Sekolah Bidang Kurikulum",
-        foto: "image/struktur/kurikulum/foto.jpg"
-    },
-    kesiswaan: {
-        nama: "Sri Mulyani, S.Pd",
-        jabatan: "Wakil Kepala Sekolah Bidang Kesiswaan",
-        foto: "image/struktur/kesiswaan/foto.jpg"
-    },
-    bk: {
-        nama: "Drs. Budi Santoso, M.Pd",
-        jabatan: "Koordinator Bimbingan Konseling",
-        foto: "image/struktur/bk/foto.jpg"
-    }
-};
-
-// ===== DATA GURU BERDASARKAN MAPEL =====
-// Format folder: image/guru/{mapel}/{nama-file.jpg}
-
-const dataGuruByMapel = {
-    "Matematika": [
-        { nama: "Sri Mulyani, S.Pd", foto: "image/guru/matematika/sri-mulyani.jpg" },
-        { nama: "Drs. Rahmat Hidayat, M.Si", foto: "image/guru/matematika/rahmat-hidayat.jpg" }
-    ],
-    "Informatika": [
-        { nama: "Eka Pratiwi, S.Kom", foto: "image/guru/informatika/eka-pratiwi.jpg" }
-    ],
-    "SBdP": [
-        { nama: "Nurhasanah, S.Sn", foto: "image/guru/sbdp/nurhasanah.jpg" }
-    ],
-    "Agama": [
-        { nama: "Drs. Mulyadi, M.Ag", foto: "image/guru/agama/mulyadi.jpg" }
-    ],
-    "Sosiologi": [
-        { nama: "Yuniarti, S.Sos", foto: "image/guru/sosiologi/yuniarti.jpg" }
-    ],
-    "Sejarah": [
-        { nama: "Drs. Agus Supriyadi", foto: "image/guru/sejarah/agus-supriyadi.jpg" }
-    ],
-    "Kimia": [
-        { nama: "Drs. Rahmat Hidayat, M.Si", foto: "image/guru/kimia/rahmat-hidayat.jpg" }
-    ],
-    "Bahasa Sunda": [
-        { nama: "Hj. Lilis Suryani, S.Pd", foto: "image/guru/bahasa-sunda/lilis-suryani.jpg" }
-    ],
-    "Bahasa Indonesia": [
-        { nama: "Drs. Budi Santoso", foto: "image/guru/bahasa-indonesia/budi-santoso.jpg" }
-    ],
-    "Bahasa Inggris": [
-        { nama: "Hj. Lilis Suryani, S.Pd", foto: "image/guru/bahasa-inggris/lilis-suryani.jpg" }
-    ],
-    "PPKn": [
-        { nama: "Drs. Mulyadi", foto: "image/guru/ppkn/mulyadi.jpg" }
-    ],
-    "Biologi": [
-        { nama: "Drs. Agus Supriyadi", foto: "image/guru/biologi/agus-supriyadi.jpg" }
-    ],
-    "Astronomi": [
-        { nama: "Eka Pratiwi, S.Pd", foto: "image/guru/astronomi/eka-pratiwi.jpg" }
-    ],
-    "Bahasa Jepang": [
-        { nama: "Rudi Hartono, S.Pd", foto: "image/guru/bahasa-jepang/rudi-hartono.jpg" }
-    ],
-    "PJOK": [
-        { nama: "Rudi Hartono, S.Pd", foto: "image/guru/pjok/rudi-hartono.jpg" }
-    ],
-    "Ekonomi": [
-        { nama: "Yuniarti, S.Pd", foto: "image/guru/ekonomi/yuniarti.jpg" }
-    ],
-    "Geografi": [
-        { nama: "Drs. Mulyadi", foto: "image/guru/geografi/mulyadi.jpg" }
-    ],
-    "Fisika": [
-        { nama: "Drs. Rahmat Hidayat, M.Si", foto: "image/guru/fisika/rahmat-hidayat.jpg" }
+    
+    staff: [
+        { nama: "Asep Saepudin, S.Kom", jabatan: "Kepala Tata Usaha", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
+        { nama: "Rina Marlina", jabatan: "Staff Administrasi", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
+        { nama: "Dedi Mulyadi", jabatan: "Staff Keuangan", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
+        { nama: "Siti Nurjanah", jabatan: "Staff Perpustakaan", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
+        { nama: "Jajang Supriatna", jabatan: "Staff Sarana Prasarana", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
     ]
 };
-
-// ===== DATA STAFF TATA USAHA =====
-// Format folder: image/staff/{nama-file.jpg}
-
-const dataStaff = [
-    { nama: "Ahmad Syarif, S.Kom", jabatan: "Kepala TU", foto: "image/staff/kepala-tu.jpg" },
-    { nama: "Dewi Kartika, A.Md", jabatan: "Bendahara", foto: "image/staff/bendahara.jpg" },
-    { nama: "Rina Febriani, S.E", jabatan: "Administrasi", foto: "image/staff/administrasi-1.jpg" },
-    { nama: "Budi Setiawan", jabatan: "Administrasi", foto: "image/staff/administrasi-2.jpg" },
-    { nama: "Siti Nurjanah", jabatan: "Perpustakaan", foto: "image/staff/perpus.jpg" },
-    { nama: "Eko Prasetyo", jabatan: "Keamanan", foto: "image/staff/keamanan.jpg" },
-    { nama: "Joko Susilo", jabatan: "Kebersihan", foto: "image/staff/kebersihan.jpg" }
-];
-
-// ===== DATA UNTUK GAMBAR (Coming Soon) =====
-const dataFotoKelas = {};
-const dataFotoEkskul = {};
-
-function getFotoKelas(angkatanId, kelas) { return []; }
-function getFotoEkskul(ekskulId) { return []; }

@@ -1,43 +1,43 @@
-// Toggle class active untuk hamburger menu
+// HAMBURGER MENU
 const navbarNav = document.querySelector('.navbar-nav');
+const hamburgerMenu = document.querySelector('#hamburger-menu');
 
-document.querySelector('#hamburger-menu').onclick = () => {
-    navbarNav.classList.toggle('active');
-};
-
-// Klik di luar sidebar untuk menghilangkan nav
-const hamburger = document.querySelector('#hamburger-menu');
+if (hamburgerMenu) {
+    hamburgerMenu.onclick = () => {
+        navbarNav.classList.toggle('active');
+    };
+}
 
 document.addEventListener('click', function(e) {
-    if(!hamburger.contains(e.target) && !navbarNav.contains(e.target)) {
+    if (navbarNav && hamburgerMenu && !hamburgerMenu.contains(e.target) && !navbarNav.contains(e.target)) {
         navbarNav.classList.remove('active');
     }
 });
 
-// ========== INTRO SCREEN ==========
+// INTRO SCREEN
 window.addEventListener('load', function() {
     const introScreen = document.getElementById('introScreen');
-    
-    setTimeout(function() {
-        introScreen.classList.add('hide');
-        
+    if (introScreen) {
         setTimeout(function() {
-            introScreen.style.display = 'none';
-        }, 600);
-    }, 2500);
+            introScreen.classList.add('hide');
+            setTimeout(function() {
+                introScreen.style.display = 'none';
+            }, 500);
+        }, 2500);
+    }
     
-    // Welcome Popup
     setTimeout(function() {
         const welcomePopup = document.getElementById('welcomePopup');
-        welcomePopup.classList.add('show');
-        
-        setTimeout(function() {
-            welcomePopup.classList.remove('show');
-        }, 5000);
+        if (welcomePopup) {
+            welcomePopup.classList.add('show');
+            setTimeout(function() {
+                welcomePopup.classList.remove('show');
+            }, 5000);
+        }
     }, 3000);
 });
 
-// ========== COUNTDOWN TIMER SPMB ==========
+// COUNTDOWN TIMER
 function startCountdown() {
     const targetDate = new Date();
     targetDate.setFullYear(2026, 0, 15, 0, 0, 0);
@@ -46,11 +46,18 @@ function startCountdown() {
         const now = new Date();
         const diff = targetDate - now;
         
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        
+        if (!daysEl) return;
+        
         if (diff <= 0) {
-            document.getElementById('days').innerHTML = '00';
-            document.getElementById('hours').innerHTML = '00';
-            document.getElementById('minutes').innerHTML = '00';
-            document.getElementById('seconds').innerHTML = '00';
+            daysEl.innerHTML = '00';
+            hoursEl.innerHTML = '00';
+            minutesEl.innerHTML = '00';
+            secondsEl.innerHTML = '00';
             return;
         }
         
@@ -59,17 +66,17 @@ function startCountdown() {
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
         
-        document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
-        document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
-        document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
-        document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+        daysEl.innerHTML = days.toString().padStart(2, '0');
+        hoursEl.innerHTML = hours.toString().padStart(2, '0');
+        minutesEl.innerHTML = minutes.toString().padStart(2, '0');
+        secondsEl.innerHTML = seconds.toString().padStart(2, '0');
     }
     
     updateCountdown();
     setInterval(updateCountdown, 1000);
 }
 
-// ========== FUNGSI UNTUK MENGGANTI HALAMAN ==========
+// SHOW PAGE FUNCTION
 function showPage(pageId) {
     document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
@@ -82,143 +89,114 @@ function showPage(pageId) {
     
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
-        if(link.dataset.page === pageId) {
+        if (link.dataset.page === pageId) {
             link.classList.add('active');
         }
     });
     
-    navbarNav.classList.remove('active');
-    
-    if (pageId === 'profil') {
-        loadProfilData();
+    if (navbarNav) {
+        navbarNav.classList.remove('active');
     }
     
-    feather.replace();
+    if (pageId === 'profil') {
+        loadStrukturOrganisasi();
+    }
+    
+    if (pageId === 'spmb') {
+        startCountdown();
+    }
+    
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
 }
 
-// ========== LOAD PROFIL DATA ==========
-function loadProfilData() {
-    // Load Sambutan Kepsek
+// LOAD STRUKTUR ORGANISASI
+function loadStrukturOrganisasi() {
     const sambutanCard = document.getElementById('sambutan-card');
-    if (sambutanCard) {
+    if (sambutanCard && typeof sambutanKepalaSekolah !== 'undefined') {
         sambutanCard.innerHTML = `
-            <img src="${sambutanKepsek.foto}" alt="${sambutanKepsek.nama}" class="sambutan-foto" onerror="this.src='https://via.placeholder.com/120'">
-            <div class="sambutan-text">
-                <h4>${sambutanKepsek.nama}</h4>
-                <p>${sambutanKepsek.sambutan}</p>
+            <img src="${sambutanKepalaSekolah.foto}" alt="${sambutanKepalaSekolah.nama}" class="sambutan-foto" onerror="this.src='https://via.placeholder.com/100'">
+            <h4>${sambutanKepalaSekolah.nama}</h4>
+            <p class="sambutan-jabatan">Kepala Sekolah</p>
+            <div class="sambutan-text">"${sambutanKepalaSekolah.sambutan}"</div>
+        `;
+    }
+    
+    const kepalaContainer = document.getElementById('kepala-sekolah-card');
+    if (kepalaContainer && typeof dataStrukturOrganisasi !== 'undefined' && dataStrukturOrganisasi.kepala && dataStrukturOrganisasi.kepala.length > 0) {
+        const kepala = dataStrukturOrganisasi.kepala[0];
+        kepalaContainer.innerHTML = `
+            <div class="struktur-card" style="width: 250px;">
+                <img src="${kepala.foto}" alt="${kepala.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/80'">
+                <h4>${kepala.nama}</h4>
+                <p>${kepala.jabatan}</p>
             </div>
         `;
     }
     
-    // Load Kepala Sekolah
-    const kepalaCard = document.getElementById('kepala-card');
-    if (kepalaCard && strukturData.kepalaSekolah) {
-        kepalaCard.innerHTML = `
-            <img src="${strukturData.kepalaSekolah.foto}" alt="${strukturData.kepalaSekolah.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/100'">
-            <h4>${strukturData.kepalaSekolah.nama}</h4>
-            <p>${strukturData.kepalaSekolah.jabatan}</p>
-        `;
+    const wakilContainer = document.getElementById('wakil-container');
+    if (wakilContainer && typeof dataStrukturOrganisasi !== 'undefined' && dataStrukturOrganisasi.wakil) {
+        let wakilHtml = '';
+        dataStrukturOrganisasi.wakil.forEach((wakil) => {
+            wakilHtml += `
+                <div class="struktur-card">
+                    <img src="${wakil.foto}" alt="${wakil.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/80'">
+                    <h4>${wakil.nama}</h4>
+                    <p>${wakil.jabatan}</p>
+                </div>
+            `;
+        });
+        wakilContainer.innerHTML = wakilHtml;
     }
     
-    // Load Kurikulum
-    const kurikulumCard = document.getElementById('kurikulum-card');
-    if (kurikulumCard && strukturData.kurikulum) {
-        kurikulumCard.innerHTML = `
-            <img src="${strukturData.kurikulum.foto}" alt="${strukturData.kurikulum.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/100'">
-            <h4>${strukturData.kurikulum.nama}</h4>
-            <p>${strukturData.kurikulum.jabatan}</p>
-        `;
-    }
-    
-    // Load Kesiswaan
-    const kesiswaanCard = document.getElementById('kesiswaan-card');
-    if (kesiswaanCard && strukturData.kesiswaan) {
-        kesiswaanCard.innerHTML = `
-            <img src="${strukturData.kesiswaan.foto}" alt="${strukturData.kesiswaan.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/100'">
-            <h4>${strukturData.kesiswaan.nama}</h4>
-            <p>${strukturData.kesiswaan.jabatan}</p>
-        `;
-    }
-    
-    // Load BK
-    const bkCard = document.getElementById('bk-card');
-    if (bkCard && strukturData.bk) {
-        bkCard.innerHTML = `
-            <img src="${strukturData.bk.foto}" alt="${strukturData.bk.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/100'">
-            <h4>${strukturData.bk.nama}</h4>
-            <p>${strukturData.bk.jabatan}</p>
-        `;
-    }
-    
-    // Load Guru Berdasarkan Mapel
-    const guruMapelGrid = document.getElementById('guru-mapel-grid');
-    if (guruMapelGrid) {
-        let html = '';
-        for (const [mapel, guruList] of Object.entries(dataGuruByMapel)) {
-            let guruHtml = '';
-            guruList.forEach(guru => {
+    const guruContainer = document.getElementById('guru-container');
+    if (guruContainer && typeof dataStrukturOrganisasi !== 'undefined' && dataStrukturOrganisasi.guru) {
+        let guruHtml = '';
+        for (const [mapel, guruList] of Object.entries(dataStrukturOrganisasi.guru)) {
+            guruList.forEach((guru) => {
                 guruHtml += `
-                    <div class="guru-item">
-                        <img src="${guru.foto}" alt="${guru.nama}" class="guru-item-foto" onerror="this.src='https://via.placeholder.com/70'">
-                        <h5>${guru.nama}</h5>
-                        <p>${mapel}</p>
+                    <div class="struktur-card">
+                        <img src="${guru.foto}" alt="${guru.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/80'">
+                        <h4>${guru.nama}</h4>
+                        <p>Guru ${mapel}</p>
                     </div>
                 `;
             });
-            html += `
-                <div class="mapel-group">
-                    <div class="mapel-title">${mapel}</div>
-                    <div class="mapel-guru-list">
-                        ${guruHtml}
-                    </div>
-                </div>
-            `;
         }
-        guruMapelGrid.innerHTML = html;
+        guruContainer.innerHTML = guruHtml;
     }
     
-    // Load Staff
-    const staffGrid = document.getElementById('staff-grid');
-    if (staffGrid) {
-        let html = '';
-        dataStaff.forEach((staff, index) => {
-            html += `
-                <div class="staff-card" style="animation-delay: ${0.03 * index}s">
-                    <img src="${staff.foto}" alt="${staff.nama}" class="staff-foto" onerror="this.src='https://via.placeholder.com/80'">
+    const staffContainer = document.getElementById('staff-container');
+    if (staffContainer && typeof dataStrukturOrganisasi !== 'undefined' && dataStrukturOrganisasi.staff) {
+        let staffHtml = '';
+        dataStrukturOrganisasi.staff.forEach((staff) => {
+            staffHtml += `
+                <div class="struktur-card">
+                    <img src="${staff.foto}" alt="${staff.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/80'">
                     <h4>${staff.nama}</h4>
                     <p>${staff.jabatan}</p>
                 </div>
             `;
         });
-        staffGrid.innerHTML = html;
+        staffContainer.innerHTML = staffHtml;
     }
     
-    feather.replace();
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
 }
 
-// ========== FUNGSI UNTUK MODAL GAMBAR ==========
-let currentFotoList = [];
-let currentFotoIndex = 0;
-
-function openModalKelas(angkatanId, kelas, index) {
-    // Coming Soon
-}
-
-function openModalEkskul(ekskulId, itemName, index) {
-    // Coming Soon
-}
-
+// CLOSE MODAL
 function closeModal() {
     const modal = document.getElementById('imageModal');
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 }
 
-function changeModalImage(direction) {
-    // Coming Soon
-}
-
-// Event listener untuk modal
+// INITIALIZATION
 document.addEventListener('DOMContentLoaded', function() {
     const closeBtn = document.querySelector('.close-modal');
     if (closeBtn) {
@@ -232,8 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    loadStrukturOrganisasi();
     startCountdown();
-    loadProfilData();
-    
     showPage('home');
 });
