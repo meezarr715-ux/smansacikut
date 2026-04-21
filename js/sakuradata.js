@@ -12,80 +12,65 @@ const dataStrukturOrganisasi = {
     ],
     
     wakil: [
-        { nama: "Drs. Ahmad Fauzi, M.Pd", jabatan: "Wakil Kepala Sekolah Bidang Kurikulum", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
-        { nama: "Dra. Siti Aminah, M.Pd", jabatan: "Wakil Kepala Sekolah Bidang Kesiswaan", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
-        { nama: "Drs. Budi Santoso", jabatan: "Wakil Kepala Sekolah Bidang Sarpras", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
-        { nama: "Hj. Lilis Suryani, S.Pd", jabatan: "Wakil Kepala Sekolah Bidang Humas", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
     ],
     
     guru: {
         "Matematika": [
-            { nama: "Sri Mulyani, S.Pd", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
-            { nama: "Drs. Rahmat Hidayat", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
         ],
         "Informatika": [
-            { nama: "Eka Pratiwi, S.Kom", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
-            { nama: "Reynaldi Saputra, S.Kom", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
         ],
         "Bahasa Indonesia": [
-            { nama: "Drs. Budi Santoso", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+            { nama: "Purna Dewi, S.Pd.", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776762581/unnamed_havk6j.jpg" },
+            { nama: "Andriyansyah Marjuki, S.S., Gr.", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776762509/unnamed_rzfgsy.png" }
         ],
         "Bahasa Inggris": [
-            { nama: "Hj. Lilis Suryani, S.Pd", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+            { nama: "Esti Puspitasari, M.Pd.", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776762590/unnamed_ntfktk.jpg" },
+            { nama: "Acep Suryadi, M.Pd.", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776762567/unnamed_kp42kg.jpg" }
         ],
         "Bahasa Sunda": [
-            { nama: "Drs. Ujang Kosasih", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+            { nama: "Agus Subhan, S.H.I.", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776762584/unnamed_w5ljlo.jpg" }
         ],
         "Bahasa Jepang": [
-            { nama: "Rina Febrianti, S.Pd", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+            { nama: "Ganjar Sutendi, S.Pd.", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776762595/unnamed_x8zu3q.jpg" },
+            { nama: "Soipah, S.Pd.", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776762541/unnamed_lk9ljv.jpg" }
         ],
         "PPKn": [
-            { nama: "Drs. Mulyadi, M.Si", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
         ],
         "Sejarah": [
-            { nama: "Nurhasanah, S.Pd", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+            { nama: "Richi Arisman, S.Pd.", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776762586/unnamed_mclufv.jpg" }
         ],
         "Sosiologi": [
-            { nama: "Dra. Yuniarti", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
         ],
         "Ekonomi": [
-            { nama: "Yuniarti, S.Pd", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
         ],
         "Geografi": [
-            { nama: "Drs. Agus Supriyadi", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
         ],
         "Biologi": [
-            { nama: "Drs. Agus Supriyadi, M.Si", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
         ],
         "Fisika": [
-            { nama: "Drs. Rahmat Hidayat, M.Si", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+            { nama: "Royhanun Athiyyah, S.Pd", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776762522/unnamed_wbtwx9.jpg" }
         ],
         "Kimia": [
-            { nama: "Eka Pratiwi, S.Pd", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+            { nama: "Dusria Afrindah, M.Pd.", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776762576/unnamed_flyfnn.jpg" }
         ],
         "Astronomi": [
-            { nama: "Dr. Rudi Hermawan, M.Si", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
         ],
         "PJOK": [
-            { nama: "Rudi Hartono, S.Pd", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+            { nama: "Haris Akbar Wisnu Aji, S.Pd.", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776762570/unnamed_bp6fp1.jpg" }
         ],
         "SBdP": [
-            { nama: "Dian Puspita, S.Sn", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+            { nama: "Tri Suraningsih, S.Pd.", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776762573/unnamed_jgkj7c.jpg" },
+            { nama: "Farid Pamungkas, S.Sn.", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776762538/unnamed_v7ucdk.png" },
+            { nama: "Budiman Tejasukmana, S.Pd.", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776762557/unnamed_eutirt.jpg" }
         ],
         "Agama Islam": [
-            { nama: "Drs. Ahmad Zaeni, M.Ag", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
+            {nama: "Fikri Haekal Anwar, S.Pd.", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776762527/unnamed_qpczkz.jpg" },
+            { nama: "Zulkarnain Rakasiwi, S.Pd.", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1776762597/unnamed_zdulev.jpg" }
         ],
         "BK": [
-            { nama: "Dra. Siti Rohmah", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
-            { nama: "Drs. Hermawan", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
         ]
     },
     
     staff: [
-        { nama: "Asep Saepudin, S.Kom", jabatan: "Kepala Tata Usaha", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
-        { nama: "Rina Marlina", jabatan: "Staff Administrasi", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
-        { nama: "Dedi Mulyadi", jabatan: "Staff Keuangan", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
-        { nama: "Siti Nurjanah", jabatan: "Staff Perpustakaan", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" },
-        { nama: "Jajang Supriatna", jabatan: "Staff Sarana Prasarana", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1773484996/WhatsApp_Image_2026-02-24_at_16.24.20_xclmwc.jpg" }
     ]
 };
