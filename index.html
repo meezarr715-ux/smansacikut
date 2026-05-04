@@ -2,21 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>SMAN 1 Cikarang Utara</title>
     <link rel="icon" type="image/png" href="image/logo-sekolah/LOGO SAKURA.png">
     <!-- Feather Icon -->
     <script src="https://unpkg.com/feather-icons"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- PDF Viewer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="css/sakura.css">
+    <style>
+        /* CSS LANGSUNG UNTUK PASTIKAN POPUP KELULUSAN MUNCUL */
+        .kelulusan-popup {
+            display: none !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: rgba(0,0,0,0.85) !important;
+            z-index: 99999 !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+        .kelulusan-popup.show {
+            display: flex !important;
+        }
+    </style>
 </head>
 <body>
     <!-- INTRO LOGO SECTION -->
     <div id="introScreen" class="intro-screen">
         <div class="intro-logo-container">
-            <img src="image/logo-sekolah/LOGO SAKURA.png" alt="Logo Sekolah" class="intro-logo">
+            <img src="image/logo-sekolah/LOGO SAKURA.png" alt="Logo Sekolah" class="intro-logo" onerror="this.src='https://placehold.co/120x120?text=Logo'">
             <div class="intro-text">
                 <h2>SELAMAT DATANG DI</h2>
                 <p>PLATFORM SMAN 1 CIKARANG UTARA</p>
@@ -37,13 +57,31 @@
         </div>
     </div>
 
+    <!-- Popup Kelulusan - DIPERBAIKI -->
+    <div id="kelulusanPopup" class="kelulusan-popup">
+        <div class="kelulusan-popup-content">
+            <span class="close-kelulusan">&times;</span>
+            <div class="kelulusan-popup-body">
+                <img src="https://res.cloudinary.com/duemncbn0/image/upload/v1777888904/9b5f56bb-1e2f-4c90-a843-6800916e0f8b_lqp97i.jpg" alt="Kelulusan" class="kelulusan-popup-img" onerror="this.src='https://placehold.co/400x200?text=Selamat+Lulus'">
+                <div class="kelulusan-popup-text">
+                    <h2>🎓 SELAMAT! 🎓</h2>
+                    <h3>Kepada Seluruh Siswa Kelas XII</h3>
+                    <p>Selamat atas kelulusan kalian! Prestasi dan perjuangan kalian selama 3 tahun telah membuahkan hasil yang membanggakan.</p>
+                    <p>Tetap semangat dan raihlah cita-cita setinggi langit!</p>
+                    <button class="kelulusan-btn" onclick="showPage('informasi'); closeKelulusanPopup();">Lihat Informasi Kelulusan →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Nav Start -->
     <nav class="navbar">
-        <a href="#" class="navbar-logo" onclick="showPage('home'); return false;"><span class="logo-icon"><img src="image/logo-sekolah/LOGO SAKURA.png" alt="logo" style="width: 35px; height: 35px; object-fit: contain; margin-right: 8px;"></span>SMAN 1 <span1>CIKARANG </span1><span2>UTARA</span2></a>
+        <a href="#" class="navbar-logo" onclick="showPage('home'); return false;"><span class="logo-icon"><img src="image/logo-sekolah/LOGO SAKURA.png" alt="logo" style="width: 35px; height: 35px; object-fit: contain; margin-right: 8px;" onerror="this.src='https://placehold.co/35x35?text=Logo'"></span>SMAN 1 <span1>CIKARANG </span1><span2>UTARA</span2></a>
         
         <div class="navbar-nav">
             <a href="#" onclick="showPage('home'); return false;" class="nav-link active" data-page="home">Beranda</a>
             <a href="#" onclick="showPage('profil'); return false;" class="nav-link" data-page="profil">Profil Sekolah</a>
+            <a href="#" onclick="showPage('informasi'); return false;" class="nav-link" data-page="informasi">Informasi</a>
             <a href="#" onclick="window.open('https://sites.google.com/guru.sma.belajar.id/karyasakura', '_blank'); return false;" class="nav-link">Karya Sakura</a>
             <a href="#" onclick="showPage('spmb'); return false;" class="nav-link" data-page="spmb">Informasi SPMB</a>
             <a href="#" onclick="showPage('album'); return false;" class="nav-link" data-page="album">Album</a>
@@ -102,17 +140,173 @@
                 </div>
 
                 <div class="struktur-section">
-                    <h3 class="section-title">Daftar Guru dan Staff</h3>
+                    <h3 class="section-title">Kepala Sekolah</h3>
+                    <div class="struktur-level" id="kepala-sekolah-container"></div>
                     
-                    <div class="struktur-level level-1">
-                        <div class="struktur-card kepala-card" id="kepala-sekolah-card"></div>
+                    <h3 class="section-title">Wakil Kepala Sekolah</h3>
+                    <div class="struktur-level" id="wakil-kepala-container"></div>
+                    
+                    <h3 class="section-title">Kurikulum</h3>
+                    <div class="struktur-level" id="kurikulum-container"></div>
+                    
+                    <h3 class="section-title">BK (Bimbingan Konseling)</h3>
+                    <div class="struktur-level" id="bk-container"></div>
+                    
+                    <h3 class="section-title">Kesiswaan</h3>
+                    <div class="struktur-level" id="kesiswaan-container"></div>
+                    
+                    <h3 class="section-title">Staf Tata Usaha</h3>
+                    <div class="struktur-level" id="staff-tu-container"></div>
+                    
+                    <h3 class="section-title">Komite Sekolah</h3>
+                    <div class="struktur-level" id="komite-container"></div>
+                    
+                    <h3 class="section-title">Guru Sosiologi</h3>
+                    <div class="struktur-level" id="guru-sosiologi-container"></div>
+                    
+                    <h3 class="section-title">Guru Bahasa Indonesia</h3>
+                    <div class="struktur-level" id="guru-bindo-container"></div>
+                    
+                    <h3 class="section-title">Guru Matematika</h3>
+                    <div class="struktur-level" id="guru-matematika-container"></div>
+                    
+                    <h3 class="section-title">Guru Fisika</h3>
+                    <div class="struktur-level" id="guru-fisika-container"></div>
+                    
+                    <h3 class="section-title">Guru Geografi</h3>
+                    <div class="struktur-level" id="guru-geografi-container"></div>
+                    
+                    <h3 class="section-title">Guru Bahasa Sunda</h3>
+                    <div class="struktur-level" id="guru-basunda-container"></div>
+                    
+                    <h3 class="section-title">Guru Bahasa Inggris</h3>
+                    <div class="struktur-level" id="guru-binggris-container"></div>
+                    
+                    <h3 class="section-title">Guru Bahasa Jepang</h3>
+                    <div class="struktur-level" id="guru-bajepang-container"></div>
+                    
+                    <h3 class="section-title">Guru Seni Budaya</h3>
+                    <div class="struktur-level" id="guru-sbdp-container"></div>
+                    
+                    <h3 class="section-title">Guru Agama Islam</h3>
+                    <div class="struktur-level" id="guru-pai-container"></div>
+                    
+                    <h3 class="section-title">Guru Agama Kristen</h3>
+                    <div class="struktur-level" id="guru-pakristen-container"></div>
+                    
+                    <h3 class="section-title">Guru Kimia</h3>
+                    <div class="struktur-level" id="guru-kimia-container"></div>
+                    
+                    <h3 class="section-title">Guru PPKn</h3>
+                    <div class="struktur-level" id="guru-ppkn-container"></div>
+                    
+                    <h3 class="section-title">Guru PJOK</h3>
+                    <div class="struktur-level" id="guru-pjok-container"></div>
+                    
+                    <h3 class="section-title">Guru Prakarya</h3>
+                    <div class="struktur-level" id="guru-prakarya-container"></div>
+                    
+                    <h3 class="section-title">Guru Sejarah</h3>
+                    <div class="struktur-level" id="guru-sejarah-container"></div>
+                    
+                    <h3 class="section-title">Guru Ekonomi</h3>
+                    <div class="struktur-level" id="guru-ekonomi-container"></div>
+                    
+                    <h3 class="section-title">Guru Informatika</h3>
+                    <div class="struktur-level" id="guru-informatika-container"></div>
+                    
+                    <h3 class="section-title">Petugas Keamanan</h3>
+                    <div class="struktur-level" id="staff-keamanan-container"></div>
+                    
+                    <h3 class="section-title">Petugas Kebersihan</h3>
+                    <div class="struktur-level" id="staff-kebersihan-container"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- INFORMASI PAGE - DIPERBAIKI -->
+        <div id="page-informasi" class="page">
+            <section class="informasi-page">
+                <h2 class="page-title">Informasi & Pengumuman</h2>
+                <p class="page-subtitle">Informasi terbaru seputar kegiatan sekolah dan pengumuman penting</p>
+                
+                <!-- PENGUMUMAN TERBARU -->
+                <div class="info-pengumuman">
+                    <div class="info-card">
+                        <i data-feather="bell"></i>
+                        <p><strong>Pengambilan Raport & Surat Keterangan Lulus</strong> — Rabu, 06 Mei 2026</p>
                     </div>
-                    
-                    <div class="struktur-level level-2" id="wakil-container"></div>
-                    
-                    <div class="struktur-level level-3" id="guru-container"></div>
-                    
-                    <div class="struktur-level level-4" id="staff-container"></div>
+                </div>
+
+                <!-- INFORMASI KELULUSAN -->
+                <div class="kelulusan-info-section">
+                    <h3 class="section-title">🎓 Informasi Kelulusan</h3>
+                    <div class="kelulusan-info-card">
+                        <div class="kelulusan-info-icon">
+                            <i data-feather="award"></i>
+                        </div>
+                        <div class="kelulusan-info-text">
+                            <h4>Pengumuman Kelulusan Tahun Ajaran 2025/2026</h4>
+                            <p>Selamat kepada seluruh siswa kelas XII yang telah dinyatakan LULUS. Berikut adalah dokumen resmi Surat Keputusan Kepala Sekolah terkait kelulusan.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DOKUMEN RESMI (SK KELULUSAN) -->
+                <div class="dokumen-section">
+                    <h3 class="section-title">📄 Dokumen Resmi</h3>
+                    <div class="dokumen-card">
+                        <div class="dokumen-header">
+                            <i data-feather="file-text"></i>
+                            <span>Surat Keputusan Kepala Sekolah Tentang Kelulusan</span>
+                        </div>
+                        <div class="pdf-iframe-container">
+                            <iframe 
+                                src="https://drive.google.com/file/d/1RRbBtsIonshn2BcyM7c8lxN60Du46BgI/preview" 
+                                class="pdf-iframe"
+                                width="100%" 
+                                height="500" 
+                                allow="autoplay">
+                            </iframe>
+                            <p class="pdf-caption">📌 Jika PDF tidak muncul, <a href="https://drive.google.com/file/d/1RRbBtsIonshn2BcyM7c8lxN60Du46BgI/view" target="_blank">klik di sini</a> untuk melihat langsung</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PROFIL SEKOLAH (MARS) -->
+                <div class="profil-sekolah-section">
+                    <h3 class="section-title">🎵 Profil Sekolah</h3>
+                    <div class="mars-card">
+                        <div class="mars-header">
+                            <i data-feather="music"></i>
+                            <h4>Mars SMAN 1 Cikarang Utara</h4>
+                        </div>
+                        <div class="mars-content">
+                            <img src="https://drive.google.com/file/d/1Xl9DxqgdbzDqgvBuFZGJMNpLlLzVViEK/view?usp=drivesdk" alt="Mars Sekolah" class="mars-image">
+                            <div class="mars-lyrics">
+                                <p>Bersama Gerak Roda Pembangunan<br>
+                                Satu Dermaga Hati Terbuka<br>
+                                Bersinar Penuh Ketakwaan<br>
+                                Pada Tuhan Yang Maha Esa</p>
+                                
+                                <p>Wiyata Tut Wuri Handayani<br>
+                                Mengabdi Murni Pada Pertiwi<br>
+                                Luhur Dalam Budi Pekerti<br>
+                                Mulia Cita-cita Tuk Kemajuan Negeri</p>
+                                
+                                <p>SMA Negeri 1 Cikarang Utara<br>
+                                Mengutamakan Pendidikan<br>
+                                Menerapkan Pola Kebersamaan<br>
+                                Dalam Kaidah Kebajikan</p>
+                                
+                                <p>SMA Negeri 1 Cikarang Utara<br>
+                                Turut Membangun Bangsa Negara<br>
+                                Meningkatkan Sumber Daya Manusia<br>
+                                Agar Berdaya Guna, Berhasil Guna<br>
+                                Adijaya Indonesia</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -167,7 +361,7 @@
                     <div class="spmb-info-card">
                         <div class="spmb-icon"><i data-feather="clipboard"></i></div>
                         <h3>Jalur Pendaftaran</h3>
-                        <p>ZonAfirmasiasi • Prestasi • </p>
+                        <p>Zonasi • Afirmasi • Prestasi</p>
                         <span class="badge">3 Jalur</span>
                     </div>
                 </div>
@@ -321,12 +515,12 @@
                         <div class="developer-info">
                             <div class="developer-profiles">
                                 <div class="developer-profile">
-                                    <img src="https://res.cloudinary.com/duemncbn0/image/upload/v1775106911/IMG-20240929-WA0036_ohrnnr.jpg" alt="Developer 1" class="developer-photo">
+                                    <img src="https://res.cloudinary.com/duemncbn0/image/upload/v1775106911/IMG-20240929-WA0036_ohrnnr.jpg" alt="Developer 1" class="developer-photo" onerror="this.src='https://placehold.co/80x80?text=Developer'">
                                     <h4>Zaenul Enka Azwar</h4>
                                     <p class="developer-role">Developer</p>
                                 </div>
                                 <div class="developer-profile">
-                                    <img src="https://res.cloudinary.com/duemncbn0/image/upload/v1776610175/cb5506ba-3a6c-45f7-b420-8db4b37e2891_edyyvu.jpg" alt="Developer 2" class="developer-photo">
+                                    <img src="https://res.cloudinary.com/duemncbn0/image/upload/v1776610175/cb5506ba-3a6c-45f7-b420-8db4b37e2891_edyyvu.jpg" alt="Developer 2" class="developer-photo" onerror="this.src='https://placehold.co/80x80?text=Developer'">
                                     <h4>Irgi Keitha Arya Putra</h4>
                                     <p class="developer-role">Management</p>
                                 </div>
@@ -393,12 +587,12 @@
 
     <!-- Scripts -->
     <script src="https://unpkg.com/feather-icons"></script>
-<script src="js/sakuradata.js"></script>
-<script src="js/sakura.js"></script>
-<script>
-    if (typeof feather !== 'undefined') {
-        feather.replace();
-    }
-</script>
+    <script src="js/sakuradata.js"></script>
+    <script src="js/sakura.js"></script>
+    <script>
+        if (typeof feather !== 'undefined') {
+            feather.replace();
+        }
+    </script>
 </body>
 </html>

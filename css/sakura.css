@@ -1,3 +1,5 @@
+/* sakura.css - DENGAN PERBAIKAN POPUP */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
@@ -159,6 +161,125 @@ body {
     font-size: 1rem;
     font-weight: 600;
     margin: 0;
+}
+
+/* POPUP KELULUSAN - DIPERBAIKI TOTAL */
+.kelulusan-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    z-index: 17000;
+    justify-content: center;
+    align-items: center;
+}
+
+.kelulusan-popup.show {
+    display: flex;
+}
+
+.kelulusan-popup-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 90%;
+    width: 550px;
+    position: relative;
+    animation: popupSlide 0.3s ease;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+@keyframes popupSlide {
+    from {
+        transform: translateY(-50px) scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.close-kelulusan {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #999;
+    transition: 0.2s;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.1);
+}
+
+.close-kelulusan:hover {
+    color: var(--color5);
+    background: rgba(0,0,0,0.2);
+    transform: rotate(90deg);
+}
+
+.kelulusan-popup-body {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.kelulusan-popup-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.kelulusan-popup-text {
+    text-align: center;
+}
+
+.kelulusan-popup-text h2 {
+    color: var(--color5);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.kelulusan-popup-text h3 {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.kelulusan-popup-text p {
+    color: #666;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.kelulusan-btn {
+    background: linear-gradient(135deg, var(--color5), var(--color1));
+    color: var(--color6);
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: 10px;
+    border: none;
+}
+
+.kelulusan-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 /* NAVBAR */
@@ -458,8 +579,8 @@ body {
 }
 
 .sambutan-foto {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 0.8rem;
@@ -486,50 +607,280 @@ body {
     font-style: italic;
 }
 
-/* STRUKTUR */
+/* STRUKTUR - POLAROID STYLE */
 .struktur-section {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
 }
 
 .struktur-level {
-    margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
 }
 
-.level-1 { display: flex; justify-content: center; margin-bottom: 1.5rem; }
-.level-2 { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
-.level-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
-.level-4 { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
-
-.struktur-card {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: 1rem;
+/* Polaroid Card Style */
+.polaroid-card {
+    background: white;
+    padding: 1rem 1rem 1.5rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    transition: 0.2s;
+    cursor: pointer;
 }
 
-.struktur-card:hover { transform: translateY(-3px); }
+.polaroid-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
 
-.struktur-foto {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+.polaroid-photo {
+    width: 100%;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
-    margin-bottom: 0.5rem;
-    border: 2px solid var(--color5);
+    border-radius: 4px;
+    margin-bottom: 1rem;
 }
 
-.struktur-card h4 {
-    font-size: 0.9rem;
+.polaroid-card h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
     color: var(--primary);
+    margin-bottom: 0.3rem;
+}
+
+.polaroid-card .jabatan {
+    font-size: 0.75rem;
+    color: var(--color3);
     margin-bottom: 0.2rem;
 }
 
-.struktur-card p {
+.polaroid-card .mapel {
+    font-size: 0.7rem;
+    color: #888;
+    font-style: italic;
+}
+
+/* ========== INFORMASI PAGE - STYLE BARU YANG RAPIH ========== */
+.informasi-page {
+    padding: 1.5rem 7%;
+}
+
+.info-pengumuman {
+    max-width: 1000px;
+    margin: 0 auto 2rem;
+}
+
+.info-card {
+    background: linear-gradient(135deg, var(--color5), var(--color1));
+    border-radius: 15px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.info-card i {
+    width: 30px;
+    height: 30px;
+    color: var(--color6);
+    flex-shrink: 0;
+}
+
+.info-card p {
+    color: var(--color6);
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.kelulusan-info-section {
+    max-width: 1000px;
+    margin: 0 auto 2rem;
+}
+
+.kelulusan-info-card {
+    background: linear-gradient(135deg, rgba(244, 209, 96, 0.15), rgba(76, 201, 254, 0.1));
+    border-radius: 20px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(244, 209, 96, 0.3);
+}
+
+.kelulusan-info-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--color5), var(--color1));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.kelulusan-info-icon i {
+    width: 32px;
+    height: 32px;
+    color: var(--color6);
+}
+
+.kelulusan-info-text h4 {
+    font-size: 1.1rem;
+    color: var(--color5);
+    margin-bottom: 0.5rem;
+}
+
+.kelulusan-info-text p {
+    color: rgba(255,255,255,0.9);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.dokumen-section {
+    max-width: 1000px;
+    margin: 0 auto 2rem;
+}
+
+.dokumen-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.dokumen-header {
+    background: linear-gradient(135deg, var(--primary), var(--color3));
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.dokumen-header i {
+    width: 22px;
+    height: 22px;
+    color: var(--color5);
+}
+
+.dokumen-header span {
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.pdf-iframe-container {
+    padding: 1rem;
+    background: #f5f5f5;
+}
+
+.pdf-iframe {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+}
+
+.pdf-caption {
+    text-align: center;
+    margin-top: 0.8rem;
+    font-size: 0.8rem;
     color: #666;
-    font-size: 0.75rem;
+}
+
+.pdf-caption a {
+    color: var(--color5);
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.profil-sekolah-section {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.mars-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.mars-header {
+    background: linear-gradient(135deg, var(--color5), var(--color1));
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.mars-header i {
+    width: 22px;
+    height: 22px;
+    color: var(--color6);
+}
+
+.mars-header h4 {
+    color: var(--color6);
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.mars-content {
+    display: flex;
+    gap: 2rem;
+    padding: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.mars-image {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    border-radius: 15px;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.mars-lyrics {
+    flex: 1;
+}
+
+.mars-lyrics p {
+    color: #444;
+    margin-bottom: 0.8rem;
+    line-height: 1.7;
+    font-size: 0.85rem;
+}
+
+/* PDF IFRAME STYLE */
+.pdf-iframe-container {
+    margin-top: 1rem;
+}
+
+.pdf-iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+}
+
+.pdf-caption {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.pdf-caption a {
+    color: var(--color5);
+    text-decoration: underline;
 }
 
 /* COMING SOON */
@@ -1048,18 +1399,61 @@ body {
     .alur-steps { flex-direction: column; }
     .alur-arrow { transform: rotate(90deg); }
     .developer-profiles { flex-direction: column; align-items: center; gap: 1rem; }
-    .level-2 { flex-direction: column; align-items: center; }
-    .level-2 .struktur-card { width: 100%; max-width: 250px; }
-    .level-3, .level-4 { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    .struktur-level { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
     .welcome-popup.show { top: 70px; }
     .welcome-popup-content { padding: 6px 18px; gap: 8px; }
     .welcome-icon { width: 28px; height: 28px; }
     .welcome-icon i { width: 16px; height: 16px; }
     .welcome-popup-content h3 { font-size: 0.85rem; }
+    
+    .kelulusan-info-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .dokumen-header span {
+        font-size: 0.8rem;
+    }
+    
+    .mars-content {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .mars-lyrics {
+        text-align: center;
+    }
+    
+    .pdf-iframe {
+        height: 350px;
+    }
 }
 
 @media (max-width: 480px) {
     .hero .content h1 { font-size: 1.5rem; }
     .coming-soon-content { padding: 1.5rem; }
     .coming-soon-content h2 { font-size: 1.3rem; }
+    .struktur-level { grid-template-columns: 1fr; }
+    
+    .kelulusan-info-icon {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .kelulusan-info-icon i {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .kelulusan-info-text h4 {
+        font-size: 0.95rem;
+    }
+    
+    .dokumen-header {
+        padding: 0.8rem 1rem;
+    }
+    
+    .dokumen-header span {
+        font-size: 0.7rem;
+    }
 }

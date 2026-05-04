@@ -1,4 +1,30 @@
-// HAMBURGER MENU
+// sakura.js - DIPERBAIKI UNTUK POPUP
+// ==================== DISABLE RIGHT CLICK & SHORTCUT KEYS ====================
+document.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+});
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "F12") {
+        e.preventDefault();
+    }
+    if (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key)) {
+        e.preventDefault();
+    }
+    if (e.ctrlKey && e.key === "u") {
+        e.preventDefault();
+    }
+    if (e.ctrlKey && e.key === "s") {
+        e.preventDefault();
+    }
+    // ESC untuk menutup modal
+    if (e.key === "Escape") {
+        closeModal();
+        closeKelulusanPopup();
+    }
+});
+
+// ==================== HAMBURGER MENU ====================
 const navbarNav = document.querySelector('.navbar-nav');
 const hamburgerMenu = document.querySelector('#hamburger-menu');
 
@@ -14,7 +40,7 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// INTRO SCREEN
+// ==================== INTRO SCREEN ====================
 window.addEventListener('load', function() {
     const introScreen = document.getElementById('introScreen');
     if (introScreen) {
@@ -35,9 +61,119 @@ window.addEventListener('load', function() {
             }, 5000);
         }
     }, 3000);
+    
+    // PERBAIKAN POPUP KELULUSAN - HARUS MUNCUL
+    setTimeout(function() {
+        const kelulusanPopup = document.getElementById('kelulusanPopup');
+        console.log("Popup kelulusan element:", kelulusanPopup);
+        console.log("localStorage check:", localStorage.getItem('kelulusanShown'));
+        
+        if (kelulusanPopup) {
+            // Hapus dulu kelas show jika ada
+            kelulusanPopup.classList.remove('show');
+            // Force reflow
+            void kelulusanPopup.offsetWidth;
+            // Tambah kelas show
+            kelulusanPopup.classList.add('show');
+            console.log("Popup should be visible now");
+            
+            // Simpan ke localStorage agar tidak muncul lagi setelah refresh
+            if (!localStorage.getItem('kelulusanShown')) {
+                localStorage.setItem('kelulusanShown', 'true');
+            }
+        } else {
+            console.error("Popup element not found!");
+        }
+    }, 4000);
 });
 
-// COUNTDOWN TIMER
+// ==================== CLOSE KELULUSAN POPUP ====================
+function closeKelulusanPopup() {
+    const kelulusanPopup = document.getElementById('kelulusanPopup');
+    if (kelulusanPopup) {
+        kelulusanPopup.classList.remove('show');
+        console.log("Popup closed");
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const closeKelulusan = document.querySelector('.close-kelulusan');
+    if (closeKelulusan) {
+        closeKelulusan.addEventListener('click', closeKelulusanPopup);
+    }
+    
+    const kelulusanPopup = document.getElementById('kelulusanPopup');
+    if (kelulusanPopup) {
+        kelulusanPopup.addEventListener('click', function(e) {
+            if (e.target === kelulusanPopup) {
+                closeKelulusanPopup();
+            }
+        });
+    }
+});
+
+// ==================== PDF VIEWER ====================
+let pdfDoc = null;
+let currentPage = 1;
+let totalPages = 0;
+
+const pdfUrl = "https://drive.google.com/file/d/1RRbBtsIonshn2BcyM7c8lxN60Du46BgI/view?usp=drivesdk";
+
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+function loadPDF() {
+    const canvas = document.getElementById('pdfCanvas');
+    if (!canvas) return;
+    
+    const demoPdf = 'https://arxiv.org/pdf/astro-ph/9603019v1.pdf';
+    
+    pdfjsLib.getDocument(demoPdf).promise.then(function(pdf) {
+        pdfDoc = pdf;
+        totalPages = pdf.numPages;
+        const pageInfo = document.getElementById('pageInfo');
+        if (pageInfo) pageInfo.textContent = `Halaman ${currentPage} / ${totalPages}`;
+        renderPage(currentPage);
+    }).catch(function(error) {
+        console.error('Error loading PDF:', error);
+        const pageInfo = document.getElementById('pageInfo');
+        if (pageInfo) pageInfo.textContent = 'PDF tidak dapat dimuat';
+    });
+}
+
+function renderPage(pageNum) {
+    if (!pdfDoc) return;
+    
+    pdfDoc.getPage(pageNum).then(function(page) {
+        const canvas = document.getElementById('pdfCanvas');
+        const ctx = canvas.getContext('2d');
+        const viewport = page.getViewport({ scale: 1.5 });
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        
+        const renderContext = {
+            canvasContext: ctx,
+            viewport: viewport
+        };
+        
+        page.render(renderContext);
+        const pageInfo = document.getElementById('pageInfo');
+        if (pageInfo) pageInfo.textContent = `Halaman ${pageNum} / ${totalPages}`;
+    });
+}
+
+function onPrevPage() {
+    if (currentPage <= 1) return;
+    currentPage--;
+    renderPage(currentPage);
+}
+
+function onNextPage() {
+    if (currentPage >= totalPages) return;
+    currentPage++;
+    renderPage(currentPage);
+}
+
+// ==================== COUNTDOWN TIMER ====================
 function startCountdown() {
     const targetDate = new Date();
     targetDate.setFullYear(2026, 0, 15, 0, 0, 0);
@@ -76,7 +212,7 @@ function startCountdown() {
     setInterval(updateCountdown, 1000);
 }
 
-// SHOW PAGE FUNCTION
+// ==================== SHOW PAGE FUNCTION ====================
 function showPage(pageId) {
     document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
@@ -106,80 +242,225 @@ function showPage(pageId) {
         startCountdown();
     }
     
+    if (pageId === 'informasi') {
+        setTimeout(function() {
+            loadPDF();
+        }, 100);
+        
+        const prevBtn = document.getElementById('prevPage');
+        const nextBtn = document.getElementById('nextPage');
+        if (prevBtn) {
+            prevBtn.onclick = onPrevPage;
+        }
+        if (nextBtn) {
+            nextBtn.onclick = onNextPage;
+        }
+    }
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
     if (typeof feather !== 'undefined') {
         feather.replace();
     }
 }
 
-// LOAD STRUKTUR ORGANISASI
+// ==================== POLAROID CARD ====================
+function createPolaroidCard(item, type) {
+    let displayName = item.nama || item.name;
+    let subtitle = '';
+    
+    if (type.includes('guru')) {
+        subtitle = `<div class="mapel">${item.mapel || 'Guru'}</div>`;
+    } else {
+        subtitle = `<div class="jabatan">${item.jabatan || 'Staff'}</div>`;
+    }
+    
+    // Escape foto URL untuk menghindari masalah
+    let fotoUrl = item.foto || 'https://placehold.co/300x300?text=No+Image';
+    
+    return `
+        <div class="polaroid-card" onclick="showImageModal('${fotoUrl}', '${displayName.replace(/'/g, "\\'")}', '${subtitle.replace(/<div class="[^"]*">|<\/div>/g, '').replace(/'/g, "\\'")}')">
+            <img src="${fotoUrl}" alt="${displayName}" class="polaroid-photo" onerror="this.src='https://placehold.co/300x300?text=No+Image'">
+            <h4>${displayName}</h4>
+            ${subtitle}
+        </div>
+    `;
+}
+
+// ==================== LOAD STRUKTUR (26 POSISI) ====================
 function loadStrukturOrganisasi() {
+    // Sambutan
     const sambutanCard = document.getElementById('sambutan-card');
     if (sambutanCard && typeof sambutanKepalaSekolah !== 'undefined') {
+        let fotoUrl = sambutanKepalaSekolah.foto || 'https://placehold.co/120x120?text=Kepsek';
         sambutanCard.innerHTML = `
-            <img src="${sambutanKepalaSekolah.foto}" alt="${sambutanKepalaSekolah.nama}" class="sambutan-foto" onerror="this.src='https://via.placeholder.com/100'">
+            <img src="${fotoUrl}" alt="${sambutanKepalaSekolah.nama}" class="sambutan-foto" onerror="this.src='https://placehold.co/120x120?text=Kepsek'">
             <h4>${sambutanKepalaSekolah.nama}</h4>
             <p class="sambutan-jabatan">Kepala Sekolah</p>
             <div class="sambutan-text">"${sambutanKepalaSekolah.sambutan}"</div>
         `;
     }
     
-    const kepalaContainer = document.getElementById('kepala-sekolah-card');
-    if (kepalaContainer && typeof dataStrukturOrganisasi !== 'undefined' && dataStrukturOrganisasi.kepala && dataStrukturOrganisasi.kepala.length > 0) {
-        const kepala = dataStrukturOrganisasi.kepala[0];
-        kepalaContainer.innerHTML = `
-            <div class="struktur-card" style="width: 250px;">
-                <img src="${kepala.foto}" alt="${kepala.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/80'">
-                <h4>${kepala.nama}</h4>
-                <p>${kepala.jabatan}</p>
-            </div>
-        `;
+    // 1. KEPALA SEKOLAH
+    const kepalaContainer = document.getElementById('kepala-sekolah-container');
+    if (kepalaContainer && dataStrukturOrganisasi.kepala) {
+        kepalaContainer.innerHTML = dataStrukturOrganisasi.kepala.map(k => createPolaroidCard(k, 'kepala')).join('');
     }
     
-    const wakilContainer = document.getElementById('wakil-container');
-    if (wakilContainer && typeof dataStrukturOrganisasi !== 'undefined' && dataStrukturOrganisasi.wakil) {
-        let wakilHtml = '';
-        dataStrukturOrganisasi.wakil.forEach((wakil) => {
-            wakilHtml += `
-                <div class="struktur-card">
-                    <img src="${wakil.foto}" alt="${wakil.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/80'">
-                    <h4>${wakil.nama}</h4>
-                    <p>${wakil.jabatan}</p>
-                </div>
-            `;
-        });
-        wakilContainer.innerHTML = wakilHtml;
+    // 2. WAKIL KEPALA SEKOLAH
+    const wakilContainer = document.getElementById('wakil-kepala-container');
+    if (wakilContainer && dataStrukturOrganisasi.wakilKepala) {
+        wakilContainer.innerHTML = dataStrukturOrganisasi.wakilKepala.map(w => createPolaroidCard(w, 'wakil')).join('');
     }
     
-    const guruContainer = document.getElementById('guru-container');
-    if (guruContainer && typeof dataStrukturOrganisasi !== 'undefined' && dataStrukturOrganisasi.guru) {
-        let guruHtml = '';
-        for (const [mapel, guruList] of Object.entries(dataStrukturOrganisasi.guru)) {
-            guruList.forEach((guru) => {
-                guruHtml += `
-                    <div class="struktur-card">
-                        <img src="${guru.foto}" alt="${guru.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/80'">
-                        <h4>${guru.nama}</h4>
-                        <p>Guru ${mapel}</p>
-                    </div>
-                `;
-            });
-        }
-        guruContainer.innerHTML = guruHtml;
+    // 3. KURIKULUM
+    const kurikulumContainer = document.getElementById('kurikulum-container');
+    if (kurikulumContainer && dataStrukturOrganisasi.kurikulum) {
+        kurikulumContainer.innerHTML = dataStrukturOrganisasi.kurikulum.map(k => createPolaroidCard(k, 'kurikulum')).join('');
     }
     
-    const staffContainer = document.getElementById('staff-container');
-    if (staffContainer && typeof dataStrukturOrganisasi !== 'undefined' && dataStrukturOrganisasi.staff) {
-        let staffHtml = '';
-        dataStrukturOrganisasi.staff.forEach((staff) => {
-            staffHtml += `
-                <div class="struktur-card">
-                    <img src="${staff.foto}" alt="${staff.nama}" class="struktur-foto" onerror="this.src='https://via.placeholder.com/80'">
-                    <h4>${staff.nama}</h4>
-                    <p>${staff.jabatan}</p>
-                </div>
-            `;
-        });
-        staffContainer.innerHTML = staffHtml;
+    // 4. BK
+    const bkContainer = document.getElementById('bk-container');
+    if (bkContainer && dataStrukturOrganisasi.bk) {
+        bkContainer.innerHTML = dataStrukturOrganisasi.bk.map(b => createPolaroidCard(b, 'bk')).join('');
+    }
+    
+    // 5. KESISWAAN
+    const kesiswaanContainer = document.getElementById('kesiswaan-container');
+    if (kesiswaanContainer && dataStrukturOrganisasi.kesiswaan) {
+        kesiswaanContainer.innerHTML = dataStrukturOrganisasi.kesiswaan.map(k => createPolaroidCard(k, 'kesiswaan')).join('');
+    }
+    
+    // 6. STAF TATA USAHA
+    const staffTuContainer = document.getElementById('staff-tu-container');
+    if (staffTuContainer && dataStrukturOrganisasi.staffTu) {
+        staffTuContainer.innerHTML = dataStrukturOrganisasi.staffTu.map(s => createPolaroidCard(s, 'staff')).join('');
+    }
+    
+    // 7. KOMITE
+    const komiteContainer = document.getElementById('komite-container');
+    if (komiteContainer && dataStrukturOrganisasi.komite) {
+        komiteContainer.innerHTML = dataStrukturOrganisasi.komite.map(k => createPolaroidCard(k, 'komite')).join('');
+    }
+    
+    // 8. GURU SOSIOLOGI
+    const guruSosiologi = document.getElementById('guru-sosiologi-container');
+    if (guruSosiologi && dataStrukturOrganisasi.guruSosiologi) {
+        guruSosiologi.innerHTML = dataStrukturOrganisasi.guruSosiologi.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+
+    // 9. GURU BAHASA INDONESIA
+    const guruBindo = document.getElementById('guru-bindo-container');
+    if (guruBindo && dataStrukturOrganisasi.guruBindo) {
+        guruBindo.innerHTML = dataStrukturOrganisasi.guruBindo.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 10. GURU MATEMATIKA
+    const guruMatematika = document.getElementById('guru-matematika-container');
+    if (guruMatematika && dataStrukturOrganisasi.guruMatematika) {
+        guruMatematika.innerHTML = dataStrukturOrganisasi.guruMatematika.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 11. GURU FISIKA
+    const guruFisika = document.getElementById('guru-fisika-container');
+    if (guruFisika && dataStrukturOrganisasi.guruFisika) {
+        guruFisika.innerHTML = dataStrukturOrganisasi.guruFisika.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 12. GURU GEOGRAFI
+    const guruGeografi = document.getElementById('guru-geografi-container');
+    if (guruGeografi && dataStrukturOrganisasi.guruGeografi) {
+        guruGeografi.innerHTML = dataStrukturOrganisasi.guruGeografi.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 13. GURU BAHASA SUNDA
+    const guruBasunda = document.getElementById('guru-basunda-container');
+    if (guruBasunda && dataStrukturOrganisasi.guruBasunda) {
+        guruBasunda.innerHTML = dataStrukturOrganisasi.guruBasunda.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 14. GURU BAHASA INGGRIS
+    const guruBinggris = document.getElementById('guru-binggris-container');
+    if (guruBinggris && dataStrukturOrganisasi.guruBinggris) {
+        guruBinggris.innerHTML = dataStrukturOrganisasi.guruBinggris.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 15. GURU BAHASA JEPANG
+    const guruBajepang = document.getElementById('guru-bajepang-container');
+    if (guruBajepang && dataStrukturOrganisasi.guruBajepang) {
+        guruBajepang.innerHTML = dataStrukturOrganisasi.guruBajepang.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 16. GURU SENI BUDAYA
+    const guruSbdp = document.getElementById('guru-sbdp-container');
+    if (guruSbdp && dataStrukturOrganisasi.guruSbdp) {
+        guruSbdp.innerHTML = dataStrukturOrganisasi.guruSbdp.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 17. GURU AGAMA ISLAM
+    const guruPai = document.getElementById('guru-pai-container');
+    if (guruPai && dataStrukturOrganisasi.guruPai) {
+        guruPai.innerHTML = dataStrukturOrganisasi.guruPai.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 18. GURU AGAMA KRISTEN
+    const guruPakristen = document.getElementById('guru-pakristen-container');
+    if (guruPakristen && dataStrukturOrganisasi.guruPakristen) {
+        guruPakristen.innerHTML = dataStrukturOrganisasi.guruPakristen.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 19. GURU KIMIA
+    const guruKimia = document.getElementById('guru-kimia-container');
+    if (guruKimia && dataStrukturOrganisasi.guruKimia) {
+        guruKimia.innerHTML = dataStrukturOrganisasi.guruKimia.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 20. GURU PPKn
+    const guruPpkn = document.getElementById('guru-ppkn-container');
+    if (guruPpkn && dataStrukturOrganisasi.guruPpkn) {
+        guruPpkn.innerHTML = dataStrukturOrganisasi.guruPpkn.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 21. GURU PJOK
+    const guruPjok = document.getElementById('guru-pjok-container');
+    if (guruPjok && dataStrukturOrganisasi.guruPjok) {
+        guruPjok.innerHTML = dataStrukturOrganisasi.guruPjok.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 22. GURU PRAKARYA
+    const guruPrakarya = document.getElementById('guru-prakarya-container');
+    if (guruPrakarya && dataStrukturOrganisasi.guruPrakarya) {
+        guruPrakarya.innerHTML = dataStrukturOrganisasi.guruPrakarya.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 23. GURU SEJARAH
+    const guruSejarah = document.getElementById('guru-sejarah-container');
+    if (guruSejarah && dataStrukturOrganisasi.guruSejarah) {
+        guruSejarah.innerHTML = dataStrukturOrganisasi.guruSejarah.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 24. GURU EKONOMI
+    const guruEkonomi = document.getElementById('guru-ekonomi-container');
+    if (guruEkonomi && dataStrukturOrganisasi.guruEkonomi) {
+        guruEkonomi.innerHTML = dataStrukturOrganisasi.guruEkonomi.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 25. GURU INFORMATIKA
+    const guruInformatika = document.getElementById('guru-informatika-container');
+    if (guruInformatika && dataStrukturOrganisasi.guruInformatika) {
+        guruInformatika.innerHTML = dataStrukturOrganisasi.guruInformatika.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
+    
+    // 26. PETUGAS KEAMANAN
+    const staffKeamanan = document.getElementById('staff-keamanan-container');
+    if (staffKeamanan && dataStrukturOrganisasi.staffKeamanan) {
+        staffKeamanan.innerHTML = dataStrukturOrganisasi.staffKeamanan.map(s => createPolaroidCard(s, 'staff')).join('');
+    }
+    
+    // PETUGAS KEBERSIHAN
+    const staffKebersihan = document.getElementById('staff-kebersihan-container');
+    if (staffKebersihan && dataStrukturOrganisasi.staffKebersihan) {
+        staffKebersihan.innerHTML = dataStrukturOrganisasi.staffKebersihan.map(s => createPolaroidCard(s, 'staff')).join('');
     }
     
     if (typeof feather !== 'undefined') {
@@ -187,7 +468,22 @@ function loadStrukturOrganisasi() {
     }
 }
 
-// CLOSE MODAL
+// ==================== IMAGE MODAL ====================
+function showImageModal(imgSrc, title, subtitle) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const caption = document.getElementById('modalCaption');
+    
+    if (modal && modalImg) {
+        modal.style.display = 'block';
+        modalImg.src = imgSrc;
+        if (caption) {
+            caption.innerHTML = `<strong>${title}</strong><br>${subtitle}`;
+        }
+        document.body.style.overflow = 'hidden';
+    }
+}
+
 function closeModal() {
     const modal = document.getElementById('imageModal');
     if (modal) {
@@ -196,7 +492,7 @@ function closeModal() {
     }
 }
 
-// INITIALIZATION
+// ==================== INITIALIZATION ====================
 document.addEventListener('DOMContentLoaded', function() {
     const closeBtn = document.querySelector('.close-modal');
     if (closeBtn) {
@@ -213,4 +509,8 @@ document.addEventListener('DOMContentLoaded', function() {
     loadStrukturOrganisasi();
     startCountdown();
     showPage('home');
+    
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
 });
