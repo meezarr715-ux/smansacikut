@@ -313,22 +313,10 @@ function loadStrukturOrganisasi() {
         wakilContainer.innerHTML = dataStrukturOrganisasi.wakilKepala.map(w => createPolaroidCard(w, 'wakil')).join('');
     }
     
-    // 3. KURIKULUM
-    const kurikulumContainer = document.getElementById('kurikulum-container');
-    if (kurikulumContainer && dataStrukturOrganisasi.kurikulum) {
-        kurikulumContainer.innerHTML = dataStrukturOrganisasi.kurikulum.map(k => createPolaroidCard(k, 'kurikulum')).join('');
-    }
-    
     // 4. BK
     const bkContainer = document.getElementById('bk-container');
     if (bkContainer && dataStrukturOrganisasi.bk) {
         bkContainer.innerHTML = dataStrukturOrganisasi.bk.map(b => createPolaroidCard(b, 'bk')).join('');
-    }
-    
-    // 5. KESISWAAN
-    const kesiswaanContainer = document.getElementById('kesiswaan-container');
-    if (kesiswaanContainer && dataStrukturOrganisasi.kesiswaan) {
-        kesiswaanContainer.innerHTML = dataStrukturOrganisasi.kesiswaan.map(k => createPolaroidCard(k, 'kesiswaan')).join('');
     }
     
     // 6. STAF TATA USAHA
@@ -446,16 +434,22 @@ function loadStrukturOrganisasi() {
     }
     
     // 25. GURU INFORMATIKA
-    const guruInformatika = document.getElementById('guru-informatika-container');
-    if (guruInformatika && dataStrukturOrganisasi.guruInformatika) {
-        guruInformatika.innerHTML = dataStrukturOrganisasi.guruInformatika.map(g => createPolaroidCard(g, 'guru')).join('');
-    }
-    
-    // 26. PETUGAS KEAMANAN
-    const staffKeamanan = document.getElementById('staff-keamanan-container');
-    if (staffKeamanan && dataStrukturOrganisasi.staffKeamanan) {
-        staffKeamanan.innerHTML = dataStrukturOrganisasi.staffKeamanan.map(s => createPolaroidCard(s, 'staff')).join('');
-    }
+const guruInformatika = document.getElementById('guru-informatika-container');
+if (guruInformatika && dataStrukturOrganisasi.guruInformatika) {
+    guruInformatika.innerHTML = dataStrukturOrganisasi.guruInformatika.map(g => createPolaroidCard(g, 'guru')).join('');
+}
+
+// TAMBAHAN: GURU BIOLOGI
+const guruBiologi = document.getElementById('guru-biologi-container');
+if (guruBiologi && dataStrukturOrganisasi.guruBiologi) {
+    guruBiologi.innerHTML = dataStrukturOrganisasi.guruBiologi.map(g => createPolaroidCard(g, 'guru')).join('');
+}
+
+// 26. PETUGAS KEAMANAN
+const staffKeamanan = document.getElementById('staff-keamanan-container');
+if (staffKeamanan && dataStrukturOrganisasi.staffKeamanan) {
+    staffKeamanan.innerHTML = dataStrukturOrganisasi.staffKeamanan.map(s => createPolaroidCard(s, 'staff')).join('');
+}
     
     // PETUGAS KEBERSIHAN
     const staffKebersihan = document.getElementById('staff-kebersihan-container');

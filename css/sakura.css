@@ -1,4 +1,4 @@
-/* sakura.css - DENGAN PERBAIKAN POPUP */
+/* sakura.css - LENGKAP */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -163,7 +163,7 @@ body {
     margin: 0;
 }
 
-/* POPUP KELULUSAN - DIPERBAIKI TOTAL */
+/* POPUP KELULUSAN */
 .kelulusan-popup {
     display: none;
     position: fixed;
@@ -663,7 +663,7 @@ body {
     font-style: italic;
 }
 
-/* ========== INFORMASI PAGE - STYLE BARU YANG RAPIH ========== */
+/* INFORMASI PAGE */
 .informasi-page {
     padding: 1.5rem 7%;
 }
@@ -774,15 +774,24 @@ body {
     font-size: 0.9rem;
 }
 
+/* PDF RESPONSIF */
 .pdf-iframe-container {
-    padding: 1rem;
+    position: relative;
+    width: 100%;
+    padding-bottom: 70%;
+    height: 0;
+    overflow: hidden;
     background: #f5f5f5;
 }
 
 .pdf-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border: none;
     border-radius: 10px;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
 }
 
 .pdf-caption {
@@ -790,6 +799,7 @@ body {
     margin-top: 0.8rem;
     font-size: 0.8rem;
     color: #666;
+    padding: 0 1rem 1rem;
 }
 
 .pdf-caption a {
@@ -856,31 +866,6 @@ body {
     margin-bottom: 0.8rem;
     line-height: 1.7;
     font-size: 0.85rem;
-}
-
-/* PDF IFRAME STYLE */
-.pdf-iframe-container {
-    margin-top: 1rem;
-}
-
-.pdf-iframe {
-    width: 100%;
-    height: 600px;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-}
-
-.pdf-caption {
-    text-align: center;
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
-    color: #666;
-}
-
-.pdf-caption a {
-    color: var(--color5);
-    text-decoration: underline;
 }
 
 /* COMING SOON */
@@ -1424,8 +1409,8 @@ body {
         text-align: center;
     }
     
-    .pdf-iframe {
-        height: 350px;
+    .pdf-iframe-container {
+        padding-bottom: 100%;
     }
 }
 

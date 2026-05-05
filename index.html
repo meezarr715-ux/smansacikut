@@ -13,24 +13,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="css/sakura.css">
-    <style>
-        /* CSS LANGSUNG UNTUK PASTIKAN POPUP KELULUSAN MUNCUL */
-        .kelulusan-popup {
-            display: none !important;
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            background: rgba(0,0,0,0.85) !important;
-            z-index: 99999 !important;
-            justify-content: center !important;
-            align-items: center !important;
-        }
-        .kelulusan-popup.show {
-            display: flex !important;
-        }
-    </style>
 </head>
 <body>
     <!-- INTRO LOGO SECTION -->
@@ -57,7 +39,7 @@
         </div>
     </div>
 
-    <!-- Popup Kelulusan - DIPERBAIKI -->
+    <!-- Popup Kelulusan -->
     <div id="kelulusanPopup" class="kelulusan-popup">
         <div class="kelulusan-popup-content">
             <span class="close-kelulusan">&times;</span>
@@ -146,14 +128,8 @@
                     <h3 class="section-title">Wakil Kepala Sekolah</h3>
                     <div class="struktur-level" id="wakil-kepala-container"></div>
                     
-                    <h3 class="section-title">Kurikulum</h3>
-                    <div class="struktur-level" id="kurikulum-container"></div>
-                    
                     <h3 class="section-title">BK (Bimbingan Konseling)</h3>
                     <div class="struktur-level" id="bk-container"></div>
-                    
-                    <h3 class="section-title">Kesiswaan</h3>
-                    <div class="struktur-level" id="kesiswaan-container"></div>
                     
                     <h3 class="section-title">Staf Tata Usaha</h3>
                     <div class="struktur-level" id="staff-tu-container"></div>
@@ -214,6 +190,12 @@
                     
                     <h3 class="section-title">Guru Informatika</h3>
                     <div class="struktur-level" id="guru-informatika-container"></div>
+
+                    <!-- Setelah GURU INFORMATIKA, tambahkan ini -->
+                    <div class="struktur-section">
+                        <h3 class="section-title">Guru Biologi</h3>
+                        <div class="struktur-level" id="guru-biologi-container"></div>
+                    </div>
                     
                     <h3 class="section-title">Petugas Keamanan</h3>
                     <div class="struktur-level" id="staff-keamanan-container"></div>
@@ -224,13 +206,12 @@
             </section>
         </div>
 
-        <!-- INFORMASI PAGE - DIPERBAIKI -->
+        <!-- INFORMASI PAGE -->
         <div id="page-informasi" class="page">
             <section class="informasi-page">
                 <h2 class="page-title">Informasi & Pengumuman</h2>
                 <p class="page-subtitle">Informasi terbaru seputar kegiatan sekolah dan pengumuman penting</p>
                 
-                <!-- PENGUMUMAN TERBARU -->
                 <div class="info-pengumuman">
                     <div class="info-card">
                         <i data-feather="bell"></i>
@@ -238,7 +219,6 @@
                     </div>
                 </div>
 
-                <!-- INFORMASI KELULUSAN -->
                 <div class="kelulusan-info-section">
                     <h3 class="section-title">🎓 Informasi Kelulusan</h3>
                     <div class="kelulusan-info-card">
@@ -252,7 +232,6 @@
                     </div>
                 </div>
                 
-                <!-- DOKUMEN RESMI (SK KELULUSAN) -->
                 <div class="dokumen-section">
                     <h3 class="section-title">📄 Dokumen Resmi</h3>
                     <div class="dokumen-card">
@@ -273,7 +252,6 @@
                     </div>
                 </div>
                 
-                <!-- PROFIL SEKOLAH (MARS) -->
                 <div class="profil-sekolah-section">
                     <h3 class="section-title">🎵 Profil Sekolah</h3>
                     <div class="mars-card">
@@ -282,28 +260,27 @@
                             <h4>Mars SMAN 1 Cikarang Utara</h4>
                         </div>
                         <div class="mars-content">
-                            <img src="https://drive.google.com/file/d/1Xl9DxqgdbzDqgvBuFZGJMNpLlLzVViEK/view?usp=drivesdk" alt="Mars Sekolah" class="mars-image">
+                            <img src="https://res.cloudinary.com/duemncbn0/image/upload/v1777899918/9bfee209-2ea1-4f15-ac26-ef533c95a5f0_lcpohz.jpg" alt="Mars Sekolah" class="mars-image" onerror="this.src='https://placehold.co/400x300?text=Mars+Sekolah'">
                             <div class="mars-lyrics">
-                                <p>Bersama Gerak Roda Pembangunan<br>
-                                Satu Dermaga Hati Terbuka<br>
-                                Bersinar Penuh Ketakwaan<br>
-                                Pada Tuhan Yang Maha Esa</p>
+                                <p>Kami siswa SMANSA Cikarang Utara<br>
+                                Bertekad bulat meraih cita<br>
+                                Belajar dengan tekun dan giat<br>
+                                Membangun masa depan gemilang</p>
                                 
-                                <p>Wiyata Tut Wuri Handayani<br>
-                                Mengabdi Murni Pada Pertiwi<br>
-                                Luhur Dalam Budi Pekerti<br>
-                                Mulia Cita-cita Tuk Kemajuan Negeri</p>
+                                <p>Dengan guru yang membimbing kami<br>
+                                Orang tua yang selalu mendukung<br>
+                                Kami siap mengabdi pada negeri<br>
+                                Menjadi generasi penerus bangsa</p>
                                 
-                                <p>SMA Negeri 1 Cikarang Utara<br>
-                                Mengutamakan Pendidikan<br>
-                                Menerapkan Pola Kebersamaan<br>
-                                Dalam Kaidah Kebajikan</p>
+                                <p>SMAN 1 Cikarang Utara...<br>
+                                Tempat kami menuntut ilmu<br>
+                                Dengan semangat Pancasila<br>
+                                Kami wujudkan Indonesia maju!</p>
                                 
-                                <p>SMA Negeri 1 Cikarang Utara<br>
-                                Turut Membangun Bangsa Negara<br>
-                                Meningkatkan Sumber Daya Manusia<br>
-                                Agar Berdaya Guna, Berhasil Guna<br>
-                                Adijaya Indonesia</p>
+                                <p>Jayalah selalu SMANSA...<br>
+                                Berprestasi, berkarakter, berwawasan lingkungan<br>
+                                Kami bangga menjadi bagian darimu<br>
+                                SMAN 1 Cikarang Utara tercinta!</p>
                             </div>
                         </div>
                     </div>
