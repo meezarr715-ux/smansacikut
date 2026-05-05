@@ -35,7 +35,7 @@ const dataStrukturOrganisasi = {
         { nama: "Adam Husni Gunawan, ST", jabatan: "Staf TU", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1777976413/e6f4a894-9866-49ca-bdec-c54b1e77b2f3_kdhuxg.jpg" },
         { nama: "Ade Saputra", jabatan: "Kepala TU", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1777976517/0fba2b01-e0e1-4104-982f-4f06048fcf24_itdbod.jpg" },
         { nama: "Sindi Maudina", jabatan: "Staf TU", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1777976408/dcd16cd1-d33c-4ca6-b38a-f13aac2a6ad2_oisle3.jpg" },
-        { nama: "Sri joko Waluyo", jabatan: "Staf TU", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1777976403/cedc8460-6809-452c-90e3-40148b1b17f7_xxy3mv.jpg" },
+        { nama: "Sri joko Waluyo", jabatan: "Staf TU", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1777976408/dcd16cd1-d33c-4ca6-b38a-f13aac2a6ad2_oisle3.jpg" },
         { nama: "Rosikin", jabatan: "Staf TU", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1777976403/cedc8460-6809-452c-90e3-40148b1b17f7_xxy3mv.jpg" },
         { nama: "Pian Sopian", jabatan: "Staf TU", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1777976472/6f05e323-664e-4c56-9d93-3dee8c232a9c_bxm85m.jpg" },
         { nama: "Subiyanti", jabatan: "Staf TU", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1777976405/2e9a3df5-0c15-4aab-a51d-6f95e85e1e4f_fusslv.jpg" },
