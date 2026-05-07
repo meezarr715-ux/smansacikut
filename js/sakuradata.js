@@ -15,6 +15,7 @@ const dataStrukturOrganisasi = {
     // 2. WAKIL KEPALA SEKOLAH
     wakilKepala: [
         { nama: "Durisa Afrindah, S.Pd.", jabatan: "Waka Kurikulum", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1777976146/d88d7a8a-f872-4b87-8991-6e5c6189c8f1_mtyxt3.jpg" },
+        { nama: "Dadi Setiadi, S.Pd.", mapel: "PJOK", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1777972631/5bced4d7-160e-43c3-ac61-8b60c7f3a607_fh9djt.jpg" },
         { nama: "Fifit Fitriani, S.Pd.", jabatan: "Waka Kesiswaan", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1777976142/d5ac6ebd-c53c-4da7-8416-9c43d791b490_dn6def.jpg" },
         { nama: "Fikri Haekal Anwar, S.Pd.", jabatan: "Waka Sarpras", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1777976141/1d80f33e-58c7-4896-8bc3-36d20ab3484d_epejzg.jpg" },
         { nama: "Ruslan, S.Pd.", jabatan: "Waka Humas", foto: "https://res.cloudinary.com/duemncbn0/image/upload/v1777976150/b6b0918a-243f-4792-a11e-69cc311f2dec_ykckjk.jpg" },

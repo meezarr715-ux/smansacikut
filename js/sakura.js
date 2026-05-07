@@ -508,3 +508,25 @@ document.addEventListener('DOMContentLoaded', function() {
         feather.replace();
     }
 });
+
+// SKIP INTRO DENGAN KLIK ATAU TAP
+function skipIntro() {
+    const introScreen = document.getElementById('introScreen');
+    if (introScreen && !introScreen.classList.contains('hide')) {
+        introScreen.classList.add('hide');
+        setTimeout(function() {
+            introScreen.style.display = 'none';
+        }, 500);
+    }
+}
+
+// Event listener untuk skip intro
+document.addEventListener('click', function(e) {
+    // Skip intro jika diklik di mana saja
+    skipIntro();
+});
+
+// Juga bisa skip dengan touch untuk mobile
+document.addEventListener('touchstart', function(e) {
+    skipIntro();
+});
