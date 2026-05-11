@@ -1,4 +1,4 @@
-// sakura.js - DIPERBAIKI UNTUK POPUP
+// sakura.js - POPUP KELULUSAN SUDAH DIHAPUS
 // ==================== DISABLE RIGHT CLICK & SHORTCUT KEYS ====================
 document.addEventListener("contextmenu", function(e) {
     e.preventDefault();
@@ -20,7 +20,6 @@ document.addEventListener("keydown", function(e) {
     // ESC untuk menutup modal
     if (e.key === "Escape") {
         closeModal();
-        closeKelulusanPopup();
     }
 });
 
@@ -62,54 +61,7 @@ window.addEventListener('load', function() {
         }
     }, 3000);
     
-    // PERBAIKAN POPUP KELULUSAN - HARUS MUNCUL
-    setTimeout(function() {
-        const kelulusanPopup = document.getElementById('kelulusanPopup');
-        console.log("Popup kelulusan element:", kelulusanPopup);
-        console.log("localStorage check:", localStorage.getItem('kelulusanShown'));
-        
-        if (kelulusanPopup) {
-            // Hapus dulu kelas show jika ada
-            kelulusanPopup.classList.remove('show');
-            // Force reflow
-            void kelulusanPopup.offsetWidth;
-            // Tambah kelas show
-            kelulusanPopup.classList.add('show');
-            console.log("Popup should be visible now");
-            
-            // Simpan ke localStorage agar tidak muncul lagi setelah refresh
-            if (!localStorage.getItem('kelulusanShown')) {
-                localStorage.setItem('kelulusanShown', 'true');
-            }
-        } else {
-            console.error("Popup element not found!");
-        }
-    }, 4000);
-});
-
-// ==================== CLOSE KELULUSAN POPUP ====================
-function closeKelulusanPopup() {
-    const kelulusanPopup = document.getElementById('kelulusanPopup');
-    if (kelulusanPopup) {
-        kelulusanPopup.classList.remove('show');
-        console.log("Popup closed");
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const closeKelulusan = document.querySelector('.close-kelulusan');
-    if (closeKelulusan) {
-        closeKelulusan.addEventListener('click', closeKelulusanPopup);
-    }
-    
-    const kelulusanPopup = document.getElementById('kelulusanPopup');
-    if (kelulusanPopup) {
-        kelulusanPopup.addEventListener('click', function(e) {
-            if (e.target === kelulusanPopup) {
-                closeKelulusanPopup();
-            }
-        });
-    }
+    // POPUP KELULUSAN TELAH DIHAPUS
 });
 
 // ==================== PDF VIEWER ====================
@@ -287,7 +239,7 @@ function createPolaroidCard(item, type) {
     `;
 }
 
-// ==================== LOAD STRUKTUR (26 POSISI) ====================
+// ==================== LOAD STRUKTUR ====================
 function loadStrukturOrganisasi() {
     // Sambutan
     const sambutanCard = document.getElementById('sambutan-card');
@@ -434,22 +386,22 @@ function loadStrukturOrganisasi() {
     }
     
     // 25. GURU INFORMATIKA
-const guruInformatika = document.getElementById('guru-informatika-container');
-if (guruInformatika && dataStrukturOrganisasi.guruInformatika) {
-    guruInformatika.innerHTML = dataStrukturOrganisasi.guruInformatika.map(g => createPolaroidCard(g, 'guru')).join('');
-}
+    const guruInformatika = document.getElementById('guru-informatika-container');
+    if (guruInformatika && dataStrukturOrganisasi.guruInformatika) {
+        guruInformatika.innerHTML = dataStrukturOrganisasi.guruInformatika.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
 
-// TAMBAHAN: GURU BIOLOGI
-const guruBiologi = document.getElementById('guru-biologi-container');
-if (guruBiologi && dataStrukturOrganisasi.guruBiologi) {
-    guruBiologi.innerHTML = dataStrukturOrganisasi.guruBiologi.map(g => createPolaroidCard(g, 'guru')).join('');
-}
+    // GURU BIOLOGI
+    const guruBiologi = document.getElementById('guru-biologi-container');
+    if (guruBiologi && dataStrukturOrganisasi.guruBiologi) {
+        guruBiologi.innerHTML = dataStrukturOrganisasi.guruBiologi.map(g => createPolaroidCard(g, 'guru')).join('');
+    }
 
-// 26. PETUGAS KEAMANAN
-const staffKeamanan = document.getElementById('staff-keamanan-container');
-if (staffKeamanan && dataStrukturOrganisasi.staffKeamanan) {
-    staffKeamanan.innerHTML = dataStrukturOrganisasi.staffKeamanan.map(s => createPolaroidCard(s, 'staff')).join('');
-}
+    // 26. PETUGAS KEAMANAN
+    const staffKeamanan = document.getElementById('staff-keamanan-container');
+    if (staffKeamanan && dataStrukturOrganisasi.staffKeamanan) {
+        staffKeamanan.innerHTML = dataStrukturOrganisasi.staffKeamanan.map(s => createPolaroidCard(s, 'staff')).join('');
+    }
     
     // PETUGAS KEBERSIHAN
     const staffKebersihan = document.getElementById('staff-kebersihan-container');
@@ -522,7 +474,6 @@ function skipIntro() {
 
 // Event listener untuk skip intro
 document.addEventListener('click', function(e) {
-    // Skip intro jika diklik di mana saja
     skipIntro();
 });
 
