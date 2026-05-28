@@ -1,4 +1,5 @@
-/* sakura.css - LENGKAP */
+/* sakura.css - LENGKAP DENGAN HAMBURGER MENU */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
@@ -156,7 +157,122 @@ body {
     margin: 0;
 }
 
-/* NAVBAR */
+/* POPUP PETA PELUANG */
+.peta-peluang-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    z-index: 20000;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.peta-peluang-popup.show {
+    display: flex;
+}
+
+.peta-peluang-popup-content {
+    background: linear-gradient(135deg, #1a1f2e, #2a2f45);
+    border-radius: 20px;
+    max-width: 90%;
+    width: 380px;
+    max-height: 85vh;
+    position: relative;
+    animation: popupSlidePeta 0.2s ease-out;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    border: 1px solid rgba(244, 209, 96, 0.3);
+    cursor: default;
+    overflow: hidden;
+}
+
+@keyframes popupSlidePeta {
+    from { transform: translateY(-30px) scale(0.95); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.close-peta-popup {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: rgba(255,255,255,0.8);
+    transition: 0.2s;
+    z-index: 1;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.5);
+}
+
+.close-peta-popup:hover {
+    color: var(--color5);
+    background: rgba(0,0,0,0.7);
+    transform: rotate(90deg);
+}
+
+.peta-peluang-popup-body {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.peta-peluang-popup-img {
+    width: 100%;
+    height: auto;
+    max-height: 50vh;
+    object-fit: contain;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.peta-peluang-popup-text {
+    text-align: center;
+}
+
+.peta-peluang-popup-text h2 {
+    color: var(--color5);
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+
+.peta-peluang-popup-text h3 {
+    color: white;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.peta-peluang-btn {
+    background: linear-gradient(135deg, var(--color5), var(--color1));
+    color: var(--color6);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: 5px;
+    border: none;
+}
+
+.peta-peluang-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(244, 209, 96, 0.4);
+}
+
+/* NAVBAR - HAMBURGER MENU WAJIB ADA DI HP */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -253,6 +369,52 @@ body {
 #hamburger-menu {
     display: none;
     cursor: pointer;
+}
+
+/* RESPONSIVE BREAKPOINTS - HAMBURGER MUNCUL DI HP/TABLET */
+@media (max-width: 1024px) {
+    .navbar .navbar-nav a { font-size: 0.8rem; margin: 0 0.5rem; }
+}
+
+@media (max-width: 768px) {
+    #hamburger-menu { 
+        display: inline-block; 
+    }
+
+    .navbar .navbar-nav {
+        position: absolute;
+        top: 100%;
+        right: -100%;
+        background: #0b0e14;
+        width: 65%;
+        max-width: 260px;
+        height: 100vh;
+        flex-direction: column;
+        transition: 0.3s ease;
+        padding: 1rem 0;
+    }
+
+    .navbar .navbar-nav.active { 
+        right: 0; 
+    }
+
+    .navbar .navbar-nav a {
+        display: block;
+        margin: 0.5rem 1.5rem;
+        padding: 0.5rem;
+        font-size: 0.95rem;
+        text-align: left;
+    }
+    
+    .navbar .navbar-nav a::after { 
+        display: none; 
+    }
+    
+    .navbar .navbar-nav a:hover {
+        background: rgba(244, 209, 96, 0.1);
+        border-radius: 8px;
+        padding-left: 1rem;
+    }
 }
 
 /* PAGES */
@@ -883,121 +1045,6 @@ body {
     color: rgba(255,255,255,0.6);
 }
 
-/* ==================== POPUP PETA PELUANG ==================== */
-.peta-peluang-popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.85);
-    z-index: 20000;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-.peta-peluang-popup.show {
-    display: flex;
-}
-
-.peta-peluang-popup-content {
-    background: linear-gradient(135deg, #1a1f2e, #2a2f45);
-    border-radius: 20px;
-    max-width: 90%;
-    width: 380px;
-    max-height: 85vh;
-    position: relative;
-    animation: popupSlidePeta 0.2s ease-out;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    border: 1px solid rgba(244, 209, 96, 0.3);
-    cursor: default;
-    overflow: hidden;
-}
-
-@keyframes popupSlidePeta {
-    from { transform: translateY(-30px) scale(0.95); opacity: 0; }
-    to { transform: translateY(0) scale(1); opacity: 1; }
-}
-
-.close-peta-popup {
-    position: absolute;
-    top: 10px;
-    right: 12px;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-    color: rgba(255,255,255,0.8);
-    transition: 0.2s;
-    z-index: 1;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.5);
-}
-
-.close-peta-popup:hover {
-    color: var(--color5);
-    background: rgba(0,0,0,0.7);
-    transform: rotate(90deg);
-}
-
-.peta-peluang-popup-body {
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
-    max-height: 85vh;
-    overflow-y: auto;
-}
-
-.peta-peluang-popup-img {
-    width: 100%;
-    height: auto;
-    max-height: 50vh;
-    object-fit: contain;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-.peta-peluang-popup-text {
-    text-align: center;
-}
-
-.peta-peluang-popup-text h2 {
-    color: var(--color5);
-    font-size: 1.1rem;
-    margin-bottom: 4px;
-}
-
-.peta-peluang-popup-text h3 {
-    color: white;
-    font-size: 0.8rem;
-    margin-bottom: 10px;
-}
-
-.peta-peluang-btn {
-    background: linear-gradient(135deg, var(--color5), var(--color1));
-    color: var(--color6);
-    padding: 8px 16px;
-    border-radius: 50px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s;
-    margin-top: 5px;
-    border: none;
-}
-
-.peta-peluang-btn:hover {
-    transform: scale(1.02);
-    box-shadow: 0 5px 15px rgba(244, 209, 96, 0.4);
-}
-
 /* ==================== SPMB PAGE V3 ==================== */
 .spmb-page-v3 {
     padding: 1rem 7%;
@@ -1171,7 +1218,6 @@ body {
     margin-right: auto;
 }
 
-/* KUOTA DAN JALUR SPMB */
 .kuota-jalur-section {
     background: linear-gradient(135deg, #1a1f2e, #2a2f45);
     border-radius: 20px;
@@ -1205,7 +1251,6 @@ body {
 .kuota-detail { display: flex; flex-direction: column; gap: 0.2rem; }
 .kuota-detail span { font-size: 0.65rem; color: rgba(255,255,255,0.7); }
 
-/* PROSENTASE PENILAIAN JALUR PRESTASI */
 .penilaian-prestasi-section { margin-bottom: 1.5rem; }
 .penilaian-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 .penilaian-card { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 1rem; }
@@ -1216,7 +1261,6 @@ body {
 .penilaian-sub { margin-top: 0.3rem; padding: 0.3rem; background: rgba(76,201,254,0.1); border-radius: 8px; text-align: center; }
 .penilaian-sub span { font-size: 0.6rem; color: var(--color1); }
 
-/* TAHAPAN SPMB */
 .tahapan-spmb-section { margin-bottom: 1.5rem; }
 .tahapan-spmb-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
 .tahapan-spmb-card { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 1rem; }
@@ -1225,7 +1269,6 @@ body {
 .tahapan-item span:first-child { font-size: 0.65rem; color: rgba(255,255,255,0.8); }
 .tahapan-persen { font-size: 0.65rem; font-weight: 700; color: var(--color1); }
 
-/* TUJUAN PCMB */
 .tujuan-grid-v3 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1265,7 +1308,6 @@ body {
     left: 0;
 }
 
-/* TAHAPAN PCMB */
 .tahapan-pcmb-v3 {
     background: rgba(0,0,0,0.3);
     border-radius: 20px;
@@ -1319,7 +1361,6 @@ body {
     color: var(--color5);
 }
 
-/* HASIL PCMB */
 .hasil-info-v3 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1359,7 +1400,6 @@ body {
     left: 0;
 }
 
-/* PERSYARATAN */
 .persyaratan-section-v3 {
     margin-bottom: 1.5rem;
 }
@@ -1396,7 +1436,6 @@ body {
     margin: 0;
 }
 
-/* AFIRMASI KETM */
 .afirmasi-section-v3 {
     background: linear-gradient(135deg, rgba(244,209,96,0.15), rgba(76,201,254,0.1));
     border-radius: 16px;
@@ -1439,7 +1478,6 @@ body {
     font-weight: 600;
 }
 
-/* SETELAH HASIL KELUAR */
 .hasil-keluar-v3 {
     margin-bottom: 1.5rem;
 }
@@ -1494,7 +1532,6 @@ body {
     padding: 0.25rem 0;
 }
 
-/* INFO PENDAFTARAN */
 .info-pendaftaran-v3 {
     background: linear-gradient(135deg, #1a1f2e 0%, #2a2f45 100%);
     border-radius: 20px;
@@ -1542,7 +1579,6 @@ body {
     margin-top: 0.5rem;
 }
 
-/* REKOMENDASI */
 .rekomendasi-v3 {
     display: flex;
     gap: 0.8rem;
@@ -1596,7 +1632,6 @@ body {
 @media (max-width: 480px) {
     .kuota-jalur-grid,
     .tahapan-spmb-grid { grid-template-columns: 1fr; }
-    .kuota-card { margin-bottom: 0.5rem; }
     .hero .content h1 { font-size: 1.5rem; }
     .coming-soon-content { padding: 1.5rem; }
     .struktur-level { grid-template-columns: 1fr; }

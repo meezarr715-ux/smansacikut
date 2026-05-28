@@ -1,4 +1,4 @@
-// sakura.js - LENGKAP
+// sakura.js - LENGKAP DENGAN HAMBURGER MENU
 document.addEventListener("contextmenu", function(e) { e.preventDefault(); });
 
 document.addEventListener("keydown", function(e) {
@@ -9,9 +9,17 @@ document.addEventListener("keydown", function(e) {
     if (e.key === "Escape") { closeModal(); closePetaPeluangPopup(); }
 });
 
+// HAMBURGER MENU - WAJIB ADA
 const navbarNav = document.querySelector('.navbar-nav');
 const hamburgerMenu = document.querySelector('#hamburger-menu');
-if (hamburgerMenu) { hamburgerMenu.onclick = () => { navbarNav.classList.toggle('active'); }; }
+
+if (hamburgerMenu) {
+    hamburgerMenu.onclick = () => {
+        navbarNav.classList.toggle('active');
+    };
+}
+
+// Tutup hamburger menu saat klik di luar
 document.addEventListener('click', function(e) {
     if (navbarNav && hamburgerMenu && !hamburgerMenu.contains(e.target) && !navbarNav.contains(e.target)) {
         navbarNav.classList.remove('active');
@@ -28,7 +36,7 @@ function closePetaPopupOnOutsideClick(event) {
     if (popup && popup.classList.contains('show') && !popupContent.contains(event.target)) closePetaPeluangPopup();
 }
 
-// INTRO SCREEN - KECEPATAN NORMAL
+// INTRO SCREEN
 window.addEventListener('load', function() {
     const introScreen = document.getElementById('introScreen');
     if (introScreen) {
@@ -38,7 +46,6 @@ window.addEventListener('load', function() {
             setTimeout(() => { showPetaPeluangPopup(); }, 300);
         }, 3000);
     }
-    // WELCOME POPUP
     setTimeout(() => {
         const wp = document.getElementById('welcomePopup');
         if (wp) { wp.classList.add('show'); setTimeout(() => wp.classList.remove('show'), 5000); }
