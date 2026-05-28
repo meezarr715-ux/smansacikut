@@ -1,5 +1,4 @@
-/* sakura.css - LENGKAP DENGAN PERBAIKAN LOGO */
-
+/* sakura.css - LENGKAP */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
@@ -65,14 +64,8 @@ body {
 }
 
 @keyframes introZoom {
-    0% {
-        transform: scale(0.3);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+    0% { transform: scale(0.3); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 .intro-logo {
@@ -163,7 +156,7 @@ body {
     margin: 0;
 }
 
-/* NAVBAR - PERBAIKAN LOGO */
+/* NAVBAR */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -260,45 +253,6 @@ body {
 #hamburger-menu {
     display: none;
     cursor: pointer;
-}
-
-@media (max-width: 1024px) {
-    .navbar .navbar-nav a { font-size: 0.8rem; margin: 0 0.5rem; }
-}
-
-@media (max-width: 768px) {
-    #hamburger-menu { display: inline-block; }
-
-    .navbar .navbar-nav {
-        position: absolute;
-        top: 100%;
-        right: -100%;
-        background: #0b0e14;
-        width: 65%;
-        max-width: 260px;
-        height: 100vh;
-        flex-direction: column;
-        transition: 0.3s ease;
-        padding: 1rem 0;
-    }
-
-    .navbar .navbar-nav.active { right: 0; }
-
-    .navbar .navbar-nav a {
-        display: block;
-        margin: 0.5rem 1.5rem;
-        padding: 0.5rem;
-        font-size: 0.95rem;
-        text-align: left;
-    }
-    
-    .navbar .navbar-nav a::after { display: none; }
-    
-    .navbar .navbar-nav a:hover {
-        background: rgba(244, 209, 96, 0.1);
-        border-radius: 8px;
-        padding-left: 1rem;
-    }
 }
 
 /* PAGES */
@@ -504,99 +458,10 @@ body {
     font-style: italic;
 }
 
-/* STRUKTUR - POLAROID STYLE */
-.struktur-section {
-    max-width: 1300px;
-    margin: 0 auto;
-}
-
-.struktur-level {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2.5rem;
-}
-
-/* Polaroid Card Style */
-.polaroid-card {
-    background: white;
-    padding: 1rem 1rem 1.5rem 1rem;
-    border-radius: 8px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-    cursor: pointer;
-}
-
-.polaroid-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-}
-
-.polaroid-photo {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-}
-
-.polaroid-card h4 {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--primary);
-    margin-bottom: 0.3rem;
-}
-
-.polaroid-card .jabatan {
-    font-size: 0.75rem;
-    color: var(--color3);
-    margin-bottom: 0.2rem;
-}
-
-.polaroid-card .mapel {
-    font-size: 0.7rem;
-    color: #888;
-    font-style: italic;
-}
-
-/* INFORMASI PAGE */
-.informasi-page {
-    padding: 1.5rem 7%;
-}
-
-.info-pengumuman {
+/* MARS SECTION */
+.mars-section {
     max-width: 1000px;
     margin: 0 auto 2rem;
-}
-
-.info-card {
-    background: linear-gradient(135deg, var(--color5), var(--color1));
-    border-radius: 15px;
-    padding: 1rem 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.info-card i {
-    width: 30px;
-    height: 30px;
-    color: var(--color6);
-    flex-shrink: 0;
-}
-
-.info-card p {
-    color: var(--color6);
-    font-weight: 500;
-    font-size: 0.95rem;
-    margin: 0;
-}
-
-.profil-sekolah-section {
-    max-width: 1000px;
-    margin: 0 auto;
 }
 
 .mars-card {
@@ -652,6 +517,61 @@ body {
     margin-bottom: 0.8rem;
     line-height: 1.7;
     font-size: 0.85rem;
+}
+
+/* STRUKTUR */
+.struktur-section {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.struktur-level {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.polaroid-card {
+    background: white;
+    padding: 1rem 1rem 1.5rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+}
+
+.polaroid-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.polaroid-photo {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.polaroid-card h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+}
+
+.polaroid-card .jabatan {
+    font-size: 0.75rem;
+    color: var(--color3);
+    margin-bottom: 0.2rem;
+}
+
+.polaroid-card .mapel {
+    font-size: 0.7rem;
+    color: #888;
+    font-style: italic;
 }
 
 /* COMING SOON */
@@ -731,9 +651,9 @@ body {
 
 .kontak-container {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
-    max-width: 600px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
@@ -788,6 +708,74 @@ body {
 }
 
 .kontak-item:hover {
+    background: var(--color5);
+    transform: translateX(3px);
+}
+
+.developer-profiles {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.developer-profile {
+    text-align: center;
+}
+
+.developer-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+    border: 3px solid var(--color5);
+}
+
+.developer-profile h4 {
+    color: var(--primary);
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+}
+
+.developer-role {
+    color: #666;
+    font-size: 0.7rem;
+}
+
+.developer-contact {
+    background: rgba(244, 209, 96, 0.1);
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin: 0.8rem 0;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.developer-sosial h4 {
+    color: var(--color3);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.sosial-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.sosial-text a {
+    color: var(--color6);
+    padding: 0.3rem;
+    background: rgba(244, 209, 96, 0.1);
+    border-radius: 5px;
+    transition: 0.2s;
+    display: block;
+    font-size: 0.75rem;
+}
+
+.sosial-text a:hover {
     background: var(--color5);
     transform: translateX(3px);
 }
@@ -922,7 +910,7 @@ body {
     color: rgba(255,255,255,0.6);
 }
 
-/* ==================== POPUP PETA PELUANG - RESPONSIVE ==================== */
+/* ==================== POPUP PETA PELUANG ==================== */
 .peta-peluang-popup {
     display: none;
     position: fixed;
@@ -956,14 +944,8 @@ body {
 }
 
 @keyframes popupSlidePeta {
-    from {
-        transform: translateY(-30px) scale(0.95);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
+    from { transform: translateY(-30px) scale(0.95); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
 }
 
 .close-peta-popup {
@@ -1203,6 +1185,74 @@ body {
     margin: 0;
 }
 
+.section-title-v3 {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--color5);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color5);
+    display: inline-block;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* KUOTA DAN JALUR SPMB */
+.kuota-jalur-section {
+    background: linear-gradient(135deg, #1a1f2e, #2a2f45);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(244, 209, 96, 0.3);
+}
+
+.kuota-jalur-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.kuota-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.kuota-card.prestasi { border-top: 4px solid #F4D160; }
+.kuota-card.domisili { border-top: 4px solid #4CC9FE; }
+.kuota-card.afirmasi { border-top: 4px solid #2ECC71; }
+.kuota-card.mutasi { border-top: 4px solid #E74C3C; }
+
+.kuota-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.kuota-name { font-size: 0.9rem; font-weight: 700; color: var(--color5); margin-bottom: 0.3rem; }
+.kuota-persen { font-size: 1.3rem; font-weight: 800; color: white; margin-bottom: 0.5rem; }
+.kuota-detail { display: flex; flex-direction: column; gap: 0.2rem; }
+.kuota-detail span { font-size: 0.65rem; color: rgba(255,255,255,0.7); }
+
+/* PROSENTASE PENILAIAN JALUR PRESTASI */
+.penilaian-prestasi-section { margin-bottom: 1.5rem; }
+.penilaian-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.penilaian-card { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 1rem; }
+.penilaian-card h4 { font-size: 0.85rem; color: var(--color5); margin-bottom: 0.8rem; text-align: center; padding-bottom: 0.3rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.penilaian-item { display: flex; justify-content: space-between; align-items: center; padding: 0.3rem 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+.penilaian-label { font-size: 0.7rem; color: rgba(255,255,255,0.8); }
+.penilaian-value { font-size: 0.7rem; font-weight: 700; color: var(--color5); }
+.penilaian-sub { margin-top: 0.3rem; padding: 0.3rem; background: rgba(76,201,254,0.1); border-radius: 8px; text-align: center; }
+.penilaian-sub span { font-size: 0.6rem; color: var(--color1); }
+
+/* TAHAPAN SPMB */
+.tahapan-spmb-section { margin-bottom: 1.5rem; }
+.tahapan-spmb-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.tahapan-spmb-card { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 1rem; }
+.tahapan-spmb-card h4 { font-size: 0.8rem; color: var(--color5); margin-bottom: 0.8rem; text-align: center; }
+.tahapan-item { display: flex; justify-content: space-between; align-items: center; padding: 0.3rem 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+.tahapan-item span:first-child { font-size: 0.65rem; color: rgba(255,255,255,0.8); }
+.tahapan-persen { font-size: 0.65rem; font-weight: 700; color: var(--color1); }
+
+/* TUJUAN PCMB */
 .tujuan-grid-v3 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1242,64 +1292,7 @@ body {
     left: 0;
 }
 
-.jalur-section-v3 {
-    margin-bottom: 1.5rem;
-}
-
-.jalur-title-v3 {
-    font-size: 1rem;
-    color: var(--color5);
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-.jalur-grid-v3 {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-}
-
-.jalur-card-v3 {
-    background: rgba(255,255,255,0.05);
-    border-radius: 16px;
-    padding: 1rem;
-    text-align: center;
-    transition: all 0.2s ease;
-}
-
-.jalur-card-v3:hover {
-    transform: translateY(-3px);
-    background: rgba(244, 209, 96, 0.1);
-}
-
-.jalur-icon-v3 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-}
-
-.jalur-card-v3 h4 {
-    font-size: 0.85rem;
-    color: var(--color5);
-    margin-bottom: 0.5rem;
-}
-
-.jalur-card-v3 p {
-    font-size: 0.7rem;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
-}
-
-.jalur-kuota-v3 {
-    font-size: 0.65rem;
-    color: var(--color1);
-    font-weight: 600;
-    background: rgba(76,201,254,0.2);
-    display: inline-block;
-    padding: 0.2rem 0.6rem;
-    border-radius: 20px;
-}
-
+/* TAHAPAN PCMB */
 .tahapan-pcmb-v3 {
     background: rgba(0,0,0,0.3);
     border-radius: 20px;
@@ -1353,6 +1346,7 @@ body {
     color: var(--color5);
 }
 
+/* HASIL PCMB */
 .hasil-info-v3 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1392,6 +1386,7 @@ body {
     left: 0;
 }
 
+/* PERSYARATAN */
 .persyaratan-section-v3 {
     margin-bottom: 1.5rem;
 }
@@ -1428,6 +1423,7 @@ body {
     margin: 0;
 }
 
+/* AFIRMASI KETM */
 .afirmasi-section-v3 {
     background: linear-gradient(135deg, rgba(244,209,96,0.15), rgba(76,201,254,0.1));
     border-radius: 16px;
@@ -1470,6 +1466,7 @@ body {
     font-weight: 600;
 }
 
+/* SETELAH HASIL KELUAR */
 .hasil-keluar-v3 {
     margin-bottom: 1.5rem;
 }
@@ -1524,11 +1521,11 @@ body {
     padding: 0.25rem 0;
 }
 
-/* Info Pendaftaran */
+/* INFO PENDAFTARAN */
 .info-pendaftaran-v3 {
     background: linear-gradient(135deg, #1a1f2e 0%, #2a2f45 100%);
     border-radius: 20px;
-    padding: 1.2rem;
+    padding: 1.5rem;
     text-align: center;
     margin-bottom: 1.5rem;
     border: 1px solid rgba(244, 209, 96, 0.3);
@@ -1541,7 +1538,7 @@ body {
 }
 
 .info-pendaftaran-v3 p {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: rgba(255,255,255,0.8);
     margin-bottom: 0.5rem;
 }
@@ -1552,10 +1549,10 @@ body {
     gap: 0.5rem;
     background: linear-gradient(135deg, var(--color5), var(--color1));
     color: var(--color6);
-    padding: 0.6rem 1.2rem;
+    padding: 0.7rem 1.5rem;
     border-radius: 40px;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     transition: all 0.2s ease;
     text-decoration: none;
     margin: 0.5rem 0;
@@ -1566,73 +1563,13 @@ body {
     box-shadow: 0 5px 20px rgba(244, 209, 96, 0.4);
 }
 
-/* QR SEDERHANA - PERSEGI PUTIH */
-.qr-sederhana {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0.8rem 0;
-}
-
-.qr-kotak {
-    background: white;
-    padding: 12px;
-    border-radius: 12px;
-    display: inline-block;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.qr-gambar {
-    width: 100px;
-    height: 100px;
-    display: block;
-    object-fit: contain;
-}
-
-.qr-teks {
-    font-size: 0.6rem;
-    color: rgba(255,255,255,0.7);
-    margin-top: 0.5rem;
-    margin-bottom: 0;
-}
-
-.info-catatan {
-    font-size: 0.6rem;
-    color: #FFC107;
-    margin-top: 0.5rem;
-    margin-bottom: 0;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .qr-gambar {
-        width: 85px;
-        height: 85px;
-    }
-    
-    .qr-kotak {
-        padding: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .qr-gambar {
-        width: 75px;
-        height: 75px;
-    }
-    
-    .qr-kotak {
-        padding: 8px;
-    }
-}
-
 .info-catatan {
     font-size: 0.65rem;
     color: #FFC107;
     margin-top: 0.5rem;
 }
 
+/* REKOMENDASI */
 .rekomendasi-v3 {
     display: flex;
     gap: 0.8rem;
@@ -1657,6 +1594,7 @@ body {
     color: var(--color5);
 }
 
+/* PRINSIP SPMB */
 .prinsip-v3 {
     background: linear-gradient(135deg, rgba(244,209,96,0.1), rgba(76,201,254,0.05));
     border-radius: 16px;
@@ -1684,123 +1622,35 @@ body {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-    .spmb-page-v3 {
-        padding: 1rem 4%;
-    }
-    
-    .spmb-header-v3 {
-        padding: 1.5rem;
-    }
-    
-    .spmb-header-v3 h1 {
-        font-size: 1.5rem;
-    }
-    
-    .jalur-grid-v3 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
+    .spmb-page-v3 { padding: 1rem 4%; }
+    .spmb-header-v3 { padding: 1.5rem; }
+    .spmb-header-v3 h1 { font-size: 1.5rem; }
+    .kuota-jalur-grid { grid-template-columns: repeat(2, 1fr); }
+    .penilaian-grid { grid-template-columns: 1fr; }
+    .tahapan-spmb-grid { grid-template-columns: repeat(2, 1fr); }
     .tujuan-grid-v3,
     .hasil-info-v3,
-    .hasil-keluar-grid-v3 {
-        grid-template-columns: 1fr;
-    }
-    
-    .persyaratan-grid-v3 {
-        grid-template-columns: 1fr;
-    }
-    
-    .tahapan-steps-v3 {
-        flex-direction: column;
-    }
-    
-    .step-arrow-v3 {
-        transform: rotate(90deg);
-    }
-    
-    .timeline-v3 {
-        padding-left: 1rem;
-    }
-    
-    .qr-image {
-        width: 100px;
-        height: 100px;
-    }
-    
-    .peta-peluang-popup-content {
-        width: 85%;
-        max-width: 320px;
-        max-height: 80vh;
-    }
-    
-    .peta-peluang-popup-body {
-        padding: 12px;
-    }
-    
-    .peta-peluang-popup-img {
-        max-height: 40vh;
-    }
-    
+    .hasil-keluar-grid-v3 { grid-template-columns: 1fr; }
+    .persyaratan-grid-v3 { grid-template-columns: 1fr; }
+    .tahapan-steps-v3 { flex-direction: column; }
+    .step-arrow-v3 { transform: rotate(90deg); }
+    .timeline-v3 { padding-left: 1rem; }
+    .kontak-container { grid-template-columns: 1fr; }
+    .developer-profiles { flex-direction: column; align-items: center; }
     .hero .content h1 { font-size: 2rem; }
-    .hero .content p { font-size: 1rem; }
     .page-title { font-size: 1.8rem; }
     .visi-misi-container { grid-template-columns: 1fr; }
+    .struktur-level { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
     .welcome-popup.show { top: 70px; }
     .mars-content { flex-direction: column; align-items: center; }
     .mars-lyrics { text-align: center; }
 }
 
 @media (max-width: 480px) {
-    .peta-peluang-popup-content {
-        width: 90%;
-        max-width: 280px;
-        max-height: 75vh;
-    }
-    
-    .peta-peluang-popup-img {
-        max-height: 35vh;
-    }
-    
-    .peta-peluang-popup-text h2 {
-        font-size: 0.85rem;
-    }
-    
-    .peta-peluang-popup-text h3 {
-        font-size: 0.65rem;
-    }
-    
-    .peta-peluang-btn {
-        padding: 5px 12px;
-        font-size: 0.65rem;
-    }
-    
-    .close-peta-popup {
-        top: 8px;
-        right: 10px;
-        width: 24px;
-        height: 24px;
-        font-size: 20px;
-    }
-    
-    .jalur-grid-v3 {
-        grid-template-columns: 1fr;
-    }
-    
-    .afirmasi-grid-v3 {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .afirmasi-item-v3 {
-        justify-content: center;
-    }
-    
+    .kuota-jalur-grid,
+    .tahapan-spmb-grid { grid-template-columns: 1fr; }
+    .kuota-card { margin-bottom: 0.5rem; }
     .hero .content h1 { font-size: 1.5rem; }
     .coming-soon-content { padding: 1.5rem; }
     .struktur-level { grid-template-columns: 1fr; }
-    
-    .qr-image {
-        width: 80px;
-        height: 80px;
-    }
 }
