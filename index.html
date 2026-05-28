@@ -39,9 +39,29 @@
         </div>
     </div>
 
+    <!-- POPUP PETA PELUANG -->
+    <div id="petaPeluangPopup" class="peta-peluang-popup">
+        <div class="peta-peluang-popup-content">
+            <span class="close-peta-popup">&times;</span>
+            <div class="peta-peluang-popup-body">
+                <img src="https://res.cloudinary.com/duemncbn0/image/upload/v1779964107/ab456e58-588e-425d-8122-fd2211f2a9ab_iqdpgc.jpg" alt="Peta Peluang SPMB 2026" class="peta-peluang-popup-img">
+                <div class="peta-peluang-popup-text">
+                    <h2>🎓 PETA PELUANG</h2>
+                    <h3>PILIH SEKOLAH TERBAIK!</h3>
+                    <button class="peta-peluang-btn" onclick="handlePetaPopupButton()">Lihat Informasi SPMB →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Nav Start -->
     <nav class="navbar">
-        <a href="#" class="navbar-logo" onclick="showPage('home'); return false;"><span class="logo-icon"><img src="image/logo-sekolah/LOGO SAKURA.png" alt="logo" style="width: 35px; height: 35px; object-fit: contain; margin-right: 8px;" onerror="this.src='https://placehold.co/35x35?text=Logo'"></span>SMAN 1 <span1>CIKARANG </span1><span2>UTARA</span2></a>
+        <a href="#" class="navbar-logo" onclick="showPage('home'); return false;">
+            <span class="logo-icon">
+                <img src="image/logo-sekolah/LOGO SAKURA.png" alt="logo" class="navbar-logo-img" onerror="this.src='https://placehold.co/35x35?text=Logo'">
+            </span>
+            SMAN 1 <span1>CIKARANG </span1><span2>UTARA</span2>
+        </a>
         
         <div class="navbar-nav">
             <a href="#" onclick="showPage('home'); return false;" class="nav-link active" data-page="home">Beranda</a>
@@ -174,7 +194,6 @@
                     <h3 class="section-title">Guru Informatika</h3>
                     <div class="struktur-level" id="guru-informatika-container"></div>
 
-                    <!-- Setelah GURU INFORMATIKA, tambahkan ini -->
                     <div class="struktur-section">
                         <h3 class="section-title">Guru Biologi</h3>
                         <div class="struktur-level" id="guru-biologi-container"></div>
@@ -189,7 +208,7 @@
             </section>
         </div>
 
-        <!-- INFORMASI PAGE -->
+        <!-- INFORMASI PAGE - HANYA MARS SEKOLAH -->
         <div id="page-informasi" class="page">
             <section class="informasi-page">
                 <h2 class="page-title">Informasi & Pengumuman</h2>
@@ -202,39 +221,6 @@
                     </div>
                 </div>
 
-                <div class="kelulusan-info-section">
-                    <h3 class="section-title">🎓 Informasi Kelulusan</h3>
-                    <div class="kelulusan-info-card">
-                        <div class="kelulusan-info-icon">
-                            <i data-feather="award"></i>
-                        </div>
-                        <div class="kelulusan-info-text">
-                            <h4>Pengumuman Kelulusan Tahun Ajaran 2025/2026</h4>
-                            <p>Selamat kepada seluruh siswa kelas XII yang telah dinyatakan LULUS. Berikut adalah dokumen resmi Surat Keputusan Kepala Sekolah terkait kelulusan.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="dokumen-section">
-                    <h3 class="section-title">📄 Dokumen Resmi</h3>
-                    <div class="dokumen-card">
-                        <div class="dokumen-header">
-                            <i data-feather="file-text"></i>
-                            <span>Surat Keputusan Kepala Sekolah Tentang Kelulusan</span>
-                        </div>
-                        <div class="pdf-iframe-container">
-                            <iframe 
-                                src="https://drive.google.com/file/d/1RRbBtsIonshn2BcyM7c8lxN60Du46BgI/preview" 
-                                class="pdf-iframe"
-                                width="100%" 
-                                height="500" 
-                                allow="autoplay">
-                            </iframe>
-                            <p class="pdf-caption">📌 Jika PDF tidak muncul, <a href="https://drive.google.com/file/d/1RRbBtsIonshn2BcyM7c8lxN60Du46BgI/view" target="_blank">klik di sini</a> untuk melihat langsung</p>
-                        </div>
-                    </div>
-                </div>
-                
                 <div class="profil-sekolah-section">
                     <h3 class="section-title">🎵 Profil Sekolah</h3>
                     <div class="mars-card">
@@ -272,111 +258,290 @@
             </section>
         </div>
 
-        <!-- INFORMASI SPMB PAGE -->
+        <!-- INFORMASI SPMB PAGE - SMAN 1 CIKARANG UTARA -->
         <div id="page-spmb" class="page">
-            <section class="spmb-page">
-                <h2 class="page-title">SPMB</h2>
-                <p class="page-subtitle">Sistem Penerimaan Murid Baru SMAN 1 Cikarang Utara</p>
-                
-                <div class="countdown-container">
-                    <h3><i data-feather="clock"></i> Pendaftaran Dibuka Dalam</h3>
-                    <div class="countdown-timer" id="countdownTimer">
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="days">00</span>
-                            <span class="countdown-label">Hari</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="hours">00</span>
-                            <span class="countdown-label">Jam</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="minutes">00</span>
-                            <span class="countdown-label">Menit</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="seconds">00</span>
-                            <span class="countdown-label">Detik</span>
-                        </div>
+            <section class="spmb-page-v3">
+                <!-- Header -->
+                <div class="spmb-header-v3">
+                    <div class="spmb-header-badge-v3">
+                        <span class="badge-live-v3">🎓 PETA PELUANG - PILIH SEKOLAH TERBAIK!</span>
+                    </div>
+                    <h1>SPMB SMAN 1 CIKARANG UTARA</h1>
+                    <p>Sistem Penerimaan Murid Baru Tahun Ajaran 2026/2027</p>
+                </div>
+
+                <!-- Info Penting -->
+                <div class="info-penting-v3">
+                    <div class="info-penting-icon">ℹ️</div>
+                    <div class="info-penting-text">
+                        <strong>Informasi Penting</strong><br>
+                        Pendaftaran SPMB 2026 SMAN 1 Cikarang Utara hanya dilakukan melalui portal resmi. 
+                        Hati-hati dengan penipuan mengatasnamakan panitia SPMB.
                     </div>
                 </div>
 
-                <div class="spmb-container">
-                    <div class="spmb-info-card">
-                        <div class="spmb-icon"><i data-feather="calendar"></i></div>
-                        <h3>Pendaftaran Gelombang 1</h3>
-                        <p>-</p>
-                        <span class="badge">Coming Soon</span>
+                <!-- Timeline Tahapan SPMB -->
+                <div class="timeline-section-v3">
+                    <h3 class="timeline-title-v3">📅 TAHAPAN SPMB 2026 SMAN 1 CIKARANG UTARA</h3>
+                    <div class="timeline-v3">
+                        <div class="timeline-item-v3">
+                            <div class="timeline-dot-v3 sosialisasi-v3"></div>
+                            <div class="timeline-content-v3">
+                                <div class="timeline-date-v3">18 Mei - 14 Juni 2026</div>
+                                <div class="timeline-event-v3">SOSIALISASI & PCMB</div>
+                                <div class="timeline-desc-v3">Pengenalan program & Pemetaan Calon Murid Baru</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item-v3">
+                            <div class="timeline-dot-v3 pcmb-v3"></div>
+                            <div class="timeline-content-v3">
+                                <div class="timeline-date-v3">29 Mei - 8 Juni 2026</div>
+                                <div class="timeline-event-v3">PENDAFTARAN PCMB</div>
+                                <div class="timeline-desc-v3">Input data & verifikasi berkas pemetaan</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item-v3">
+                            <div class="timeline-dot-v3 tahap1-v3"></div>
+                            <div class="timeline-content-v3">
+                                <div class="timeline-date-v3">15 - 19 Juni 2026</div>
+                                <div class="timeline-event-v3">PENDAFTARAN SPMB TAHAP 1</div>
+                                <div class="timeline-desc-v3">Registrasi & verifikasi gelombang 1</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item-v3">
+                            <div class="timeline-dot-v3 tahap2-v3"></div>
+                            <div class="timeline-content-v3">
+                                <div class="timeline-date-v3">30 Juni - 6 Juli 2026</div>
+                                <div class="timeline-event-v3">PENDAFTARAN SPMB TAHAP 2</div>
+                                <div class="timeline-desc-v3">Registrasi & verifikasi gelombang 2</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item-v3">
+                            <div class="timeline-dot-v3 akhir-v3"></div>
+                            <div class="timeline-content-v3">
+                                <div class="timeline-date-v3">15 - 17 Juli 2026</div>
+                                <div class="timeline-event-v3">TAHUN AJARAN BARU & MPLS</div>
+                                <div class="timeline-desc-v3">Awal tahun ajaran dan Masa Pengenalan Lingkungan Sekolah</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="spmb-info-card">
-                        <div class="spmb-icon"><i data-feather="calendar"></i></div>
-                        <h3>Pendaftaran Gelombang 2</h3>
-                        <p>-</p>
-                        <span class="badge">Coming Soon</span>
-                    </div>
-                    <div class="spmb-info-card">
-                        <div class="spmb-icon"><i data-feather="users"></i></div>
-                        <h3>Kuota</h3>
-                        <p>0 Siswa</p>
-                        <span class="badge">-</span>
-                    </div>
-                    <div class="spmb-info-card">
-                        <div class="spmb-icon"><i data-feather="clipboard"></i></div>
-                        <h3>Jalur Pendaftaran</h3>
-                        <p>Zonasi • Afirmasi • Prestasi</p>
-                        <span class="badge">3 Jalur</span>
+                    <div class="jadwal-catatan">
+                        <p>⚠️ Jadwal dapat berubah, menyesuaikan kebijakan resmi dari Dinas Pendidikan Provinsi Jawa Barat</p>
                     </div>
                 </div>
 
-                <div class="spmb-info-lengkap">
-                    <div class="spmb-persyaratan">
-                        <h3><i data-feather="file-text"></i> Persyaratan Umum</h3>
+                <!-- Tujuan PCMB & Data yang Dipilih -->
+                <div class="tujuan-grid-v3">
+                    <div class="tujuan-card-v3">
+                        <h3>🎯 TUJUAN PCMB</h3>
                         <ul>
-                            <li>Ijazah/SKL SMP/MTS atau sederajat</li>
-                            <li>Nilai rata-rata rapor minimal 75</li>
-                            <li>Pas foto terbaru 3x4 (4 lembar)</li>
-                            <li>Kartu Keluarga dan Akta Kelahiran</li>
-                            <li>Surat Keterangan Sehat dari dokter</li>
+                            <li>Mengetahui peluang diterima lebih awal</li>
+                            <li>Penyaluran siswa lebih merata</li>
+                            <li>Membantu siswa KETM mendapatkan akses pendidikan</li>
                         </ul>
                     </div>
+                    <div class="tujuan-card-v3">
+                        <h3>📊 DATA YANG DIPILIH</h3>
+                        <ul>
+                            <li>Identitas Siswa</li>
+                            <li>Nilai Rapor</li>
+                            <li>Prestasi</li>
+                            <li>Jarak Domisili</li>
+                            <li>Data Ekonomi Keluarga</li>
+                        </ul>
+                    </div>
+                </div>
 
-                    <div class="spmb-alur">
-                        <h3><i data-feather="git-branch"></i> Alur Pendaftaran</h3>
-                        <div class="alur-steps">
-                            <div class="alur-step">
-                                <div class="step-number">1</div>
-                                <p>Registrasi Online</p>
-                            </div>
-                            <div class="alur-arrow">→</div>
-                            <div class="alur-step">
-                                <div class="step-number">2</div>
-                                <p>Verifikasi Berkas</p>
-                            </div>
-                            <div class="alur-arrow">→</div>
-                            <div class="alur-step">
-                                <div class="step-number">3</div>
-                                <p>Seleksi</p>
-                            </div>
-                            <div class="alur-arrow">→</div>
-                            <div class="alur-step">
-                                <div class="step-number">4</div>
-                                <p>Pengumuman</p>
-                            </div>
-                            <div class="alur-arrow">→</div>
-                            <div class="alur-step">
-                                <div class="step-number">5</div>
-                                <p>Daftar Ulang</p>
-                            </div>
+                <!-- Jalur Pendaftaran dengan Presentase -->
+                <div class="jalur-section-v3">
+                    <h3 class="jalur-title-v3">🛤️ JALUR PENDAFTARAN & PRESENTASE</h3>
+                    <div class="jalur-grid-v3">
+                        <div class="jalur-card-v3">
+                            <div class="jalur-icon-v3">🏠</div>
+                            <h4>Jalur Domisili</h4>
+                            <p>Berdasarkan wilayah administratif sesuai ketentuan pemerintah daerah</p>
+                            <div class="jalur-kuota-v3">35%</div>
+                        </div>
+                        <div class="jalur-card-v3">
+                            <div class="jalur-icon-v3">❤️</div>
+                            <h4>Jalur Afirmasi</h4>
+                            <p>KETM, Disabilitas, CIBI (Anak berkebutuhan khusus)</p>
+                            <div class="jalur-kuota-v3">30%</div>
+                        </div>
+                        <div class="jalur-card-v3">
+                            <div class="jalur-icon-v3">🏆</div>
+                            <h4>Jalur Prestasi</h4>
+                            <p>Prestasi Akademik & Non Akademik (seni, olahraga, dll)</p>
+                            <div class="jalur-kuota-v3">30%</div>
+                        </div>
+                        <div class="jalur-card-v3">
+                            <div class="jalur-icon-v3">🔄</div>
+                            <h4>Jalur Mutasi</h4>
+                            <p>Perpindahan tugas orang tua/wali & anak guru</p>
+                            <div class="jalur-kuota-v3">5%</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="spmb-button">
-                    <a href="https://instagram.com/smansacikut" class="cta" target="_blank">
-                        <i data-feather="instagram"></i> Informasi Lengkap
-                    </a>
+                <!-- TAHAPAN PCMB -->
+                <div class="tahapan-pcmb-v3">
+                    <h3 class="tahapan-title-v3">📋 TAHAPAN PCMB (Pemetaan Calon Murid Baru)</h3>
+                    <div class="tahapan-steps-v3">
+                        <div class="step-item-v3">
+                            <div class="step-number-v3">1</div>
+                            <p>Dapat Akun dari sekolah asal (SMP/MTs/PKBM)</p>
+                        </div>
+                        <div class="step-arrow-v3">→</div>
+                        <div class="step-item-v3">
+                            <div class="step-number-v3">2</div>
+                            <p>Isi Data & Upload Dokumen lengkap dan benar</p>
+                        </div>
+                        <div class="step-arrow-v3">→</div>
+                        <div class="step-item-v3">
+                            <div class="step-number-v3">3</div>
+                            <p>Pilih maksimal 3 SMA pilihan</p>
+                        </div>
+                        <div class="step-arrow-v3">→</div>
+                        <div class="step-item-v3">
+                            <div class="step-number-v3">4</div>
+                            <p>Verifikasi oleh sekolah tujuan</p>
+                        </div>
+                        <div class="step-arrow-v3">→</div>
+                        <div class="step-item-v3">
+                            <div class="step-number-v3">5</div>
+                            <p>Sistem memetakan peluang berdasarkan data</p>
+                        </div>
+                    </div>
                 </div>
-            </section>
+
+                <!-- Hasil PCMB & Informasi Tambahan -->
+                <div class="hasil-info-v3">
+                    <div class="hasil-card-v3">
+                        <h3>📌 HASIL PCMB DIGUNAKAN UNTUK</h3>
+                        <ul>
+                            <li>Memetakan jumlah calon murid yang melanjutkan ke SMA/SMK/SLB/MA</li>
+                            <li>Mengetahui peminat & kriteria tiap jalur (domisili, afirmasi, prestasi, mutasi, prioritas)</li>
+                            <li>Penempatan langsung jalur afirmasi KETM Desil 1 DTSEN</li>
+                            <li>Bahan penyaluran siswa, koordinasi dengan sekolah swasta & Kemenag</li>
+                            <li>Menghitung alokasi beasiswa</li>
+                            <li>Memperkirakan jumlah pendaftar SPMB Tahap 1 & Tahap 2</li>
+                        </ul>
+                    </div>
+                    <div class="hasil-card-v3">
+                        <h3>⚠️ HAL PENTING UNTUK ORANG TUA DAN SISWA</h3>
+                        <ul>
+                            <li>Pastikan data & dokumen benar</li>
+                            <li>Upload dokumen lengkap & jelas</li>
+                            <li>Pastikan jarak domisili dengan sekolah pilihan</li>
+                            <li>Pantau hasil pemetaan melalui aplikasi</li>
+                            <li>Jika belum sesuai, masih bisa ikut SPMB Tahap 1 atau Tahap 2</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Persyaratan Umum -->
+                <div class="persyaratan-section-v3">
+                    <h3 class="persyaratan-title-v3">📄 PERSYARATAN UMUM</h3>
+                    <div class="persyaratan-grid-v3">
+                        <div class="persyaratan-item-v3">
+                            <span>🎓</span>
+                            <p>Lulus SMP/sederajat (tahun berjalan atau sebelumnya)</p>
+                        </div>
+                        <div class="persyaratan-item-v3">
+                            <span>📅</span>
+                            <p>Usia maksimal 21 tahun pada 1 Juli 2026</p>
+                        </div>
+                        <div class="persyaratan-item-v3">
+                            <span>🆔</span>
+                            <p>Akta kelahiran/Kartu Identitas Anak (KIA)</p>
+                        </div>
+                        <div class="persyaratan-item-v3">
+                            <span>🏠</span>
+                            <p>Kartu Keluarga (domisili sesuai ketentuan)</p>
+                        </div>
+                        <div class="persyaratan-item-v3">
+                            <span>📊</span>
+                            <p>Rapor semester 1 s.d. 5</p>
+                        </div>
+                        <div class="persyaratan-item-v3">
+                            <span>📎</span>
+                            <p>Dokumen lain sesuai jalur yang dipilih</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Khusus Jalur Afirmasi KETM -->
+                <div class="afirmasi-section-v3">
+                    <h3 class="afirmasi-title-v3">🎯 KHUSUS JALUR AFIRMASI KETM</h3>
+                    <div class="afirmasi-grid-v3">
+                        <div class="afirmasi-item-v3">
+                            <span>📋</span>
+                            <p>KARTU KELUARGA</p>
+                        </div>
+                        <div class="afirmasi-item-v3">
+                            <span>📊</span>
+                            <p>NILAI RAPOR SEMESTER 1–5</p>
+                        </div>
+                        <div class="afirmasi-item-v3">
+                            <span>🤝</span>
+                            <p>BUKTI KEPESERTAAN BANTUAN SOSIAL</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Setelah Hasil Keluar -->
+                <div class="hasil-keluar-v3">
+                    <h3 class="hasil-keluar-title-v3">📢 SETELAH HASIL KELUAR</h3>
+                    <div class="hasil-keluar-grid-v3">
+                        <div class="hasil-keluar-item-v3 setuju">
+                            <div class="hasil-icon">✅</div>
+                            <h4>JIKA SETUJU</h4>
+                            <ul>
+                                <li>Sistem mengunci pilihan</li>
+                                <li>Tidak bisa daftar ulang di jalur lain</li>
+                                <li>Tanggal daftar ulang sesuai jadwal</li>
+                            </ul>
+                        </div>
+                        <div class="hasil-keluar-item-v3 tidak-setuju">
+                            <div class="hasil-icon">🔄</div>
+                            <h4>JIKA TIDAK SETUJU</h4>
+                            <ul>
+                                <li>Masih bisa ikut SPMB Tahap 1 atau Tahap 2</li>
+                                <li>Bisa mencoba sekolah/jalur lain sesuai syarat</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INFO PENDAFTARAN dengan PORTAL RESMI BUTTON & QR -->
+<div class="info-pendaftaran-v3">
+    <h3>📱 INFO PENDAFTARAN</h3>
+    <p>Daftar dan informasi resmi hanya melalui:</p>
+    
+    <a href="https://spmb.jabarprov.go.id/" class="portal-resmi-btn" target="_blank">
+        <span>🔗</span> Portal Resmi SPMB Jabar
+    </a>
+    
+    <!-- QR CODE SEDERHANA -->
+    <div class="qr-sederhana">
+        <div class="qr-kotak">
+            <img src="https://res.cloudinary.com/duemncbn0/image/upload/v1779964408/ea532676-ea7b-4333-a8ec-30a54eec3ff2_u8uskg.jpg" alt="QR Code SPMB Jabar" class="qr-gambar">
         </div>
+        <p class="qr-teks">Scan QR Code untuk mengakses portal SPMB Jabar</p>
+    </div>
+    
+    <p class="info-catatan">⚠️ Pendaftaran hanya melalui portal resmi di atas</p>
+</div>
+
+                <!-- Rekomendasi Sistem -->
+                <div class="rekomendasi-v3">
+                    <div class="rekomendasi-icon">💡</div>
+                    <div class="rekomendasi-text">
+                        <strong>Sistem akan memberikan rekomendasi sekolah lain berdasarkan:</strong><br>
+                        • Jarak terdekat • Kuota yang masih tersedia • Peluang diterima<br>
+                        Kamu bisa memilih: <strong>MENERIMA</strong> atau <strong>MENOLAK</strong> rekomendasi tersebut.
+                    </div>
+                </div>
 
         <!-- ALBUM PAGE (COMING SOON) -->
         <div id="page-album" class="page">
@@ -466,34 +631,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="kontak-card developer-card">
-                        <div class="card-header">
-                            <i data-feather="code"></i>
-                            <h3>Developer Web</h3>
-                        </div>
-                        
-                        <div class="developer-info">
-                            <div class="developer-profiles">
-                                <div class="developer-profile">
-                                    <img src="https://res.cloudinary.com/duemncbn0/image/upload/v1775106911/IMG-20240929-WA0036_ohrnnr.jpg" alt="Developer 1" class="developer-photo" onerror="this.src='https://placehold.co/80x80?text=Developer'">
-                                    <h4>Zaenul Enka Azwar</h4>
-                                    <p class="developer-role">Developer</p>
-                                </div>
-                                <div class="developer-profile">
-                                    <img src="https://res.cloudinary.com/duemncbn0/image/upload/v1776610175/cb5506ba-3a6c-45f7-b420-8db4b37e2891_edyyvu.jpg" alt="Developer 2" class="developer-photo" onerror="this.src='https://placehold.co/80x80?text=Developer'">
-                                    <h4>Irgi Keitha Arya Putra</h4>
-                                    <p class="developer-role">Management</p>
-                                </div>
-                            </div>
-                            
-                            <div class="developer-contact">
-                                <div class="contact-item">
-                                    <span>Hai, Perkenalkan nama saya Zaenul Enka Azwar dan Rekan Saya Irgi Keitha Arya Putra, Kami Berdua Adalah Developer Sekaligus Pelajar SMAN 1 CIKARANG UTARA. Kami Berdua Memulai Project Web Ini Saat Masih Kelas 10, dan Juga Didukung Oleh Bp. Indrajaya Simatupang Selaku Pengawas dan Pembina Kami Berdua Saat Membuat Website Ini.</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
         </div>
@@ -504,7 +641,7 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3 class="footer-logo">SMAN 1 <span1>CIKARANG </span1><span2>UTARA</span2></h3>
-                <p class="footer-desc">Sekolah Unggul Berprestasi, Berkarakter, dan Berwawasan Lingkungan</p>
+                <p class="footer-desc">Sekolah Berprestasi, Berkarakter, dan Berwawasan Lingkungan</p>
                 <p class="footer-address">
                     Jl. Ki Hajar Dewantara No.23, Karangasih, Cikarang Utara, Bekasi
                 </p>
