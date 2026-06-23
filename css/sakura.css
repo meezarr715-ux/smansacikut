@@ -1285,6 +1285,128 @@ body {
   color: #ffc107;
 }
 
+/* ========== DOWNLOAD PERSYARATAN ========== */
+.download-persyaratan-section {
+  background: linear-gradient(135deg, #1a1f2e, #2a2f45);
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(244, 209, 96, 0.3);
+}
+
+.download-title {
+  font-size: 1.1rem;
+  color: var(--color5);
+  text-align: center;
+  margin-bottom: 0.3rem;
+}
+
+.download-subtitle {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.download-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.download-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-decoration: none;
+}
+
+.download-item:hover {
+  background: rgba(244, 209, 96, 0.15);
+  border-color: var(--color5);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(244, 209, 96, 0.1);
+}
+
+.download-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.download-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.download-name {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  display: block;
+  line-height: 1.3;
+}
+
+.download-size {
+  font-size: 0.6rem;
+  color: var(--color1);
+  background: rgba(76, 201, 254, 0.15);
+  padding: 0.1rem 0.5rem;
+  border-radius: 10px;
+  display: inline-block;
+  margin-top: 0.2rem;
+}
+
+.download-btn {
+  background: var(--color5);
+  color: var(--color6);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.download-item:hover .download-btn {
+  transform: scale(1.1);
+  box-shadow: 0 3px 10px rgba(244, 209, 96, 0.4);
+}
+
+/* ========== STATUS BERLANGSUNG ========== */
+.status-berlangsung {
+  display: inline-block;
+  background: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+  font-size: 0.6rem;
+  font-weight: 600;
+  padding: 0.1rem 0.6rem;
+  border-radius: 20px;
+  margin-left: 0.5rem;
+  animation: pulseStatus 1.5s ease-in-out infinite;
+  vertical-align: middle;
+}
+
+@keyframes pulseStatus {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ========== TIMELINE SPMB ========== */
 .timeline-section-v3 {
   margin-bottom: 1.5rem;
 }
@@ -1951,6 +2073,17 @@ body {
   .mars-lyrics {
     text-align: center;
   }
+
+  /* DOWNLOAD RESPONSIVE */
+  .download-grid {
+    grid-template-columns: 1fr;
+  }
+  .download-item {
+    padding: 0.6rem 0.8rem;
+  }
+  .download-name {
+    font-size: 0.65rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1966,6 +2099,25 @@ body {
   }
   .struktur-level {
     grid-template-columns: 1fr;
+  }
+
+  /* DOWNLOAD RESPONSIVE */
+  .download-grid {
+    grid-template-columns: 1fr;
+  }
+  .download-item {
+    padding: 0.5rem 0.7rem;
+  }
+  .download-name {
+    font-size: 0.6rem;
+  }
+  .download-icon {
+    font-size: 1.2rem;
+  }
+  .download-btn {
+    width: 25px;
+    height: 25px;
+    font-size: 0.7rem;
   }
 }
 
