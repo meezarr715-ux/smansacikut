@@ -1,4 +1,4 @@
-// sakura.js - LENGKAP DENGAN HAMBURGER MENU
+// sakura.js - LENGKAP DENGAN HAMBURGER MENU DAN DOWNLOAD PDF
 document.addEventListener("contextmenu", function (e) {
   e.preventDefault();
 });

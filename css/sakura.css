@@ -191,11 +191,11 @@ body {
 .peta-peluang-popup-content {
   background: linear-gradient(135deg, #1a1f2e, #2a2f45);
   border-radius: 20px;
-  max-width: 95%;
-  width: 800px;
-  max-height: 92vh;
+  max-width: 90%;
+  width: 380px;
+  max-height: 85vh;
   position: relative;
-  animation: popupSlidePeta 0.3s ease-out;
+  animation: popupSlidePeta 0.2s ease-out;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(244, 209, 96, 0.3);
   cursor: default;
@@ -216,15 +216,15 @@ body {
 .close-peta-popup {
   position: absolute;
   top: 10px;
-  right: 15px;
-  font-size: 28px;
+  right: 12px;
+  font-size: 24px;
   font-weight: bold;
   cursor: pointer;
   color: rgba(255, 255, 255, 0.8);
   transition: 0.2s;
-  z-index: 10;
-  width: 32px;
-  height: 32px;
+  z-index: 1;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -241,36 +241,15 @@ body {
 .peta-peluang-popup-body {
   display: flex;
   flex-direction: column;
-  padding: 20px 24px 24px 24px;
-  max-height: 92vh;
+  padding: 16px;
+  max-height: 85vh;
   overflow-y: auto;
-}
-
-/* HEADER POPUP - TEKS DI ATAS GAMBAR */
-.peta-popup-header {
-  text-align: center;
-  margin-bottom: 12px;
-}
-
-.peta-popup-header h2 {
-  color: var(--color5);
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  margin-bottom: 2px;
-}
-
-.peta-popup-header h3 {
-  color: #ffffff;
-  font-size: 0.9rem;
-  font-weight: 500;
-  opacity: 0.9;
 }
 
 .peta-peluang-popup-img {
   width: 100%;
   height: auto;
-  max-height: 65vh;
+  max-height: 50vh;
   object-fit: contain;
   border-radius: 12px;
   margin-bottom: 12px;
@@ -281,12 +260,24 @@ body {
   text-align: center;
 }
 
+.peta-peluang-popup-text h2 {
+  color: var(--color5);
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.peta-peluang-popup-text h3 {
+  color: white;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+
 .peta-peluang-btn {
   background: linear-gradient(135deg, var(--color5), var(--color1));
   color: var(--color6);
-  padding: 8px 20px;
+  padding: 8px 16px;
   border-radius: 50px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
   transition: 0.2s;
@@ -1334,6 +1325,8 @@ body {
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.05);
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .download-item:hover {
@@ -1341,6 +1334,12 @@ body {
   border-color: var(--color5);
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(244, 209, 96, 0.1);
+}
+
+.download-item:active {
+  transform: scale(0.96);
+  background: rgba(244, 209, 96, 0.2);
+  border-color: var(--color5);
 }
 
 .download-icon {
@@ -2088,10 +2087,16 @@ body {
     grid-template-columns: 1fr;
   }
   .download-item {
-    padding: 0.6rem 0.8rem;
+    padding: 0.8rem 1rem;
+    min-height: 55px;
   }
   .download-name {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
+  }
+  .download-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
   }
 }
 
@@ -2115,18 +2120,19 @@ body {
     grid-template-columns: 1fr;
   }
   .download-item {
-    padding: 0.5rem 0.7rem;
+    padding: 0.6rem 0.8rem;
+    min-height: 50px;
   }
   .download-name {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
   }
   .download-icon {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
   .download-btn {
-    width: 25px;
-    height: 25px;
-    font-size: 0.7rem;
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
   }
 }
 
