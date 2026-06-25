@@ -398,3 +398,21 @@ showPage = function (pageId) {
     }, 300);
   }
 };
+
+// ========== TOGGLE PENGUMUMAN PDF ==========
+function togglePengumuman() {
+  var container = document.getElementById("pdfViewerContainer");
+  var btn = document.querySelector(".btn-lihat-pengumuman");
+
+  if (container.style.display === "none" || container.style.display === "") {
+    container.style.display = "block";
+    btn.innerHTML = "<span>📕</span> TUTUP PENGUMUMAN";
+    // Scroll ke PDF
+    setTimeout(function () {
+      container.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+  } else {
+    container.style.display = "none";
+    btn.innerHTML = "<span>📖</span> LIHAT PENGUMUMAN KELULUSAN SPMB TAHAP 1";
+  }
+}

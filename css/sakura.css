@@ -2214,3 +2214,229 @@ body {
 .modal.show .modal-caption {
   opacity: 1;
 }
+
+/* ========== PENGUMUMAN KELULUSAN SPMB TAHAP 1 ========== */
+.pengumuman-kelulusan-section {
+  background: linear-gradient(135deg, #1a3a2e, #0d2b1f);
+  border-radius: 20px;
+  padding: 1.8rem;
+  margin-bottom: 1.5rem;
+  border: 2px solid #2ecc71;
+  box-shadow: 0 0 30px rgba(46, 204, 113, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.pengumuman-kelulusan-section::before {
+  content: "🎓";
+  position: absolute;
+  top: -20px;
+  right: -10px;
+  font-size: 8rem;
+  opacity: 0.05;
+  transform: rotate(15deg);
+}
+
+.pengumuman-header {
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.pengumuman-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #f1c40f, #f39c12);
+  color: #1a1f2e;
+  padding: 0.2rem 1.2rem;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.pengumuman-title {
+  font-size: 1.8rem;
+  color: #2ecc71;
+  margin-bottom: 0.2rem;
+  font-weight: 700;
+}
+
+.pengumuman-subtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0;
+}
+
+.pengumuman-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.pengumuman-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.info-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  border-left: 3px solid #2ecc71;
+}
+
+.info-label {
+  display: block;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-top: 0.1rem;
+}
+
+.pengumuman-download {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-lihat-pengumuman {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: #fff;
+  padding: 0.8rem 1.8rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-lihat-pengumuman:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(46, 204, 113, 0.4);
+}
+
+.btn-lihat-pengumuman:active {
+  transform: scale(0.96);
+}
+
+/* ========== PDF VIEWER CONTAINER ========== */
+.pdf-viewer-container {
+  margin-top: 1.5rem;
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pdf-viewer-wrapper {
+  background: #0b0e14;
+  border-radius: 12px;
+  padding: 0.5rem;
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.pdf-viewer-wrapper embed {
+  border-radius: 8px;
+  background: #fff;
+  min-height: 500px;
+}
+
+.pdf-download-wrapper {
+  text-align: center;
+  padding: 0.8rem 0 0.3rem 0;
+}
+
+.btn-download-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f1c40f;
+  color: #1a1f2e;
+  padding: 0.5rem 1.5rem;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-download-pdf:hover {
+  background: #f39c12;
+  transform: scale(1.03);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .pengumuman-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .pengumuman-info {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pengumuman-title {
+    font-size: 1.4rem;
+  }
+
+  .pengumuman-kelulusan-section {
+    padding: 1.2rem;
+  }
+
+  .btn-lihat-pengumuman {
+    font-size: 0.8rem;
+    padding: 0.7rem 1.2rem;
+  }
+
+  .pdf-viewer-wrapper embed {
+    min-height: 350px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pengumuman-info {
+    grid-template-columns: 1fr;
+  }
+
+  .pengumuman-title {
+    font-size: 1.2rem;
+  }
+
+  .btn-lihat-pengumuman {
+    font-size: 0.7rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .pdf-viewer-wrapper embed {
+    min-height: 300px;
+    height: 350px;
+  }
+}
